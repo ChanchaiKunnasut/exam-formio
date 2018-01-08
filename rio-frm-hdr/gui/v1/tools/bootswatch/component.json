@@ -1,0 +1,143 @@
+{
+    "name": "Bootswatch style themes",
+    "vendor": "Thomas Park",
+    "description": "Bootswatch is a collection of free themes for bootstrap.",
+    "homepage": "https://bootswatch.com/3/",
+    "sources": "https://github.com/thomaspark/bootswatch/tree/v3.3.7",
+    "need": "We use bootswatch to provide different themes in our app. Themes can be predefined or chosen by user. Form.IO uses bootstrap styles so bootswatch themes are easily applied to Form.IO forms by replacing a bootstrap css file with a chosen bootswatch theme's css file",
+    "comment": "We use a version compatible with bootstrap v3.3.7. There are newer version of bootstrap but Form.IO currently uses this version of bootstrap.",
+    "version":
+    {
+        "number": "v3.3.7",
+        "date": "07/30/2016",
+        "license":
+        {
+            "type": "opensource",
+            "name": "MIT",
+            "file": "bootswatch.txt",
+            "link": "https://github.com/twbs/bootstrap/blob/master/LICENSE"
+        },
+        "files":
+        [
+            "file":
+            {
+                "path": "src/ress/css/bluemeanie/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with the Cosmo Bootswatch theme applied. The Bluemeanie theme in our Header APP uses it as a body style as well as the Cosmo theme, but those two themes in the Header APP have different header styles."
+            },
+            "file":
+            {
+                "path": "src/ress/css/cerulean/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Cerulean Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/cosmo/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with the Cosmo Bootswatch theme applied. The Cosmo theme in our Header APP uses it as a body style as well as the Bluemeanie theme, but those two themes in the Header APP have different header styles."
+            },
+            "file":
+            {
+                "path": "src/ress/css/cyborg/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Cyborg Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/darkly/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Darkly Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/flatly/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Flatly Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/journal/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Journal Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/lumen/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Lumen Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/paper/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Paper Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/readable/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Readable Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/sandstone/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Sandstone Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/simplex/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Simplex Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/slate/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Slate Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/spacelab/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Spacelab Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/superhero/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Superhero Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/united/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with United Bootswatch theme applied"
+            },
+            "file":
+            {
+                "path": "src/ress/css/yeti/bootstrap.min.css",
+                "name": "bootstrap.min",
+                "extension": "css",
+                "description": "Bootstrap styles with Yeti Bootswatch theme applied"
+            }
+        ]
+    }
+}
