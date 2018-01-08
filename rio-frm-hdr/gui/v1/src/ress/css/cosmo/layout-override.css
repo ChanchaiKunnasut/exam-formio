@@ -1,0 +1,56 @@
+.header-border {
+    background-color: #2780e3;
+}
+
+.header-wrapper {
+	border-top: 1px solid #1967be;
+	border-left: 1px solid #1967be;
+	border-bottom: 1px solid #1967be;
+}
+
+.app-menu-button:focus {
+	background-color: #2780e3;
+}
+
+.app-menu-button:hover {
+    background-color: #1967be;
+}
+
+.app-menu-button:active {
+    background-color: #2780e3;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-cosmo.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: #1967be;
+}
+
+.environment-option:hover, .environment-option:active {
+    background-color: #2780e3;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #1967be;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #2780e3;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #1967be;
+}
+
+.app-launcher-wrapper {
+    background-color: #1967be;
+}
+
+.app-launcher-button {
+    background-color: #222222;
+}

@@ -1,0 +1,89 @@
+.header-border {
+    background-image: linear-gradient(#8a9196, #7a8288 60%, #70787d);
+    background-repeat: no-repeat;
+    background-color: #7a8288;
+}
+
+.header-wrapper {
+	border-top: 1px solid rgba(0, 0, 0, 0.6);
+	border-left: 1px solid rgba(0, 0, 0, 0.6);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.app-menu-brand {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button {
+    color: #cccccc;
+}
+
+.app-menu-button:focus {
+    background-image: linear-gradient(#8a9196, #7a8288 60%, #70787d);
+    background-repeat: no-repeat;
+    background-color: #7a8288;
+}
+
+.app-menu-button:hover {
+    background-image: linear-gradient(#404448, #4e5458 40%, #53595d);
+    background-repeat: no-repeat;
+    background-color: #5d6368;
+    color: white;
+}
+
+.app-menu-button:active {
+    background-image: linear-gradient(#8a9196, #7a8288 60%, #70787d);
+    background-repeat: no-repeat;
+    background-color: #7a8288;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-slate.gif') !important;
+}
+
+.app-menu-button-right-menu-selected {
+    background-image: none !important;
+}
+
+.environment-button.opened {
+    background-image: none !important;
+    background-color: #5d6368;
+}
+
+.environment-option {
+    background-color: #3a3f44;
+    border-bottom-color: #272b30;
+    color: #c8c8c8;
+}
+
+.environment-option:hover, .environment-option:active {
+    background-color: #272b30;
+    color: white;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #5d6368;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #5d6368;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: rgba(0, 0, 0, 0.6);
+}
+
+.app-launcher-wrapper {
+    background-color: #7a8288;
+}
+
+.app-launcher-button {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    background-color: #3a3f44;
+    color: white !important;
+    border-radius: 4px;
+}

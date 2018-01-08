@@ -1,0 +1,3 @@
+var brandObj = {
+    "bootswatchtheme": "cosmo"
+};

@@ -1,0 +1,68 @@
+.header-border {
+    background-color: #eb6864;
+}
+
+.header-wrapper {
+	border-top: 1px solid #e53c37;
+	border-left: 1px solid #e53c37;
+	border-bottom: 1px solid #e53c37;
+}
+
+.app-menu-brand {
+    font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+}
+
+.app-menu-button:focus {
+    background-color: transparent;
+}
+
+.app-menu-button:hover {
+    background-color: #e74b47;
+}
+
+.app-menu-button:active {
+	background-color: transparent;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-journal.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: #e74b47;
+}
+
+.environment-option {
+    background-color: transparent;
+    border-bottom-color: #e5e5e5;
+    color: #333333;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: white;
+    background-color: #eb6864;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #e74b47;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #e74b47;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #e53c37;
+}
+
+.app-launcher-wrapper {
+    background-color: #e74b47;
+}
+
+.app-launcher-button {
+    background-color: #999999;
+    border-radius: 4px;
+}

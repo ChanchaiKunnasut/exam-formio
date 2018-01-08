@@ -1,0 +1,73 @@
+.header-border {
+    background-color: #222222;
+}
+
+.header-wrapper {
+	border-top: 1px solid #080808;
+	border-left: 1px solid #080808;
+	border-bottom: 1px solid #080808;
+}
+
+.app-menu-brand {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button {
+    color: #888888;
+}
+
+.app-menu-button:focus {
+	background-color: #222222;
+}
+
+.app-menu-button:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.app-menu-button:active {
+	background-color: #222222;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-cyborg.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: transparent;
+}
+
+.environment-option {
+    background-color: #222222;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+    color: #888888;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: white;
+    background-color: #2a9fd6;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #222222;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #222222;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #080808;
+}
+
+.app-launcher-wrapper {
+    background-color: #222222;
+}
+
+.app-launcher-button {
+    background-color: #424242;
+    border-radius: 4px;
+}

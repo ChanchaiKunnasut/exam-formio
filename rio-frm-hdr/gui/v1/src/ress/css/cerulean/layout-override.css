@@ -1,0 +1,73 @@
+.header-border {
+    background-image: linear-gradient(#04519b, #044687 60%, #033769);
+    background-repeat: no-repeat;
+    background-color: #033c73;
+}
+
+.header-wrapper {
+	border-top: 1px solid #022a50;
+	border-left: 1px solid #022a50;
+	border-bottom: 1px solid #022241;
+}
+
+.app-menu-brand {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button:focus {
+    background-image: linear-gradient(#04519b, #044687 60%, #033769);
+    background-repeat: no-repeat;
+	background-color: #033c73;
+}
+
+.app-menu-button:hover {
+    background-color: #022f5a;
+}
+
+.app-menu-button:active {
+    background-image: linear-gradient(#04519b, #044687 60%, #033769);
+    background-repeat: no-repeat;
+    background-color: #033c73;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-cerulean.gif') !important;
+}
+
+.app-menu-button-right-menu-selected {
+    background-image: none !important;
+}
+
+.environment-button.opened {
+    background-color: #022f5a;
+}
+
+.environment-option:hover, .environment-option:active {
+    background-color: #2fa4e7;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #033c73;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #2fa4e7;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #022241;
+}
+
+.app-launcher-wrapper {
+    background-color: #022f5a;
+}
+
+.app-launcher-button {
+    background-color: white;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    color: #555555 !important;
+}

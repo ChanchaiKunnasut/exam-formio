@@ -1,0 +1,71 @@
+.header-border {
+    background-color: #df691a;
+}
+
+.header-wrapper {
+	border-top: 1px solid #df691a;
+	border-left: 1px solid #df691a;
+	border-bottom: 1px solid #df691a;
+}
+
+.app-menu-brand {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button {
+    color: #ebebeb;
+}
+
+.app-menu-button:focus {
+    background-color: transparent;
+}
+
+.app-menu-button:hover {
+    background-color: #c85e17;
+}
+
+.app-menu-button:active {
+	background-color: transparent;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-superhero.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: #c85e17;
+}
+
+.environment-option {
+    background-color: #4e5d6c;
+    border-bottom-color: #2b3e50;
+    color: #ebebeb;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: #ebebeb;
+    background-color: #485563;
+}
+
+.environment-option.active-option {
+    color: #ebebeb;
+    background-color: #c85e17;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: #ebebeb;
+    background-color: #c85e17;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #df691a;
+}
+
+.app-launcher-wrapper {
+    background-color: #df691a;
+}
+
+.app-launcher-button {
+    background-color: #4e5d6c;
+}

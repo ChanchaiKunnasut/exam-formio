@@ -1,0 +1,68 @@
+.header-border {
+    background-color: #772953;
+}
+
+.header-wrapper {
+	border-top: 1px solid #511c39;
+	border-left: 1px solid #511c39;
+	border-bottom: 1px solid #511c39;
+}
+
+.app-menu-brand {
+    font-family: "Ubuntu", Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button:focus {
+    background-color: transparent;
+}
+
+.app-menu-button:hover {
+    background-color: #3e152b;
+}
+
+.app-menu-button:active {
+	background-color: transparent;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-united.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: #511c39;
+}
+
+.environment-option {
+    background-color: white;
+    border-bottom-color: #e5e5e5;
+    color: #333333;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: white;
+    background-color: #e95420;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #511c39;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #511c39;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #511c39;
+}
+
+.app-launcher-wrapper {
+    background-color: #511c39;
+}
+
+.app-launcher-button {
+    background-color: #aea79f;
+    border-radius: 4px;
+}

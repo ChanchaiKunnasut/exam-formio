@@ -1,0 +1,69 @@
+.header-border {
+    background-color: #008cba;
+}
+
+.header-wrapper {
+	border-top: 1px solid #008cba;
+	border-left: 1px solid #008cba;
+	border-bottom: 1px solid #008cba;
+}
+
+.app-menu-brand {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button:focus {
+    background-color: transparent;
+}
+
+.app-menu-button:hover {
+    background-color: #006687;
+}
+
+.app-menu-button:active {
+	background-color: transparent;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-yeti.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: #006687;
+}
+
+.environment-option {
+    background-color: #008cba;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: white;
+    background-color: #006687;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #006687;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #006687;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #008cba;
+}
+
+.app-launcher-wrapper {
+    background-color: #006687;
+}
+
+.app-launcher-button {
+    background-color: #e7e7e7;
+    color: #333333 !important;
+    border: 1px solid #cccccc;
+}

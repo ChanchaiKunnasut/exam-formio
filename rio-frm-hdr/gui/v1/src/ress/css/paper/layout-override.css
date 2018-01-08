@@ -1,0 +1,74 @@
+.header-border {
+    background-color: #2196f3;
+}
+
+.header-wrapper {
+	border-top: 1px solid #2196f3;
+	border-left: 1px solid #2196f3;
+	border-bottom: 1px solid #2196f3;
+}
+
+.app-menu-brand {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button {
+    color: #b2dbfb;
+}
+
+.app-menu-button:focus {
+    background-color: transparent;
+}
+
+.app-menu-button:hover {
+    color: white;
+    background-color: transparent;
+}
+
+.app-menu-button:active {
+	background-color: transparent;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-paper.gif') !important;
+}
+
+.environment-button.opened {
+    background-color: #0c7cd5;
+}
+
+.environment-option {
+    background-color: transparent;
+    border-bottom-color: #e5e5e5;
+    color: #666666;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: #141414;
+    background-color: #eeeeee;
+}
+
+.environment-option.active-option {
+    color: white;
+    background-color: #0c7cd5;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: white;
+    background-color: #e74b47;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #2196f3;
+}
+
+.app-launcher-wrapper {
+    background-color: #2196f3;
+}
+
+.app-launcher-button {
+    background-color: white;
+    color: #444444 !important;
+    border-radius: 3px;
+}

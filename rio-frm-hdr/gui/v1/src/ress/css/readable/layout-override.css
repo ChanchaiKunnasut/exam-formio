@@ -1,0 +1,97 @@
+.header-border {
+    background-color: white;
+}
+
+.header-wrapper {
+	border-top: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+}
+
+.app-menu-brand {
+    color: #333333;
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.app-menu-button {
+    color: #333333;
+}
+
+.app-menu-button:focus {
+    background-color: transparent;
+}
+
+.app-menu-button:hover {
+    background-color: transparent;
+    color: #333333;
+    outline: 1px solid #ddd;
+    outline-offset: -2px;
+}
+
+.appl-button {
+    background-image: url('../../gif/appl/appl-readable.gif') !important;
+}
+
+.appl-button:hover, .appl-button:active {
+    outline: 1px solid #ddd !important;
+    outline-offset: -2px;
+}
+
+.app-menu-button:active {
+	background-color: transparent;
+}
+
+.appl-button:hover {
+    outline: none;
+}
+
+.environment-button.opened {
+    background-color: transparent;
+    outline: 1px solid #ddd;
+    outline-offset: -2px;
+}
+
+.environment-text {
+    color: #333333;
+}
+
+.environment-option {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    color: #333333;
+}
+
+.environment-option:hover, .environment-option:active {
+    color: white;
+    background-color: #4582ec;
+}
+
+.environment-option.active-option {
+    color: #333333;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user-settings-small-menu-dropdown-option.active-option {
+    color: #333333;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+.user-settings-wrapper.first-item {
+    border-color: #dddddd;
+}
+
+.app-launcher-wrapper {
+    background-color: white;
+}
+
+.app-launcher-button {
+    background-color: white;
+    color: #333333 !important;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
