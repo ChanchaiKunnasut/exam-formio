@@ -1,0 +1,38 @@
+{
+    "name": "Office UI Fabric",
+    "vendor": "Microsoft Corporation",
+    "description": "Official Microsoft Office styles developed for building experiences that fit seamlessly into Office and Office 365",
+    "homepage": "https://developer.microsoft.com/en-us/fabric",
+    "sources": "https://github.com/OfficeDev/office-ui-fabric-core/releases/tag/2.2.0",
+    "need": "We use Office Fabric to fit our header style to Office 365 styles. For example we use their font icons for header menu buttons.",
+    "comment": "Further integration of these styles into the body part of our application (Form.IO) is not implemented yet.",
+    "version":
+    {
+        "number": "2.2.0",
+        "date": "03/22/2016",
+        "license":
+        {
+            "type": "opensource",
+            "name": "MIT",
+            "file": "office-fabric.txt",
+            "link": "https://github.com/OfficeDev/office-ui-fabric-core/blob/master/LICENSE"
+        },
+        "files":
+        [
+            "file":
+            {
+                "path": "src/ress/css/fabric.min.css",
+                "name": "fabric.min",
+                "extension": "css",
+                "description": "Main css files which includes common css classes and font icon styles."
+            },
+            "file":
+            {
+                "path": "src/ress/css/fabric.components.min.css",
+                "name": "fabric.components.min",
+                "extension": "css",
+                "description": "Styles applied to specific components such as buttons, navbars, panels, search boxes and so on."
+            }
+        ]
+    }
+}
