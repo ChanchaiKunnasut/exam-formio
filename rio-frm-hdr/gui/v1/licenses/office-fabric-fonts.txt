@@ -1,0 +1,25 @@
+Microsoft Fabric Assets License Agreement
+
+Thank you for your interest in developing for Office and other Office 365 endpoints.  This agreement is between you (â€œDeveloperâ€) and Microsoft Corporation (â€œMicrosoftâ€), and governs your use of the Fabric Assets (defined below) (the â€œAgreementâ€).  By downloading the Fabric Assets from the CDN, you represent and warrant to Microsoft that you have the authority to accept this Agreement on behalf of yourself, a company, and/or other entity, as applicable.
+
+1. Fabric Assets License and Guidelines
+  a.  License Grant. 
+      Microsoft grants to Developer, a non-exclusive, limited, worldwide, non-assignable, non-transferable, royalty-free license to use the Fabric Assets solely for the purpose of developing for Office and other Office 365 endpoints including, but not limited to, Office Add-ins, SharePoint Web Parts, SharePoint Apps, and Custom Office 365 apps.  For the avoidance of doubt, the Fabric Assets are not to be used for marketing purposes.  â€œFabric Assetsâ€ means the (1) Segoe Font Family located at https://dev.office.com/fabric#/styles/typography; (2) Office icons located at https://dev.office.com/fabric#/styles/icons; and (3) Microsoft trademarks, symbols, marks, etc. located at http://dev.office.com/fabric#/styles/brand-icons (â€œTrademarksâ€).  Microsoft reserves all rights not expressly granted herein.  Developer may not use the Trademarks in the name of any product, service, or in any way that would cause confusion about whether Developerâ€™s product or service is a Microsoft product, and Microsoft may revoke this license at any time.
+
+  b. Branding Guidelines.
+      The license grant under Section 1(a) is conditioned on Developer complying with the branding guidelines located at http://dev.office.com/Modules/DevOffice.Fabric/dist/files/OfficeBrandGuide_16Sep2016.pdf.
+
+  c. Ownership of the Partner Content.
+      Developer acknowledges Microsoftâ€™s sole ownership of the Fabric Assets, and all associated goodwill, and that Microsoft retains all right, title, and interest in and to the Fabric Assets.  Developer will not use the Fabric Assets in any manner that will diminish or otherwise damage Microsoftâ€™s goodwill in the Fabric Assets.  Developer agrees to rectify any specified misuses of the Fabric Assets promptly upon receiving written notice from Microsoft.  
+
+2.  Representations and Warranties. Microsoft represents and warrants that it has the authority and rights to grant the license herein. 
+
+3.  Miscellaneous
+  a. Jurisdiction/Choice of Law.
+     The Agreement will be governed by the laws of the State of Washington, and the parties agree to the exclusive jurisdiction and venue in the federal courts sitting in King County, Washington.  If there is no federal subject matter jurisdiction, the parties agree to the exclusive jurisdiction and venue in the Superior Court of King County, Washington.
+
+  b. Attorneysâ€™ fees.
+     If either Microsoft or Partner employs attorneys to enforce any rights arising out of or relating to this Agreement, the prevailing party will be entitled to recover its reasonable attorneysâ€™ fees, costs, and other expenses, including the costs and fees incurred on appeal or in a bankruptcy or similar action.
+
+  c. Entire agreement.
+     This Agreement is the entire agreement between the parties regarding its subject matter. It replaces all prior agreements, communications and representations between the parties regarding its subject matter.

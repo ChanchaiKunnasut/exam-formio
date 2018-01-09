@@ -1,0 +1,45 @@
+{
+    "name": "Office UI Fabric Fonts",
+    "vendor": "Microsoft Corporation",
+    "description": "Official Microsoft Office fonts developed for building experiences that fit seamlessly into Office and Office 365",
+    "homepage": "https://developer.microsoft.com/en-us/fabric",
+    "sources": "",
+    "need": "We use Office Fabric font icons for header menu buttons.",
+    "comment": "We override font file path definitions in our layout.css. Original paths are defined in fabric.min.css and they point to Microsoft's servers.",
+    "version":
+    {
+        "number": "",
+        "date": "",
+        "license":
+        {
+            "type": "commercial",
+            "name": "Microsoft Fabric Assets License Agreement",
+            "file": "office-fabric-fonts.txt",
+            "link": "http://aka.ms/fabric-font-license"
+        },
+        "files":
+        [
+            "file":
+            {
+                "path": "src/ress/css/fonts/office365icons.eot",
+                "name": "office365icons",
+                "extension": "eot",
+                "description": "Office365icons font icons in EOT format."
+            },
+            "file":
+            {
+                "path": "src/ress/css/fonts/office365icons.ttf",
+                "name": "office365icons",
+                "extension": "eot",
+                "description": "Office365icons font icons in truetype format."
+            },
+            "file":
+            {
+                "path": "src/ress/css/fonts/office365icons.eot",
+                "name": "office365icons",
+                "extension": "eot",
+                "description": "Office365icons font icons in WOFF format."
+            }
+        ]
+    }
+}
