@@ -167,6 +167,12 @@ function setupLayout() {
         {
             languageSelectorWrapper.hide();
         }
+        
+        var timeZoneSelectorWrapper = $('#timeZones');
+        if (!timeZoneSelectorWrapper.is(e.target) && timeZoneSelectorWrapper.has(e.target).length === 0)
+        {
+            timeZoneSelectorWrapper.hide();
+        }
     });
     
     $('.user-settings-card').click(function (e)
@@ -577,11 +583,19 @@ function closeAppLauncher()
 }
 
 /**
- * Opends a list of available languages
+ * Opens a list of available languages
  */
 function chooseLanguage()
 {
     $('#languages').show();
+}
+
+/**
+ * Opens a list of available time zones
+ */
+function chooseTimeZone()
+{
+    $('#timeZones').show();
 }
 
 /**
@@ -614,7 +628,27 @@ function chooseLanguage()
 function saveLTZ(e)
 {
     e.stopPropagation();
-    setChosenLanguage();
+    var languageChanged = setChosenLanguage();
+    var timeZoneChanged = setChosenTimeZone();
+    if ((languageChanged || timeZoneChanged) && isUseOutlookMailSettings() && mailboxSettingsAvailable && isSignedInUser())
+    {
+        var payload;
+        if (languageChanged && timeZoneChanged)
+        {
+            payload = {"timeZone":timeZoneSelector.currentTimeZone,"language":{"locale":languageSelector.currentLanguage}};
+        }
+        else if (languageChanged)
+        {
+            payload = {"language":{"locale":languageSelector.currentLanguage}};
+        }
+        else
+        {
+            payload = {"timeZone":timeZoneSelector.currentTimeZone};
+        }
+        
+        patchmailboxsettingsdata("https://graph.microsoft.com/beta/me/mailboxSettings", payload);
+    }
+    
     $('#LTZCard').closeExtendedCard();
 }
 
@@ -625,6 +659,7 @@ function cancelLTZ(e)
 {
     e.stopPropagation();
     resetLanguage();
+    resetTimeZone();
     $('#LTZCard').closeExtendedCard();
 }
 

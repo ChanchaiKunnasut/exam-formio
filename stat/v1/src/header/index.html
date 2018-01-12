@@ -13,6 +13,7 @@
         <script src="./scripts/vendor/jquery-1.10.2.min.js"></script>
         <script src="./scripts/vendor/adal.min.js"></script>
         <script src="./scripts/lang.js"></script>
+        <script src="./scripts/tz.js"></script>
         <script src="./scripts/theme.js"></script>
         <script src="./scripts/main.js"></script>
         <script src="./scripts/auth.js"></script>
@@ -160,6 +161,7 @@
                             // Find out user's mailbox settings
                             if (isUseOutlookMailSettings() && isSignedInUser()) {
                                 getmailboxsettingsdata('https://graph.microsoft.com/beta/me/mailboxSettings');
+                                getSupportedTimeZones();
                             } else {
                                 // Just translate the page
                                 applyTranslation();
@@ -391,7 +393,7 @@
                                                                         <span id="languageName1">English (Internatioanl)&lrm;</span>
                                                                     </div>
                                                                     <div class="header-common user-settings-card-combo-wrapper">
-                                                                        <div>
+                                                                        <div id="languageWrapper" class="user-settings-card-combo-item">
                                                                             <span id="Language" lang-tran="Language">Language</span>
                                                                             <div class="user-settings-card-picker-container">
                                                                                 <button class="user-settings-card-picker-button" onclick="chooseLanguage()">
@@ -399,6 +401,22 @@
                                                                                         <span class="user-settings-card-picker-button-text"></span>
                                                                                         <div>
                                                                                             <span id="languageName2">English (Internatioanl)&lrm;</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="user-settings-card-picker-button-arrow-wrapper">
+                                                                                        <span class="user-settings-card-picker-button-arrow ms-Icon ms-Icon--caretDown"></span>
+                                                                                    </div>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="timeZoneWrapper" class="user-settings-card-combo-item" style="display: none">
+                                                                            <span id="Time Zone" lang-tran="Time Zone">Time Zone</span>
+                                                                            <div class="user-settings-card-picker-container">
+                                                                                <button class="user-settings-card-picker-button" onclick="chooseTimeZone()">
+                                                                                    <div class="user-settings-card-picker-button-text-wrapper">
+                                                                                        <span class="user-settings-card-picker-button-text"></span>
+                                                                                        <div>
+                                                                                            <span id="timeZoneName">(UTC) Coordinated Universal Time</span>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="user-settings-card-picker-button-arrow-wrapper">
@@ -537,6 +555,7 @@
 		<div class="content-wrapper">
             <div id="mymessage"></div>
             <div id="mailboxsettingsmessage"></div>
+            <div id="supportedtimezonesmessage"></div>
             <div id="userphotomessage"></div>
             <div class="container body-content">
 		        <div id='formio'></div>
@@ -570,11 +589,23 @@
             </div>
         </div>
         <div id="languages" class="languages-wrapper">
-            <div class="languages-container">
-                <div class="languages-content">
-                    <div class="languages-scroller-container">
-                        <div class="languages-scroller-content">
+            <div class="ltz-container">
+                <div class="ltz-content">
+                    <div class="ltz-scroller-container">
+                        <div class="ltz-scroller-content">
                             <div id="langarr">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="timeZones" class="time-zones-wrapper">
+            <div class="ltz-container">
+                <div class="ltz-content">
+                    <div class="ltz-scroller-container">
+                        <div class="ltz-scroller-content">
+                            <div id="tzarr">
                             </div>
                         </div>
                     </div>

@@ -36,10 +36,10 @@ function setupLanguageMenu()
     setLanguageSettings(languageSelector.currentLanguage);
     $.each(languagesMap, function(code, name)
     {
-        var languageItem = '<div class="language-container"><button class="language-selector" onclick="selectLanguage(this,\''
-            + code + '\')"><span id="langCheck' + code + '" class="ms-Icon ms-Icon--check language-selector-check"'
+        var languageItem = '<div class="ltz-itm-container"><button class="ltz-itm-selector" onclick="selectLanguage(this,\''
+            + code + '\')"><span id="langCheck' + code + '" class="ms-Icon ms-Icon--check ltz-itm-selector-check"'
             + (code === languageSelector.currentLanguage ? ' style="visibility: visible;"' : '') 
-            + '></span><div class="language-content"><div class="language-wrapper"><span>'
+            + '></span><div class="ltz-itm-content"><div class="ltz-itm-wrapper"><span>'
             + name + '&lrm;</span></div></div></button></div>';
         $('#langarr').append(languageItem);
     });
@@ -61,8 +61,8 @@ function selectLanguage(languageButton, lang)
 {
     languageSelector.selectedLanguage = lang;
     setLanguageSettings(lang);
-    $('#langarr').find('.language-selector-check').css('visibility', 'hidden');
-    $(languageButton).find('.language-selector-check').css('visibility', 'visible');
+    $('#langarr').find('.ltz-itm-selector-check').css('visibility', 'hidden');
+    $(languageButton).find('.ltz-itm-selector-check').css('visibility', 'visible');
     $('#languages').hide();
 }
 
@@ -75,7 +75,7 @@ function setupPredefinedLanguage()
 {
     applyTranslation();
     setLanguageSettings(languageSelector.currentLanguage);
-    $(".language-selector-check").css('visibility', 'hidden');
+    $(".ltz-itm-selector-check").css('visibility', 'hidden');
     $("#langCheck" + languageSelector.currentLanguage).css('visibility', 'visible');
 }
 
@@ -119,10 +119,10 @@ function applyTranslation()
  */
 function setChosenLanguage()
 {
+    var languageChanged = (languageSelector.selectedLanguage === languageSelector.currentLanguage);
     applyTranslation();
-    if (isUseOutlookMailSettings() && mailboxSettingsAvailable && isSignedInUser()) {
-        patchmailboxsettingsdata("https://graph.microsoft.com/beta/me/mailboxSettings", {"language":{"locale":languageSelector.currentLanguage}});
-    }
+    
+    return languageChanged;
 }
 
 /**

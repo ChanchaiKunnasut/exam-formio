@@ -268,6 +268,14 @@ function getdatanoadalmailboxsettings(token,url) {
         }
         
         console.log("Selected language="+languageSelector.selectedLanguage);
+        
+        if (data && data["timeZone"]) {
+            setInitialTimeZone(data["timeZone"]);
+            console.log("User's current time zone alias: " + data["timeZone"]);
+        } else {
+            console.log("User's current time zone hasn't been received.");
+        }
+        
         // Translate the page
         setupPredefinedLanguage();
         setupStyle();
@@ -278,6 +286,40 @@ function getdatanoadalmailboxsettings(token,url) {
         setupStyle();
         console.log('getmailboxsettingsdata call failed');
         document.getElementById('mailboxsettingsmessage').innerHTML='Failed to retrieve the mailbox data!';
+        console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+    });
+}
+
+function getSupportedTimeZones() {
+    document.getElementById('supportedtimezonesmessage').innerHTML='Waiting for data...';
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getDataOnAdalSupportedTimeZones, 'https://graph.microsoft.com/beta/me/outlook/supportedTimeZones');
+}
+
+function getDataOnAdalSupportedTimeZones(token, url) {
+    var settings = {
+        "crossDomain": true,
+        "url": url,
+        "timeout":30000,
+        "method": "GET",        
+        "headers": {
+            "Authorization": "Bearer " + token
+        }
+    }
+    
+    $.ajax(settings).done(function (data, textStatus, request) {
+        console.log('getSupportedTimeZones call successfully executed');
+        document.getElementById('supportedtimezonesmessage').innerHTML='Supported time zones successfully retrieved!';
+        if (data && data["value"]) {
+            setSupportedTimeZones(data["value"]);
+            console.log('Supported time zones successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
+        } else {
+            console.log("Invalid response format!");
+        }
+    }).fail(function (err, textStatus, errorThrown) {
+        mailboxSettingsAvailable = false;
+        console.log('getSupportedTimeZones call failed');
+        document.getElementById('supportedtimezonesmessage').innerHTML='Failed to retrieve supported time zones!';
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
         alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
