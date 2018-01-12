@@ -1,0 +1,38 @@
+{
+    "name": "jQuery",
+    "vendor": "JS Foundation",
+    "description": "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.",
+    "homepage": "http://jquery.com/",
+    "sources": "https://github.com/jquery/jquery",
+    "need": "We use jquery as a JavaScript framework for HTML document traversal and manipulation, event handling and AJAX API calls.",
+    "comment": "There are newer versions of jQuery libary but we use this version because newer versions doesn't support Internet Explorer 6 and 7.",
+    "version":
+    {
+        "number": "1.10.2",
+        "date": "07/03/2013",
+        "license":
+        {
+            "type": "opensource",
+            "name": "MIT",
+            "file": "jquery.txt",
+            "link": "https://github.com/jquery/jquery/blob/master/LICENSE.txt"
+        },
+        "files":
+        [
+            "file":
+            {
+                "path": "src/scripts/vendor/jquery-1.10.2.min.js",
+                "name": "jquery-1.10.2.min",
+                "extension": "js",
+                "description": "Core JavaScript library of jQuery framework"
+            },
+            "file":
+            {
+                "path": "src/scripts/vendor/jquery-1.10.2.min.map",
+                "name": "jquery-1.10.2.min",
+                "extension": "map",
+                "description": "Holds information about original jQuery source file and maps a combined/minified jQuery core file to an unbuilt state."
+            }
+        ]
+    }
+}
