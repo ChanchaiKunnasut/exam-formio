@@ -1,0 +1,38 @@
+{
+    "name": "Form.io",
+    "vendor": "Form.io LLC",
+    "description": "Form.io is a combined Form and Data Management platform for form-based Serverless web applications.",
+    "homepage": "https://form.io/",
+    "sources": "https://github.com/formio",
+    "need": "We use the platform to build complex forms with language, offline and other userfull capabilities.",
+    "comment": "We use form.io portal to build form and create JSON representation of the form from which the form is created in our APP. A path to json form is defined in src/defs/app.json.js as appObj['formdefinition'].",
+    "version":
+    {
+        "number": "2.27.6",
+        "date": "01/11/2018",
+        "license":
+        {
+            "type": "opensource",
+            "name": "BSD",
+            "file": "form.io.txt",
+            "link": "https://github.com/formio/formio/blob/master/LICENSE.txt"
+        },
+        "files":
+        [
+            "file":
+            {
+                "path": "src/ress/css/formio.full.min.css",
+                "name": "formio.full.min",
+                "extension": "css",
+                "description": "Styles applied to form.io components excluding bootstrap/bootswatch styles"
+            },
+            "file":
+            {
+                "path": "src/scripts/vendor/formio.full.min.js",
+                "name": "formio.full.min",
+                "extension": "js",
+                "description": "JavaScript for rendering and dealing with form.io forms"
+            }
+        ]
+    }
+}
