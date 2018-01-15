@@ -1,20 +1,26 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+<!DOCTYPE html><html><title>risktech.io E2E root</title><xmp theme="cerulean" style="display:none;">
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# End to End Test - root
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## [Azure Resources dir](azure)
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+### [App Service Plan template](azure/wap/wap/asp/template.json)
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### [Web App template](azure/wap/wap/wap/template.json)
+
+## [Dynamic CDN files dir](dyna)
+
+### [Dynamic CDN probe](dyna/probe/probe.jpg)
+
+## [Static CDN files](stat) 
+
+## API
+
+### API Definition
+
+### API Implementation
+
+### Dependencies
+
+</xmp><script src="stat/v1/styling/strapdown.js"></script>
+</html>

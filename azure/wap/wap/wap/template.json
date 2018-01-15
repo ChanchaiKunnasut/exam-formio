@@ -1,0 +1,352 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap",
+            "type": "String"
+        },
+        "profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-cpd",
+            "type": "String"
+        },
+        "profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-cps",
+            "type": "String"
+        },
+        "config_web_name": {
+            "defaultValue": "web",
+            "type": "String"
+        },
+        "endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ced_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-ced",
+            "type": "String"
+        },
+        "endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ces_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-ces",
+            "type": "String"
+        },
+        "hostNameBindings_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap.azurewebsites.net_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap.azurewebsites.net",
+            "type": "String"
+        },
+        "origins_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_azurewebsites_net_name": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap-azurewebsites-net",
+            "type": "String"
+        },
+        "origins_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_azurewebsites_net_name_1": {
+            "defaultValue": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap-azurewebsites-net",
+            "type": "String"
+        },
+        "sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_serverFarmId": {
+            "defaultValue": "/subscriptions/c67eb5d9-ec94-46a1-ab1e-b8df8b9f8227/resourceGroups/rio-dev-plg-cod-wap-ete-pri-rg/providers/Microsoft.Web/serverfarms/rio-dev-plg-cod-wap-ete-pri-asp",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [{
+            "comments": "Sample CDN risktech.io V1",
+            "type": "Microsoft.Cdn/profiles",
+            "sku": {
+                "name": "Standard_Akamai"
+            },
+            "name": "[parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name')]",
+            "apiVersion": "2016-04-02",
+            "location": "SoutheastAsia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceState": "Active"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Sample CDN risktech.io V1",
+            "type": "Microsoft.Cdn/profiles",
+            "sku": {
+                "name": "Premium_Verizon"
+            },
+            "name": "[parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name')]",
+            "apiVersion": "2016-04-02",
+            "location": "SoutheastAsia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceState": "Active"
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Sample WebApp risktech.io V1",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name')]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "tags": {
+                "hidden-related:/subscriptions/c67eb5d9-ec94-46a1-ab1e-b8df8b9f8227/resourcegroups/rio-dev-plg-cod-wap-ete-pri-rg/providers/Microsoft.Web/serverfarms/rio-dev-plg-cod-wap-ete-pri-asp": "empty"
+            },
+            "scale": null,
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [{
+                        "name": "[concat(parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name'),'.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name'),'.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "virtualIP": null,
+                        "thumbprint": null,
+                        "toUpdate": null,
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_serverFarmId')]",
+                "reserved": false,
+                "siteConfig": null,
+                "scmSiteAlsoStopped": false,
+                "hostingEnvironmentProfile": null,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "cloningInfo": null
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c67eb5d9-ec94-46a1-ab1e-b8df8b9f8227/resourcegroups/rio-dev-plg-cod-wap-ete-mav-pri-grn-rg/providers/Microsoft.Cdn/profiles/rio-dev-plg-cod-wap-ete-mav-pri-grn-cpd/endpoints/rio-dev-plg-cod-wap-ete-mav-pri-grn-ced'.",
+            "type": "Microsoft.Cdn/profiles/endpoints",
+            "name": "[concat(parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name'), '/', parameters('endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ced_name'))]",
+            "apiVersion": "2016-04-02",
+            "location": "SoutheastAsia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "originHostHeader": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap.azurewebsites.net",
+                "isHttpAllowed": false,
+                "isHttpsAllowed": true,
+                "queryStringCachingBehavior": "IgnoreQueryString",
+                "originPath": "/dyna",
+                "origins": [{
+                    "name": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap-azurewebsites-net",
+                    "properties": {
+                        "hostName": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap.azurewebsites.net",
+                        "httpPort": null,
+                        "httpsPort": null
+                    }
+                }],
+                "contentTypesToCompress": [
+                    "text/plain",
+                    "text/html",
+                    "text/css",
+                    "text/javascript",
+                    "application/x-javascript",
+                    "application/javascript",
+                    "application/json",
+                    "application/xml"
+                ],
+                "isCompressionEnabled": true
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name'))]"
+            ]
+        },
+        {
+            "comments": "Origin",
+            "type": "Microsoft.Cdn/profiles/endpoints/origins",
+            "name": "[concat(parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name'), '/', parameters('endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ced_name'), '/', parameters('origins_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_azurewebsites_net_name'))]",
+            "apiVersion": "2016-04-02",
+            "scale": null,
+            "properties": {
+                "hostName": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap.azurewebsites.net",
+                "httpPort": null,
+                "httpsPort": null
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name'))]",
+                "[resourceId('Microsoft.Cdn/profiles/endpoints', parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cpd_name'), parameters('endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ced_name'))]"
+            ]
+        },
+        {
+            "comments": "CDN",
+            "type": "Microsoft.Cdn/profiles/endpoints",
+            "name": "[concat(parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name'), '/', parameters('endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ces_name'))]",
+            "apiVersion": "2016-04-02",
+            "location": "SoutheastAsia",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "originHostHeader": "rio-dev-plg-cod-wap-ete-mav-sec-grn-wap.azurewebsites.net",
+                "isHttpAllowed": false,
+                "isHttpsAllowed": true,
+                "queryStringCachingBehavior": "NotSet",
+                "originPath": "/stat",
+                "origins": [{
+                    "name": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap-azurewebsites-net",
+                    "properties": {
+                        "hostName": "rio-dev-plg-cod-wap-ete-mav-sec-grn-wap.azurewebsites.net",
+                        "httpPort": 80,
+                        "httpsPort": 443
+                    }
+                }],
+                "contentTypesToCompress": [],
+                "isCompressionEnabled": false
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name'))]"
+            ]
+        },
+        {
+            "comments": "Origin",
+            "type": "Microsoft.Cdn/profiles/endpoints/origins",
+            "name": "[concat(parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name'), '/', parameters('endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ces_name'), '/', parameters('origins_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_azurewebsites_net_name_1'))]",
+            "apiVersion": "2016-04-02",
+            "scale": null,
+            "properties": {
+                "hostName": "rio-dev-plg-cod-wap-ete-mav-sec-grn-wap.azurewebsites.net",
+                "httpPort": 80,
+                "httpsPort": 443
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name'))]",
+                "[resourceId('Microsoft.Cdn/profiles/endpoints', parameters('profiles_rio_dev_plg_cod_wap_ete_mav_pri_grn_cps_name'), parameters('endpoints_rio_dev_plg_cod_wap_ete_mav_pri_grn_ces_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c67eb5d9-ec94-46a1-ab1e-b8df8b9f8227/resourceGroups/rio-dev-plg-cod-wap-ete-mav-pri-grn-rg/providers/Microsoft.Web/sites/rio-dev-plg-cod-wap-ete-mav-pri-grn-wap/config/web'.",
+            "type": "Microsoft.Web/sites/config",
+            "name": "[concat(parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name'), '/', parameters('config_web_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "tags": {
+                "hidden-related:/subscriptions/c67eb5d9-ec94-46a1-ab1e-b8df8b9f8227/resourcegroups/rio-dev-plg-cod-wap-ete-pri-rg/providers/Microsoft.Web/serverfarms/rio-dev-plg-cod-wap-ete-pri-asp": "empty"
+            },
+            "scale": null,
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "pythonVersion": "",
+                "nodeVersion": "",
+                "linuxFxVersion": "",
+                "requestTracingEnabled": false,
+                "requestTracingExpirationTime": "2018-01-06T12:14:00Z",
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": null,
+                "httpLoggingEnabled": true,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": true,
+                "publishingUsername": "$rio-dev-plg-cod-wap-ete-mav-pri-grn-wap",
+                "publishingPassword": null,
+                "appSettings": null,
+                "metadata": null,
+                "connectionStrings": null,
+                "machineKey": null,
+                "handlerMappings": null,
+                "documentRoot": null,
+                "scmType": "VSO",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "javaVersion": null,
+                "javaContainer": null,
+                "javaContainerVersion": null,
+                "appCommandLine": "",
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [{
+                    "virtualPath": "/",
+                    "physicalPath": "site\\wwwroot",
+                    "preloadEnabled": false,
+                    "virtualDirectories": null
+                }],
+                "winAuthAdminState": 0,
+                "winAuthTenantState": 0,
+                "customAppPoolIdentityAdminState": false,
+                "customAppPoolIdentityTenantState": false,
+                "runtimeADUser": null,
+                "runtimeADUserPassword": null,
+                "loadBalancing": "LeastRequests",
+                "routingRules": [],
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "limits": null,
+                "autoHealEnabled": false,
+                "autoHealRules": null,
+                "tracingOptions": null,
+                "vnetName": "",
+                "siteAuthEnabled": false,
+                "siteAuthSettings": {
+                    "enabled": null,
+                    "unauthenticatedClientAction": null,
+                    "tokenStoreEnabled": null,
+                    "allowedExternalRedirectUrls": null,
+                    "defaultProvider": null,
+                    "clientId": null,
+                    "clientSecret": null,
+                    "issuer": null,
+                    "allowedAudiences": null,
+                    "additionalLoginParams": null,
+                    "isAadAutoProvisioned": false,
+                    "googleClientId": null,
+                    "googleClientSecret": null,
+                    "googleOAuthScopes": null,
+                    "facebookAppId": null,
+                    "facebookAppSecret": null,
+                    "facebookOAuthScopes": null,
+                    "twitterConsumerKey": null,
+                    "twitterConsumerSecret": null,
+                    "microsoftAccountClientId": null,
+                    "microsoftAccountClientSecret": null,
+                    "microsoftAccountOAuthScopes": null
+                },
+                "cors": null,
+                "push": null,
+                "apiDefinition": null,
+                "autoSwapSlotName": null,
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": null,
+                "ipSecurityRestrictions": null
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name'))]"
+            ]
+        },
+        {
+            "comments": "Binding",
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "name": "[concat(parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name'), '/', parameters('hostNameBindings_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap.azurewebsites.net_name'))]",
+            "apiVersion": "2016-08-01",
+            "location": "Southeast Asia",
+            "scale": null,
+            "properties": {
+                "siteName": "rio-dev-plg-cod-wap-ete-mav-pri-grn-wap",
+                "domainId": null,
+                "hostNameType": "Verified"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_rio_dev_plg_cod_wap_ete_mav_pri_grn_wap_name'))]"
+            ]
+        }
+    ]
+}
