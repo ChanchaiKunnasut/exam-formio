@@ -25,10 +25,20 @@
             var customizationDef;
             var styleDef;
             var headerConfig;
+            var regex = new RegExp("[?&]form(=([^&#]*)|&|#|$)")
+            var formDefParam = regex.exec(window.location.href);
+            var formSet = false;
+            if (formDefParam && formDefParam[2])
+            {
+                formDef = "../forms/" + decodeURIComponent(formDefParam[2].replace(/\+/g, " ")) + "/form.json.js";
+                formSet = true;
+            }
+            
             if (typeof appObj !== 'undefined')
             {
                 // We have found app.json.js so we will use it to load other definitions
-                if (appObj["formdefinition"])
+                // If we have form definition already defined in query parameter we will use it
+                if (!formSet && appObj["formdefinition"])
                 {
                     formDef = appObj["formdefinition"];
                 }
