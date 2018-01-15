@@ -1,13 +1,6 @@
 var addtwonumbersurl = null;
 var mailboxSettingsAvailable = true;
-var ADAL = new AuthenticationContext({
-    instance: 'https://login.microsoftonline.com/',
-    tenant: '3e0b6cbd-4959-4d01-81bf-ce883ddabd96', //COMMON OR YOUR TENANT ID
-    clientId: '8abc815a-6fc1-4419-a172-bab1ef5bdbeb', //REPLACE WITH YOUR CLIENT ID
-    redirectUri: [window.location.protocol, '//', window.location.host, window.location.pathname].join(''), // THE CDN URI
-    cacheLocation: isIEBrowser() ? 'localStorage' : 'sessionStorage', // enable this for IE, as sessionStorage does not work for localhost.
-    popUp: false
-});   
+var ADAL = null;  
 
 // output ADAL logs to the console
 Logging = {
@@ -26,22 +19,45 @@ var currentUser = {
 
 (function () {
     // parsing the query string into JSON 
+    var adal_tenant = null;
+    var adal_clientId = null;
     var query = window.location.search.substring(1);
     var qs = '{}';
+    var storageObj = isIEBrowser() ? localStorage : sessionStorage;
     if (query!=null && query!='') {
         var qs = parse_query_string(query);
+        adal_tenant = qs['tenant'];
+        storageObj.setItem('adal_tenant',adal_tenant);
+        adal_clientId = qs['client'];
+        storageObj.setItem('adal_clientId',adal_clientId);
+    } else {
+       adal_tenant = storageObj.getItem('adal_tenant');
+       adal_clientId = storageObj.getItem('adal_clientId');
     }
     
     var isIfrm = isIframe();
-    var isCallback = ADAL.isCallback(window.location.hash);
+    var isCallback = isADALCallback();
     console.log('isIframe: '+isIfrm+', isADALInitialized: '+isSignedInUser()+', isCallback='+isCallback+', query string: '+query);
     
     // check and use ADAL if we have signed in user or we need to initialize it
     // NOTE: ADAL should be used if this is running inside iFrame (it means it is refreshing the ID token), or if we already have signed-in user, 
     // or we are in process of initialization (callback), or if we have the query parameter 'online' equal to 'true'
-    var shouldUseADAL = isIfrm || isSignedInUser() || isCallback || qs['online']=='true';
+    var shouldUseADAL = isIfrm || isSignedInUser() || isCallback || (qs['online']=='true' && adal_clientId!=null && adal_tenant!=null);
     console.log('should use ADAL: '+shouldUseADAL);
     if (shouldUseADAL) {
+         if (ADAL==null) {
+            ADAL = new AuthenticationContext({
+                instance: 'https://login.microsoftonline.com/',
+                tenant: adal_tenant,//'b4a7cf6c-8876-456a-b97f-1e2bbeb7579a', //COMMON OR YOUR TENANT ID
+                clientId: adal_clientId,//'0b2d8b43-929e-412c-b6d4-2d536ffc1e92', //REPLACE WITH YOUR CLIENT ID
+                redirectUri: [window.location.protocol, '//', window.location.host, window.location.pathname].join(''), // THE CDN URI
+                cacheLocation: isIEBrowser() ? 'localStorage' : 'sessionStorage', // enable this for IE, as sessionStorage does not work for localhost.
+                //endpoints: endpoints,
+                popUp: false
+            });   
+         }
+          
+       
         // doing ADAL logic
         console.log('iscallback='+isCallback);
         if (isCallback) {
@@ -63,6 +79,42 @@ var currentUser = {
 })();
 
 
+function isADALCallback() {
+   var hash = getHash(window.location.hash);
+   var parameters = deserializeHash(hash);
+   return (
+      parameters.hasOwnProperty('error_description') ||
+      parameters.hasOwnProperty('access_token') ||
+      parameters.hasOwnProperty('id_token')
+   );   
+}
+
+function deserializeHash(query) {
+   var match,
+      pl = /\+/g,  // Regex for replacing addition symbol with a space
+      search = /([^&=]+)=([^&]*)/g,
+      decode = function (s) {
+          return decodeURIComponent(s.replace(pl, ' '));
+      },
+      obj = {};
+   match = search.exec(query);
+   while (match) {
+      obj[decode(match[1])] = decode(match[2]);
+      match = search.exec(query);
+   }
+
+   return obj;   
+}
+
+function getHash(hash) {
+   if (hash.indexOf('#/') > -1) {
+      hash = hash.substring(hash.indexOf('#/') + 2);
+   } else if (hash.indexOf('#') > -1) {
+      hash = hash.substring(1);
+   }
+
+   return hash;
+}
    
 function isIEBrowser() {
     var mybrowser = window.navigator.userAgent;
@@ -74,7 +126,7 @@ function isIEBrowser() {
 }
    
 function isSignedInUser () {
-    return ADAL.getCachedUser()!=null;
+    return ADAL!=null && ADAL.getCachedUser()!=null;
 }
 
 function isUseOutlookMailSettings() {
@@ -82,7 +134,7 @@ function isUseOutlookMailSettings() {
 }
    
 function fillUserInfo() {
-    var signeduser = ADAL.getCachedUser();
+    var signeduser = ADAL!=null ? ADAL.getCachedUser() : null;
     if (signeduser && headerObj !== 'undefined' && headerObj.hasOwnProperty("account") && headerObj["account"]) {
         if (signeduser.profile.upn) {
             // For work or school accounts (tenant members)
