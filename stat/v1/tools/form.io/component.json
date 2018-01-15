@@ -8,8 +8,8 @@
     "comment": "We use form.io portal to build form and create JSON representation of the form from which the form is created in our APP. A path to json form is defined in src/defs/app.json.js as appObj['formdefinition'].",
     "version":
     {
-        "number": "2.27.6",
-        "date": "01/11/2018",
+        "number": "2.27.0",
+        "date": "01/07/2018",
         "license":
         {
             "type": "opensource",

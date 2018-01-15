@@ -86,7 +86,7 @@ function applyTranslation()
 {
     var oldLanguage = languageSelector.currentLanguage;
     languageSelector.currentLanguage = languageSelector.selectedLanguage;
-    setLanguage(languageSelector.selectedLanguage.replace("-", "_").replace("-", "_")); // We need to replace twice in order to cover SR_LATN_CS
+    setLanguage(languageSelector.selectedLanguage);
     $("[lang-tran]").translate();
     changeLanguageForThemeSettings(oldLanguage, languageSelector.currentLanguage);
 }
@@ -105,10 +105,10 @@ function applyTranslation()
                 && langLayoutObj[languageSelector.selectedLanguage][$this.attr("lang-tran")] !== undefined)
             {
                 $this.html(langLayoutObj[languageSelector.selectedLanguage][$this.attr("lang-tran")]);
-            } else if ($this.attr("lang-tran") !== undefined && langObj.i18n.resources.hasOwnProperty(languageSelector.selectedLanguage.replace("-", "_").replace("-", "_"))
-                && langObj.i18n.resources[languageSelector.selectedLanguage.replace("-", "_").replace("-", "_")].translation[$this.attr("lang-tran")] !== undefined)
+            } else if ($this.attr("lang-tran") !== undefined && langObj.i18n.resources.hasOwnProperty(languageSelector.selectedLanguage)
+                && langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")] !== undefined)
             {
-                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage.replace("-", "_").replace("-", "_")].translation[$this.attr("lang-tran")]);
+                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")]);
             }
         });
     };
