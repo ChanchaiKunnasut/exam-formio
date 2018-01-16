@@ -25,14 +25,24 @@ var currentUser = {
     var qs = '{}';
     var storageObj = isIEBrowser() ? localStorage : sessionStorage;
     if (query!=null && query!='') {
-        var qs = parse_query_string(query);
-        adal_tenant = qs['tenant'];
-        storageObj.setItem('adal_tenant',adal_tenant);
+        qs = parse_query_string(query);
         adal_clientId = qs['client'];
+        if (adal_clientId==null) {
+           var token = qs['token'];
+           var parsedToken = parseJwt(token);
+           adal_clientId = parsedToken.aud;
+           adal_tenant = parsedToken.tid;
+        } else {
+            adal_tenant = qs['tenant'];
+        }
         storageObj.setItem('adal_clientId',adal_clientId);
+        storageObj.setItem('adal_tenant',adal_tenant);        
     } else {
        adal_tenant = storageObj.getItem('adal_tenant');
        adal_clientId = storageObj.getItem('adal_clientId');
+    }
+    if (adal_tenant==null) {
+       adal_tenant = 'common';
     }
     
     var isIfrm = isIframe();
@@ -41,8 +51,8 @@ var currentUser = {
     
     // check and use ADAL if we have signed in user or we need to initialize it
     // NOTE: ADAL should be used if this is running inside iFrame (it means it is refreshing the ID token), or if we already have signed-in user, 
-    // or we are in process of initialization (callback), or if we have the query parameter 'online' equal to 'true'
-    var shouldUseADAL = isIfrm || isSignedInUser() || isCallback || (qs['online']=='true' && adal_clientId!=null && adal_tenant!=null);
+    // or we are in process of initialization (callback), or if we have the query parameter 'client' or query parameter 'token'
+    var shouldUseADAL = isIfrm || isSignedInUser() || isCallback || adal_clientId!=null;
     console.log('should use ADAL: '+shouldUseADAL);
     if (shouldUseADAL) {
          if (ADAL==null) {
@@ -78,6 +88,11 @@ var currentUser = {
     }    
 })();
 
+function parseJwt (token) {
+   var base64Url = token.split('.')[1];
+   var base64 = base64Url.replace('-', '+').replace('_', '/');
+   return JSON.parse(atob(base64));
+}
 
 function isADALCallback() {
    var hash = getHash(window.location.hash);
