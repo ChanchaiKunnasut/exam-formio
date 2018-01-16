@@ -1,4 +1,3 @@
-var addtwonumbersurl = null;
 var mailboxSettingsAvailable = true;
 var ADAL = null;  
 
@@ -280,35 +279,6 @@ function getFunctionName(funct) {
    } else {
       return funct.name;
    }
-}
-
-function getdata(url) {
-    document.getElementById('mymessage').innerHTML='Waiting for data...';
-    executeAjaxRequestWithAdalLogic(ADAL.config.clientId,getdatanoadal,url);
-}
-
-function getdatanoadal(token,url) {
-    var settings = {
-        "crossDomain": true,
-        "url": url,
-        "timeout":30000,
-        "method": "GET",        
-        "headers": {
-            "Authorization": "Bearer " + token
-        }
-    }
-    
-    $.ajax(settings).done(function (data,textStatus,request) {
-        console.log('getdata call successfully executed');
-        document.getElementById('mymessage').innerHTML='Data successfully retrieved!';
-        addtwonumbersurl = request.getResponseHeader('API_add_url');
-        console.log('Data successfully retrieved! ATNURL='+addtwonumbersurl);
-    }).fail(function (err, textStatus, errorThrown) {
-        console.log('getdata call failed');
-        document.getElementById('mymessage').innerHTML='Failed to retrieve the data!';
-        console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-    });
 }
 
 function getmailboxsettingsdata(url) {   
