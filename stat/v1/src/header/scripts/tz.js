@@ -14,11 +14,15 @@ var timeZoneSelector =
     supportedTimeZonesSet: false
 };
 
+/**
+ * Sets time zone when retrieved from Microsoft Graph API
+ */
 function setInitialTimeZone(timeZone)
 {
     timeZoneSelector.currentTimeZone = timeZone;
     timeZoneSelector.selectedTimeZone = timeZone;
     
+    // Update GUI components with the time zone information
     if (timeZoneSelector.supportedTimeZonesSet)
     {
         $('#timeZoneName').html(supportedTimeZonesMap[timeZone]);
@@ -29,10 +33,14 @@ function setInitialTimeZone(timeZone)
     timeZoneSelector.timeZoneInitialized = true;
 }
 
+/**
+ * Sets time zone choices when retrieved from Microsoft Graph API
+ */
 function setSupportedTimeZones(values)
 {
     if (values && values.length > 0)
     {
+        // Add all time zones to our map and update choices in the header menu
         for (var timeZoneIndex = 0; timeZoneIndex < values.length; timeZoneIndex++)
         {
             supportedTimeZonesMap[values[timeZoneIndex]["alias"]] = values[timeZoneIndex]["displayName"];
@@ -46,9 +54,14 @@ function setSupportedTimeZones(values)
         
         timeZoneSelector.supportedTimeZonesSet = true;
         $('#timeZoneWrapper').show();
+        
+        // If user's time zone is already retrieved we need to update GUI now,
+        // because we couldn't do that when we didn't have time zone choices
         if (timeZoneSelector.timeZoneInitialized)
         {
              $('#timeZoneName').html(supportedTimeZonesMap[timeZoneSelector.currentTimeZone]);
+             $('#tzarr').find('.ltz-itm-selector-check').css('visibility', 'hidden');
+            document.getElementById('tzCheck' + timeZoneSelector.currentTimeZone).style.visibility = "visible";
         }
         
     }
