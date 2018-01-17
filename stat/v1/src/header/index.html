@@ -17,85 +17,35 @@
         <script src="./scripts/theme.js"></script>
         <script src="./scripts/main.js"></script>
         <script src="./scripts/auth.js"></script>
-        <script src="./defs/app.json.js"></script>
-        <script id="definitionsImport" type="text/javascript">
+        <script id="appConfImport" type="text/javascript">
         (function() {
-            var formDef = "./defs/form.json.js";
-            var brandDef;
-            var customizationDef;
-            var styleDef;
-            var headerConfig;
-            var regex = new RegExp("[?&]form(=([^&#]*)|&|#|$)")
-            var formDefParam = regex.exec(window.location.href);
-            var formSet = false;
-            if (formDefParam && formDefParam[2])
-            {
-                formDef = "../forms/" + decodeURIComponent(formDefParam[2].replace(/\+/g, " ")) + "/form.json.js";
-                formSet = true;
-            }
+            var appDef = "./defs/app.json.js";
             
-            if (typeof appObj !== 'undefined')
+            // Check if we have an URI paramater which specifies
+            // a path to the app configuration. If so we'll use it.
+            var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)")
+            var appDefParam = appRegex.exec(window.location.href);
+            if (appDefParam && appDefParam[2])
             {
-                // We have found app.json.js so we will use it to load other definitions
-                // If we have form definition already defined in query parameter we will use it
-                if (!formSet && appObj["formdefinition"])
+                var appUriParam = decodeURIComponent(appDefParam[2].replace(/\+/g, " "));
+                if (appUriParam === "/")
                 {
-                    formDef = appObj["formdefinition"];
+                    appDef = "../appcnfs/app.json.js";
                 }
-                
-                if (appObj["branddefinition"])
+                else
                 {
-                    brandDef = appObj["branddefinition"];
-                }
-                
-                if (appObj["stylingdefinition"])
-                {
-                    styleDef = appObj["stylingdefinition"];
-                }
-                
-                if (appObj["customizationdefinition"])
-                {
-                    customizationDef = appObj["customizationdefinition"];
-                }
-                
-                if (appObj["headerconfiguration"])
-                {
-                    headerConfig = appObj["headerconfiguration"];
+                    appDef = "../appcnfs/" + appUriParam + "/app.json.js";
                 }
             }
             
-            var formDSE = document.createElement("script");
-            formDSE.src = formDef;
-            var currentNode = document.getElementById("definitionsImport");
-            currentNode.parentNode.insertBefore(formDSE, currentNode.nextSibling);
+            var appDSE = document.createElement("script");
+            appDSE.src = appDef;
+            var currentNode = document.getElementById("appConfImport");
+            currentNode.parentNode.insertBefore(appDSE, currentNode.nextSibling);
             
-            if (brandDef)
-            {
-                var brandDSE = document.createElement("script");
-                brandDSE.src = brandDef;
-                currentNode.parentNode.insertBefore(brandDSE, currentNode.nextSibling);
-            }
-            
-            if (styleDef)
-            {
-                var styleDSE = document.createElement("script");
-                styleDSE.src = styleDef;
-                currentNode.parentNode.insertBefore(styleDSE, currentNode.nextSibling);
-            }
-            
-            if (customizationDef)
-            {
-                var customizationDSE = document.createElement("script");
-                customizationDSE.src = customizationDef;
-                currentNode.parentNode.insertBefore(customizationDSE, currentNode.nextSibling);
-            }
-            
-            if (headerConfig)
-            {
-                var headerCSE = document.createElement("script");
-                headerCSE.src = headerConfig;
-                currentNode.parentNode.insertBefore(headerCSE, currentNode.nextSibling);
-            }
+            var defsSE = document.createElement("script");
+            defsSE.src = "./scripts/defimp.js";
+            currentNode.parentNode.insertBefore(defsSE, currentNode.nextSibling);
         })();
         </script>
         <script src="./scripts/lang-form.json.js"></script>
