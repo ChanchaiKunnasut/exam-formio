@@ -4,7 +4,9 @@
     // Check if appObj is defined. If not try with a new hardcoded value
     if (typeof appObj === "undefined")
     {
-        appDefinition.src = "./defs/app.json.js";
+        var appDSE = document.createElement("script");
+        appDSE.src = "./defs/app.json.js";
+        appDefinition.parentNode.insertBefore(appDSE, appDefinition.nextSibling);
     }
     
     var defsSE = document.createElement("script");
