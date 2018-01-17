@@ -28,9 +28,15 @@ var currentUser = {
         adal_clientId = qs['client'];
         if (adal_clientId==null) {
            var token = qs['token'];
-           var parsedToken = parseJwt(token);
-           adal_clientId = parsedToken.aud;
-           adal_tenant = parsedToken.tid;
+           if (token) {
+               try {
+               var parsedToken = parseJwt(token);
+               adal_clientId = parsedToken.aud;
+               adal_tenant = parsedToken.tid;
+               } catch(e) {
+                  console.log('Invalid token parameter: '+token);
+               }
+           }
         } else {
             adal_tenant = qs['tenant'];
         }
