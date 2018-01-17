@@ -151,9 +151,14 @@ function setupStyle()
     }
     
     bootswatchStyleDE.href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/bootstrap.min.css";
-    
     var layoutStyleNode = document.getElementById("layoutstyle");
     layoutStyleNode.parentNode.insertBefore(bootswatchStyleDE, layoutStyleNode.nextSibling);
+    
+    var headerStyleDE = document.createElement("link");
+    headerStyleDE.id = "themelayoutstyle";
+    headerStyleDE.rel = "stylesheet";
+    headerStyleDE.href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/layout-override.css";
+    layoutStyleNode.parentNode.insertBefore(headerStyleDE, layoutStyleNode.nextSibling);
 }
 
 /**
@@ -241,8 +246,9 @@ function showContentOnStyleApply()
 {
     // We added btn class to this element and it will have text-align
     // set to center once bootswatch has been rendered
-    if ($("#renderIndicator").css("text-align") !== "right")
+    if ($("#renderIndicator").css("text-align") !== "right" && $("#headerRenderIndicator").css("text-align") === "right")
     {
+        $('.header-border').show();
         $('.content-wrapper').show();
     }
     else
