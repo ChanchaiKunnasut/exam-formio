@@ -110,8 +110,15 @@
                     Formio.createForm(document.getElementById('formio'), formObj, langObj)
                     .then(function(form) {
                         form.header = {
-                            user: currentUser
+                            user: currentUser,
+                            settings: {
+                                brand: brandObj,
+                                customization: customizationObj,
+                                headerConfiguration: headerObj
+                            }
                         };
+                        form.header.settings.brand.mainlogopath = $("#mainLogo").find("img").attr("src");
+                        form.header.settings.brand.faviconpath = $("#pageIcon").attr("href");
                         var qsjson = parse_query_string(window.location.search.substring(1));
                         form.submission = {"data":qsjson};
                         form.httprequest = {

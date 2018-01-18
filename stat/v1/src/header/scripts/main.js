@@ -39,6 +39,7 @@ function setupLayout() {
         var faviconElement = document.createElement("link");
         faviconElement.rel = "shortcut icon";
         faviconElement.type = "image/x-icon";
+        faviconElement.id = "pageIcon";
         if (brandObj["faviconpath"])
         {
             faviconElement.href = brandObj["faviconpath"];
