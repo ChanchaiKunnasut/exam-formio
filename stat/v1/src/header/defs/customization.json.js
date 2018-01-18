@@ -1,2 +1,3 @@
 var customizationObj = {
+    "customizationlogopath": ""
 }

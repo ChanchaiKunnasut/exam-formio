@@ -1,3 +1,6 @@
 var brandObj = {
-    "bootswatchtheme": "cosmo"
+    "mainlogopath": "",
+    "sidelogopath": "",
+    "faviconpath": "",
+    "bootswatchtheme": ""
 };

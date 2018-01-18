@@ -28,21 +28,38 @@ function setupLayout() {
             $("#mainLogo").find("img").attr("src", "./ress/jpeg/risktech/Risktech48.jpg");
         }
         
-        // Set up partner's logo and show it if defined
-        if (brandObj["partnerlogopath"])
+        // Set up side logo and show it if defined
+        if (brandObj["sidelogopath"])
         {
-            $("#partnerLogo").find("img").attr("src", brandObj["partnerlogopath"]);
-            $("#partnerLogo").show();
+            $("#sideLogo").find("img").attr("src", brandObj["sidelogopath"]);
+            $("#sideLogo").show();
         }
+        
+        // Set up favicon
+        var faviconElement = document.createElement("link");
+        faviconElement.rel = "shortcut icon";
+        faviconElement.type = "image/x-icon";
+        if (brandObj["faviconpath"])
+        {
+            faviconElement.href = brandObj["faviconpath"];
+        }
+        else
+        {
+            // If favicon is not specified use the main logo
+            faviconElement.href = $("#mainLogo").find("img").attr("src");
+        }
+        
+        var pageTitleNode = document.getElementById("pageTitle");
+        pageTitleNode.parentNode.insertBefore(faviconElement, pageTitleNode.nextSibling);
     }
     
     if (typeof customizationObj !== 'undefined')
     {
-        // Set up client's logo and show it if defined
-        if (customizationObj["clientlogopath"])
+        // Set up client's logo (customization logo) and show it if defined
+        if (customizationObj["customizationlogopath"])
         {
-            $("#clientLogo").find(".client-logo").attr("src", customizationObj["clientlogopath"]);
-            $("#clientLogo").show();
+            $("#customizationLogo").find(".client-logo").attr("src", customizationObj["customizationlogopath"]);
+            $("#customizationLogo").show();
         }
     }
     

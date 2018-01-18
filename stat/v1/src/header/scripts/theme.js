@@ -128,8 +128,8 @@ themesMap['yeti'] =
  */
 var themeSelector =
 {
-    currentTheme: 'bluemeanie',
-    selectedTheme: 'bluemeanie'
+    currentTheme: 'cosmo',
+    selectedTheme: 'cosmo'
 };
 
 /**
@@ -147,8 +147,9 @@ function setupStyle()
     {
         themeSelector.currentTheme = brandObj["bootswatchtheme"];
         themeSelector.selectedTheme = themeSelector.currentTheme;
-        setupThemeMenu();
     }
+    
+    setupThemeMenu();
     
     bootswatchStyleDE.href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/bootstrap.min.css";
     var layoutStyleNode = document.getElementById("layoutstyle");
