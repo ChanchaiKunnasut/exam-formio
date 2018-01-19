@@ -605,6 +605,9 @@ body {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
+    font-family: "Segoe UI Regular","Segoe UI",Segoe,Tahoma,Helvetica,Arial,sans-serif;
+    text-shadow: none;
+    color: #333;
 }
 
 .user-settings-overlay {
@@ -689,7 +692,6 @@ body {
 }
 
 .user-settings-card-header-label {
-    color: #333;
     white-space: normal;
     font-size: 14px;
 }
@@ -731,6 +733,10 @@ body {
     margin-top: 20px;
     position: relative;
     cursor: default;
+}
+
+.user-settings-card-value-content{
+    color: #666;
 }
 
 .user-settings-card-footer {
@@ -1039,6 +1045,7 @@ body {
     right: 0;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .5);
     font-size: 14px;
+    text-shadow: none;
 }
 
 @media (min-width: 883px) {
