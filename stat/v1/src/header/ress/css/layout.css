@@ -625,7 +625,6 @@ body {
 }
 
 .user-settings-header {
-    color: #333;
     padding-top: 24px;
     white-space: normal;
     text-align: left;
@@ -1325,7 +1324,6 @@ body {
 }
 
 .user-settings-name {
-    color: #333;
     font-size: 17px;
     overflow: hidden;
     text-overflow: ellipsis;
