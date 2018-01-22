@@ -284,6 +284,9 @@ function openUserMenu(userMenuButton)
                             {
                                 wrapper.parentElement.parentElement.classList.remove('first-item');
                             }
+                            $('#transparentbutton').removeClass('header-hidden-element');
+                            $('#transparentbutton').addClass('rsp-hidden');
+                            $('#transparentbutton').show();
                         }
                         
                         wrapper.classList.remove('header-hidden-element');
@@ -302,11 +305,17 @@ function openUserMenu(userMenuButton)
                                 contentWrappers[i].classList.add('shrink');
                             }
                         }
+                        
                     }
                 }
             }
+            
+
+            
         }
     }
+    
+    
 }
 
 /**
@@ -363,6 +372,10 @@ function closeUserMenu()
         contentWrappers[contentWrappersIndex].classList.remove('shrink');
     }
     }
+    
+    $('#transparentbutton').removeClass('header-hidden-element');
+    $('#transparentbutton').addClass('rsp-hidden');
+    $('#transparentbutton').hide();
 }
 
 /**
