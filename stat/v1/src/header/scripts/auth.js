@@ -1,4 +1,5 @@
 var mailboxSettingsAvailable = true;
+var userPropertyExtensionsAvailable = true;
 var ADAL = null;  
 
 // output ADAL logs to the console
@@ -151,6 +152,10 @@ function isSignedInUser () {
 
 function isUseOutlookMailSettings() {
     return typeof headerObj !== 'undefined' && headerObj["use outlook settings"];
+}
+
+function isUseUserPropertyExtensions() {
+    return typeof headerObj !== 'undefined' && headerObj["use user property extensions"];
 }
    
 function fillUserInfo() {
@@ -321,12 +326,10 @@ function getdatanoadalmailboxsettings(token,url) {
         
         // Translate the page
         setupPredefinedLanguage();
-        setupStyle();
         console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         mailboxSettingsAvailable = false;
         applyTranslation();
-        setupStyle();
         console.log('getmailboxsettingsdata call failed');
         document.getElementById('mailboxsettingsmessage').innerHTML='Failed to retrieve the mailbox data!';
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
@@ -462,4 +465,124 @@ function getdatanoadalphoto(token,url) {
         }
     };
     request.send(null);
+}
+
+function createThemePropertyExtension(theme) {
+    var payload = {
+        "@odata.type": "microsoft.graph.openTypeExtension",
+        "extensionName": themePropertyExtensionId,
+        "theme": theme
+    };
+    document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension doesn't exist. Will be created.";
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postdataonadal, "https://graph.microsoft.com/beta/me/extensions", payload);
+}
+
+function postdataonadal(token, url, payload) {
+    var settings = {
+        "crossDomain": true,
+        "url": url,
+        "timeout":30000,
+        "method": "POST",        
+        "headers": {
+            "Authorization": "Bearer " + token
+        },
+        "data": JSON.stringify(payload),
+        "contentType": "application/json"
+    };
+    
+    $.ajax(settings).done(function (data,textStatus,request) {
+        console.log('postdataonadal call successfully executed');
+        document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension successfully created.";
+        console.log('Data successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
+    }).fail(function (err, textStatus, errorThrown) {
+        userPropertyExtensionsAvailable = false;
+        console.log('postdataonadal call failed');
+        document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to create user's theme property extension.";
+        console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+    });
+}
+
+function getUserPropertyExtensions() {
+    document.getElementById('userpropertyextensionsmessage').innerHTML='Waiting for data...';
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions");
+}
+
+function getdatanoadaluserpropertyextensions(token, url) {
+    var settings = {
+        "crossDomain": true,
+        "url": url,
+        "timeout":30000,
+        "method": "GET",        
+        "headers": {
+            "Authorization": "Bearer " + token
+        }
+    }
+    
+    $.ajax(settings).done(function (data,textStatus,request) {
+        console.log('getUserPropertyExtensions call successfully executed');
+        
+        // Parse the payload data and create or use existing property extension
+        if (data && data.extensions && data.extensions.length > 0) {
+            var themeFound = false;
+            for (var i = 0; i < data.extensions.length; i++) {
+                if (data.extensions[i].id === themePropertyExtensionId && data.extensions[i].theme) {
+                    document.getElementById('userpropertyextensionsmessage').innerHTML="User's property extensions (theme) successfully retrieved!";
+                    setupTheme(data.extensions[i].theme);
+                    themeFound = true;
+                    break;
+                }
+            }
+            
+            if (!themeFound) {
+                createThemePropertyExtension(themeSelector.currentTheme);
+                setupStyle();
+            }
+        } else {
+            createThemePropertyExtension(themeSelector.currentTheme);
+            setupStyle();
+        }
+        
+        console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
+    }).fail(function (err, textStatus, errorThrown) {
+        userPropertyExtensionsAvailable = false;
+        setupStyle();
+        console.log('getUserPropertyExtensions call failed');
+        document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to retrieve user's property extensions (theme)!";
+        console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+    });
+}
+
+function updateThemePropertyExtension(theme) {
+    var payload = {
+        "theme": theme
+    };
+    document.getElementById('userpropertyextensionsmessage').innerHTML="Updating user's theme property extension...";
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchThemePropertyExtensionOnAdal, "https://graph.microsoft.com/v1.0/me/extensions/" + themePropertyExtensionId, payload);
+}
+
+function patchThemePropertyExtensionOnAdal(token, url, payload) {
+    var settings = {
+        "crossDomain": true,
+        "url": url,
+        "timeout":30000,
+        "method": "PATCH",        
+        "headers": {
+            "Authorization": "Bearer " + token
+        },
+        "data": JSON.stringify(payload),
+        "contentType": "application/json"
+    }
+    
+    $.ajax(settings).done(function (data,textStatus,request) {
+        console.log('patchThemePropertyExtensionOnAdal call successfully executed');
+        document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension successfully updated!";
+        console.log('User's theme property extension successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
+    }).fail(function (err, textStatus, errorThrown) {
+        console.log('patchThemePropertyExtensionOnAdal call failed');
+        document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to update user's theme property extension!";
+        console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
+    });
 }

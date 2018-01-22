@@ -140,6 +140,12 @@
                             } else {
                                 // Just translate the page
                                 applyTranslation();
+                            }
+                            
+                            // Find out user's theme (user property extensions)
+                            if (isUseUserPropertyExtensions() && isSignedInUser()) {
+                                getUserPropertyExtensions();
+                            } else {
                                 setupStyle();
                             }
                         });
@@ -174,7 +180,7 @@
                         <img />
                     </div>
                     <div id="appTitle" class="header-common app-header rsp-lar-visible" style="display: none">
-                        <p class="app-menu-brand">Risktech APP</a>
+                        <p class="app-menu-brand">Risktech APP</p>
                     </div>
                 </div>
                 <div class="header-common header-center"></div>
@@ -517,6 +523,7 @@
             <div id="mymessage"></div>
             <div id="mailboxsettingsmessage"></div>
             <div id="supportedtimezonesmessage"></div>
+            <div id="userpropertyextensionsmessage"></div>
             <div id="userphotomessage"></div>
             <div class="container body-content">
 		        <div id='formio'></div>
