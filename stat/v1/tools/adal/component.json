@@ -1,0 +1,31 @@
+{
+    "name": "ADAL.js",
+    "vendor": "Microsoft Corporation",
+    "description": "The Azure Active Directory Authentication Library (ADAL) enables application developers to authenticate users to cloud or on-premises Active Directory (AD), and obtain tokens for securing API calls.",
+    "homepage": "https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-libraries",
+    "sources": "https://github.com/AzureAD/azure-activedirectory-library-for-js",
+    "need": "We use the library to sign users into our app and for token handling for secured API calls to both Microsoft and our APIs.",
+    "comment": "This library uses Azure AD API. v2.0 endpoint is used by MSAL.js library.",
+    "version":
+    {
+        "number": "1.0.15",
+        "date": "07/19/2017",
+        "license":
+        {
+            "type": "opensource",
+            "name": "Apache License 2.0",
+            "file": "adal.txt",
+            "link": "https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/LICENSE.txt"
+        },
+        "files":
+        [
+            "file":
+            {
+                "path": "src/scripts/vendor/adal.min.js",
+                "name": "adal.min",
+                "extension": "js",
+                "description": "JavaScript minified source code of the library."
+            }
+        ]
+    }
+}
