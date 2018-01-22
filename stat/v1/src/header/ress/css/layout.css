@@ -559,6 +559,19 @@ body {
     display: inline-block !important;
 }
 
+.overlaybutton {
+    top: 50px;
+    left: 0;
+    width: calc(100% - 305px);
+    height: calc(100% - 50px);
+    position: fixed;
+    opacity: .4;
+    background-color: #333;
+    border-width: 0px;
+    padding: 0px;
+    cursor: pointer !important;
+}
+
 .user-settings-wrapper {
     background-color: #f4f4f4;
     top: 49px;
