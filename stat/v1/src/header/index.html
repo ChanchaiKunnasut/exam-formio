@@ -21,7 +21,7 @@
             
             // Check if we have an URI paramater which specifies
             // a path to the app configuration. If so we'll use it.
-            var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)")
+            var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)");
             var appDefParam = appRegex.exec(window.location.href);
             if (appDefParam && appDefParam[2])
             {

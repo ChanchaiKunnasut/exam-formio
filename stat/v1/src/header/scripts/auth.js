@@ -578,7 +578,7 @@ function patchThemePropertyExtensionOnAdal(token, url, payload) {
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('patchThemePropertyExtensionOnAdal call successfully executed');
         document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension successfully updated!";
-        console.log('User's theme property extension successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
+        console.log("User's theme property extension successfully updated! DATA="+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         console.log('patchThemePropertyExtensionOnAdal call failed');
         document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to update user's theme property extension!";
