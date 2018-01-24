@@ -184,7 +184,7 @@ function fillUserInfo() {
             $('#usersettingslinklist').append('<div><div class="user-settings-link-wrapper"><a id="myProfileLink" class="user-settings-link" role="link" href="https://delve.office.com/"><span class="user-settings-link-label" lang-tran="My profile">My profile</span></a></div><div class="user-settings-link-wrapper"><a id="myAccountLink" class="user-settings-link" role="link" href="https://portal.office.com/account/"><span class="user-settings-link-label" lang-tran="My account">My account</span></a></div><div class="user-settings-link-wrapper"><a id="signOutLink" class="user-settings-link" role="link" href="https://login.microsoftonline.com/' + ADAL.config.tenant + '/oauth2/logout"><span class="user-settings-link-label" lang-tran="Sign out">Sign out</span></a></div></div>');
         }
         
-        
+        $("#allAppsLink").attr("href", "https://account.activedirectory.windowsazure.com/r?tenantId=" + ADAL.config.tenant + "#/applications");
         currentUser.name = signeduser.profile.name;
         $('.username').html(signeduser.profile.name);
         getuserphotometadata();
