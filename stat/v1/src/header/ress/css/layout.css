@@ -1548,6 +1548,257 @@ body {
     line-height: 1;
 }
 
+.feedback-overlay-background{
+    background-color: rgba(0,0,0,0.5);
+    color: #444444;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    position: fixed;
+    z-index: 10000000000;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    min-width: 780px;
+}
+
+.feedback-main-container{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    background-color: white;
+    top: 50%;
+    min-width: 100%;
+    position: absolute;
+    margin-top: -160px;
+    height: 320px;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: obf-MainContainerGrowFromCenter;
+    -moz-animation-name: obf-MainContainerGrowFromCenter;
+    -o-animation-name: obf-MainContainerGrowFromCenter;
+    animation-name: obf-MainContainerGrowFromCenter;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.feedback-main-content-holder{
+    height: 100%;
+    width: 720px;
+    margin: 0 auto;
+}
+
+#feedbackLeftFormContainer{
+    float: left;
+    margin-left: 180px;
+}
+
+.feedback-form-container{
+    height: 100%;
+    width: 360px;
+    position: relative;
+    font-size: 0; 
+}
+
+.feedback-question-left-text{
+    padding-top: 24px;
+    padding-bottom: 18px;
+    width: 300px;
+    font-size: 18px;
+}
+
+.feedback-font-subtitle{
+    font-size: 18px;
+    font-family: 'wf_SegoeUIRegular', 'wf_SegoeUI', 'Segoe UI Regular', 'Segoe UI', 'Segoe', 'Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif';
+}
+
+.feedback-text-align-left{
+    text-align: left;
+}
+
+.feedback-line-height{
+    line-height: 100%;
+}
+
+.feedback-column-separatordiv{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.feedback-overall-anchor{
+    color: #ffffff;
+    width: 300px;
+    height: 45px;
+    padding: 0px;
+    border: 0px;
+    margin-bottom: 4px;
+    background-color: #757575;
+    outline: 1px solid transparent;
+}
+
+.feedback-overall-image{
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 8px;
+}
+
+.feedback-overall-text{
+    color: #ffffff;
+    vertical-align: middle;
+    text-align: left;
+    display: inline-block;
+}
+
+.feedback-privacy-statement-link-div{
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.feedback-font-subtext{
+    font-size: 13px;
+    font-family: 'wf_SegoeUIRegular', 'wf_SegoeUI', 'Segoe UI Regular', 'Segoe UI', 'Segoe', 'Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif';
+}
+
+.feedback-link{
+    color: #0167B0;
+    text-decoration: none;
+}
+
+#feedbackMiddleFormContainer{
+    margin-left: 540px;
+}
+
+.feedback-margin-left-60px{
+    margin-left: 60px;
+}
+
+.feedback-font-text{
+    font-size: 16px;
+    font-family: 'wf_SegoeUIRegular', 'wf_SegoeUI', 'Segoe UI Regular', 'Segoe UI', 'Segoe', 'Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif';
+}
+
+.feedback-form-comment{
+    width: 300px;
+    height: 120px;
+    padding: 5px;
+    margin-bottom: 8px;
+}
+
+.feedback-text-input{
+    font-size: 14px;
+    border: 1px solid #b0b0b0;
+    overflow: auto;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.feedback-form-email-input{
+    font-size: 14px;
+    width: 300px;
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 8px;
+}
+
+.feedback-form-bottom-container{
+    width: 300px;
+    height: 34px;
+    position: absolute;
+    bottom: 24px;
+} 
+
+.feedback-form-screenshot-container{
+    display: inline-block;
+    vertical-align: middle;
+    width: 180px;
+}
+
+.feedback-basic-form-screenshot-checkbox{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.feedback-form-submit-button-container{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.feedback-submit-button{
+    background-color: #0167B0;
+    height: 32px;
+    color: white;
+    width: 120px;
+    padding: 0px;
+    border: 0px;
+    outline: 1px solid transparent;
+}
+
+.feedback-spinner{
+    position: relative;
+    height: 36px;
+    width: 36px;
+    margin: auto;
+}    
+
+.feedback-inserted{
+    font-size: 12px;
+    color: #333;
+    line-height: 18px;
+    letter-spacing: .01em;
+    text-align: left;
+    font-weight: 400;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+.feedback-container{
+    position: fixed;
+    bottom: 0;
+    z-index: 400;
+    right: 50px;
+    text-decoration: none;
+    color: #333;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+.feedback-container:hover{
+    text-decoration: none;
+}
+
+.feedback-header {
+    font-size: 16px;
+    padding: 10px 16px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-family: SegoeUI,Helvetica,Arial,sans-serif;
+    line-height: 18px;
+    letter-spacing: .01em;
+    box-sizing: border-box;
+}
+
+.feedback-icon {
+    font-size: 14px;
+    vertical-align: bottom;
+    margin-right: 6px;
+}
+
 /**
  * LANGUAGE AND TIME ZONE SELECTOR
  */

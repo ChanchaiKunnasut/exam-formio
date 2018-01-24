@@ -164,6 +164,11 @@ function setupLayout() {
         {
             $('#themeCardWrapper').show();
         }
+        
+        if (!headerObj.hasOwnProperty("feedback") || headerObj["feedback"] === false)
+        {
+            $("#feedbackInserted").hide();
+        }
     }
     
     // Display the main logo even if its path is not defined in brandObj
@@ -217,6 +222,26 @@ function setupLayout() {
     $('#collapseLTZ').click(cancelLTZ);
     
     setupLanguageMenu();
+
+    //Close feedback on click without feedback div
+    $('#feedbackOverlayBackground').click(function()
+    {
+        $('#feedbackOverlayBackground').hide();   
+    });
+    
+    $('#feedbackMainContainer').click(function(e)
+    {
+        e.stopPropagation();  
+    });
+
+    //On press escape close feedback     
+    $(document).on('keydown', function(e)
+    {
+        if(e.keyCode === 27)  //ESC
+        {
+            $('#feedbackOverlayBackground').hide();
+        }    
+    });
 }
 
 /**
@@ -706,3 +731,20 @@ function cancelTheme(e)
     resetTheme();
     $('#themeCard').closeExtendedCard();
 }
+
+/**
+ * Show feedback div
+ */
+function showFeedbackDiv()
+{
+    var feedback = document.getElementById('feedbackOverlayBackground');
+    if(feedback.style.display == 'none')
+    {
+        feedback.style.display = 'block';
+    }
+    else
+    {
+        feedback.style.display = 'none';
+    }
+}
+
