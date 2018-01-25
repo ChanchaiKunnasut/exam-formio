@@ -46,7 +46,7 @@ function setSupportedTimeZones(values)
             supportedTimeZonesMap[values[timeZoneIndex]["alias"]] = values[timeZoneIndex]["displayName"];
             var timeZoneItem = '<div class="ltz-itm-container"><button class="ltz-itm-selector" onclick="selectTimeZone(this,\''
                 + values[timeZoneIndex]["alias"] + '\')"><span id="tzCheck' + values[timeZoneIndex]["alias"] + '" class="ms-Icon ms-Icon--check ltz-itm-selector-check"'
-                + (values[timeZoneIndex]["alias"] === timeZoneSelector.currentTimeZone ? ' style="visibility: visible;"' : '') 
+                + (values[timeZoneIndex]["alias"] === timeZoneSelector.currentTimeZone ? ' style="visibility: visible;"' : 'style="visibility: hidden;"') 
                 + '></span><div class="ltz-itm-content"><div class="ltz-itm-wrapper"><span>'
                 + values[timeZoneIndex]["displayName"] + '&lrm;</span></div></div></button></div>';
             $('#tzarr').append(timeZoneItem);
@@ -59,8 +59,8 @@ function setSupportedTimeZones(values)
         // because we couldn't do that when we didn't have time zone choices
         if (timeZoneSelector.timeZoneInitialized)
         {
-             $('#timeZoneName').html(supportedTimeZonesMap[timeZoneSelector.currentTimeZone]);
-             $('#tzarr').find('.ltz-itm-selector-check').css('visibility', 'hidden');
+            $('#timeZoneName').html(supportedTimeZonesMap[timeZoneSelector.currentTimeZone]);
+            $('#tzarr').find('.ltz-itm-selector-check').css('visibility', 'hidden');
             document.getElementById('tzCheck' + timeZoneSelector.currentTimeZone).style.visibility = "visible";
         }
         

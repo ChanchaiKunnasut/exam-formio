@@ -75,7 +75,7 @@ function setupPredefinedLanguage()
 {
     applyTranslation();
     setLanguageSettings(languageSelector.currentLanguage);
-    $(".ltz-itm-selector-check").css('visibility', 'hidden');
+    $('#langarr').find('.ltz-itm-selector-check').css('visibility', 'hidden');
     $("#langCheck" + languageSelector.currentLanguage).css('visibility', 'visible');
 }
 
