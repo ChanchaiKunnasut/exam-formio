@@ -1565,6 +1565,12 @@ body {
     min-width: 780px;
 }
 
+@media (max-width: 882px) {
+    .feedback-overlay-background{
+        min-width: 320px;
+    }
+}    
+
 .feedback-main-container{
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
@@ -1594,6 +1600,12 @@ body {
     margin: 0 auto;
 }
 
+@media (max-width: 882px) {
+    .feedback-main-content-holder{
+        width: 300px;
+    }
+}
+
 #feedbackLeftFormContainer{
     float: left;
     margin-left: 180px;
@@ -1604,6 +1616,17 @@ body {
     width: 360px;
     position: relative;
     font-size: 0; 
+}
+
+@media (max-width: 882px) {
+    #feedbackLeftFormContainer{
+        float: left;
+        margin-left: 0;
+    }
+ 
+    #feedbackMiddleFormContainer{
+        margin-left: 0;
+    }
 }
 
 .feedback-question-left-text{
