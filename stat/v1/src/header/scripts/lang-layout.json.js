@@ -102,7 +102,13 @@ var langLayoutObj = {
         'Settings': 'Settings',
         'Sign out': 'Sign out',
         'Theme': 'Theme',
-        'Your apps': 'Your apps'
+        'Your apps': 'Your apps',
+        'Feedback': 'Feedback',
+        'Feedback question': 'What kind of feedback do you have?',
+        'Feedback Like': 'I Like Something',
+        'Feedback Dont Like': 'I Don\'t Like Something',
+        'Feedback Suggestion': 'I Have a Suggestion',
+        'Privacy Statement': 'Privacy Statement'
     },
     'HR-HR': {
         'Apply theme': 'Primijeni temu: ',
@@ -249,7 +255,13 @@ var langLayoutObj = {
         'Settings': 'Postavke',
         'Sign out': 'Odjavi se',
         'Theme': 'Tema',
-        'Your apps': 'Vaše aplikacije'
+        'Your apps': 'Vaše aplikacije',
+        'Feedback': 'Povratne informacije',
+        'Feedback question': 'Koju vrstu povratnih informacija imate?',
+        'Feedback Like': 'Sviđa mi se nešto',
+        'Feedback Dont Like': 'Ne sviđa mi se nešto',
+        'Feedback Suggestion': 'Imam predlog',
+        'Privacy Statement': 'Izjava o privatnosti'
     },
     'RU-RU': {
         'Apply theme': 'Применить тему: ',

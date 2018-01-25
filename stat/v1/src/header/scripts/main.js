@@ -169,6 +169,18 @@ function setupLayout() {
         {
             $("#feedbackInserted").hide();
         }
+        
+        if(headerObj.hasOwnProperty("feedback") || headerObj["feedback"] === true)
+        {
+            //On press escape close feedback     
+            $(document).on('keydown', function(e)
+            {
+                if(e.keyCode === 27)  //ESC
+                {
+                    $('#feedbackOverlayBackground').hide();
+                }    
+            });
+        }    
     }
     
     // Display the main logo even if its path is not defined in brandObj
@@ -196,6 +208,15 @@ function setupLayout() {
         {
             timeZoneSelectorWrapper.hide();
         }
+    });
+    
+    //On press escape close feedback     
+    $(document).on('keydown', function(e)
+    {
+        if(e.keyCode === 27)  //ESC
+        {
+            $('#feedbackOverlayBackground').hide();
+        }    
     });
     
     $('.user-settings-card').click(function (e)
@@ -232,15 +253,6 @@ function setupLayout() {
     $('#feedbackMainContainer').click(function(e)
     {
         e.stopPropagation();  
-    });
-
-    //On press escape close feedback     
-    $(document).on('keydown', function(e)
-    {
-        if(e.keyCode === 27)  //ESC
-        {
-            $('#feedbackOverlayBackground').hide();
-        }    
     });
 }
 
@@ -738,13 +750,13 @@ function cancelTheme(e)
 function showFeedbackDiv()
 {
     var feedback = document.getElementById('feedbackOverlayBackground');
-    if(feedback.style.display == 'none')
+    if(feedback.style.display === 'none')
     {
-        feedback.style.display = 'block';
+        $('#feedbackOverlayBackground').show();
     }
     else
     {
-        feedback.style.display = 'none';
+        $('#feedbackOverlayBackground').hide();
     }
 }
 
