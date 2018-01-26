@@ -524,7 +524,7 @@
             </div>
             <div id="renderIndicator" class="rendered btn" />
             <div id="feedbackInserted" class="feedback-inserted">
-                <a class="feedback-container" onclick="showFeedbackDiv();" href="javascript:void(0)" data-clicking="custom">
+                <a class="feedback-container" onclick="showFeedbackDialog();" href="javascript:void(0)" data-clicking="custom">
                     <div class="feedback-header">
                         <span class="feedback-icon"><i class="ms-Icon ms-Icon--Chat" aria-hidden="true"></i></span>
                         <span lang-tran="Feedback">Feedback</span>
@@ -584,8 +584,6 @@
         </div>
         <div id="feedbackOverlayBackground" class="feedback-overlay-background" style="display:none;">
             <div id="feedbackMainContainer" class="feedback-main-container">
-                <div id="feedback-first-tabbable">
-                </div>
                 <form class="feedback-main-content-holder">
                     <div id="feedbackLeftFormContainer" class="feedback-form-container">
                         <div lang-tran="Feedback question" class="feedback-question-left-text feedback-text-align-left feedback-line-height feedback-font-subtitle">
@@ -629,27 +627,7 @@
                             <a lang-tran="Privacy Statement" href="#" target="_blank" class="feedback-link">Privacy Statement</a>
                         </div>
                     </div>
-                    <div id="feedbackMiddleFormContainer" class="feedback-form-container" style="display:none;">
-                        <div id="feedbackBasicFormContainer" class="feedback-margin-left-60px">
-                            <label for="feedbackBasicFormComment" id="feedbackBasicFormQuestionMiddleText" class="feedback-font-subtitle feedback-line-height feedback-text-align-left"></label>
-                            <textarea placeholder="Please type in your comment" maxlength="1000" id="feedbackBasicFormComment" class="feedback-font-text feedback-form-comment feedback-text-input"></textarea>
-                            <label for="emailOptional" class="feedback-font-subtitle feedback-line-height feedback-text-align-left">Email (optional)</label>
-                            <input type="text" placeholder="Email (optional)" aria-label="emailOptional" name="feedback-basic-form-email-input" maxlength="1000" value="" id="feedback-basic-form-email-input" class="feedback-font-text feedback-form-email-input feedback-text-input">
-                            <div class="feedback-form-bottom-container">
-                                <div class="feedback-form-screenshot-container">
-                                    <input type="checkbox" value="unchecked" id="feedbackBasicFormScreenshotCheckbox" class="feedback-basic-form-screenshot-checkbox">
-                                    <label for="feedbackBasicFormScreenshotCheckbox" class="feedback-font-text feedback-text-align-left feedback-line-height">Include screenshot</label>
-                                </div>
-                                <div class="feedback-form-submit-button-container">
-                                    <button id="feedbackBasicFormSubmitButton" class="feedback-font-text feedback-submit-button">Submit</button>
-                                    <div id="feedbackBasicFormSubmitButtonSpinner" class="feedback-spinner"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </form>
-                <div tabindex="0" id="feedback-last-tabbable">
-                </div>
             </div>
         </div>
     </body>

@@ -169,8 +169,9 @@ function setupLayout() {
         {
             $("#feedbackInserted").hide();
         }
-        
-        if(headerObj.hasOwnProperty("feedback") || headerObj["feedback"] === true)
+ 
+        //“We add the keydown listener only when feedback is enabled in order to avoid unnecessary triggers and improve performance 
+        if(headerObj.hasOwnProperty("feedback") && headerObj["feedback"] === true)
         {
             //On press escape close feedback     
             $(document).on('keydown', function(e)
@@ -745,9 +746,9 @@ function cancelTheme(e)
 }
 
 /**
- * Show feedback div
+ * Show feedback dialog
  */
-function showFeedbackDiv()
+function showFeedbackDialog()
 {
     var feedback = document.getElementById('feedbackOverlayBackground');
     if(feedback.style.display === 'none')
