@@ -4,3 +4,4 @@ var brandObj = {
     "faviconpath": "",
     "bootswatchtheme": ""
 };
+$.holdReady(false);

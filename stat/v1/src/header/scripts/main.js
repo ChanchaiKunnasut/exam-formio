@@ -12,6 +12,149 @@ var hiddenWrappers = [];
 var firstMenuItem = 'notdefined';
 
 /**
+ * Sets up the header and layout elements including a form
+ */
+function setupApp()
+{                
+    // if this code runs in iFrame it means it is used from ADAL in the background...in that case we don't want to execute our APP logic
+    if (!isIframe())
+    {      
+        if (isSignedInUser())
+        {
+            document.getElementById('mymessage').innerHTML='ADAL logic finished...';
+        }
+        
+        // Initializing the form
+        setupLayout();
+        var hooksObj =
+        {
+            input: function(input)
+            {
+                this.addEventListener(input, 'focus', (function(comp)
+                {
+                    return function()
+                    {
+                        $('#divHelp').empty();
+                        if (comp && comp.hasOwnProperty("component") && comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("formhelp"))
+                        {
+                            var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
+                            $('#divHelp').append(vhelpform);
+                            $('#formHelp').html(comp.component.properties.formhelp).attr("lang-tran", comp.component.properties.formhelp).translate();
+                        }
+                        
+                        if (comp && comp.hasOwnProperty("component") && comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("fieldhelp"))
+                        {
+                            var vhelpfield = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="fieldHelp"></span></div></div></div>';
+                            $('#divHelp').append(vhelpfield);
+                            $('#fieldHelp').html(comp.component.properties.fieldhelp).attr("lang-tran", comp.component.properties.fieldhelp).translate();
+                        }
+                        
+                        if(comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("processimagelink") 
+                                && comp.component.properties.hasOwnProperty("processlink"))
+                        {
+                            var vprocess = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="bussinesplabel"></span></div></div></div><div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="processlink"><img class="help-photo-container" id="processimagelink"></a></div></div></div>';
+                            $('#divHelp').append(vprocess);
+                            $('#processimagelink').attr('src',comp.component.properties.processimagelink);
+                            $('#processlink').attr('href',comp.component.properties.processlink);
+                            $('#bussinesplabel').html('Bussines process: ');
+                        }
+                        
+                        if(comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("elearningimagelink")
+                                && comp.component.properties.hasOwnProperty("elearninglink"))
+                        {
+                            var velearning = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="elearninglabel"></span></div></div></div><div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="elearninglink"><img class="help-photo-container" id="elearningimagelink"></a></div></div></div>';
+                            $('#divHelp').append(velearning);
+                            $('#elearningimagelink').attr('src',comp.component.properties.elearningimagelink);
+                            $('#elearninglink').attr('href',comp.component.properties.elearninglink);
+                            $('#elearninglabel').html('E-Learning: ');
+                        }
+                    };
+                })(this));
+                
+                this.addEventListener(input, 'blur', (function(comp)
+                {
+                    return function()
+                    {
+                        console.log(comp.component.key + ' out of focus');
+                    };
+                })(this));
+            }
+        };
+        
+        langObj.hooks = hooksObj;
+        Formio.createForm(document.getElementById('formio'), formObj, langObj)
+        .then(function(form)
+        {
+            form.header =
+            {
+                user: currentUser,
+                settings:
+                {
+                    brand: brandObj,
+                    customization: customizationObj,
+                    headerConfiguration: headerObj
+                }
+            };
+            form.header.settings.brand.mainlogopath = $("#mainLogo").find("img").attr("src");
+            form.header.settings.brand.faviconpath = $("#pageIcon").attr("href");
+            var qsjson = parse_query_string(window.location.search.substring(1));
+            form.submission = {"data":qsjson};
+            form.httprequest =
+            {
+                protocol : window.location.protocol.substring(0,window.location.protocol.length-1),
+                hostname: window.location.hostname,
+                pathname: window.location.pathname,
+                querystring: window.location.search,
+                queryjson: qsjson
+            }
+            window.setLanguage = function (lang)
+            {
+                form.language = lang;
+            };
+            
+            form.ready.then(function()
+            {
+                // Find out user's mailbox settings
+                if (isUseOutlookMailSettings() && isSignedInUser())
+                {
+                    getmailboxsettingsdata('https://graph.microsoft.com/beta/me/mailboxSettings');
+                    getSupportedTimeZones();
+                }
+                else
+                {
+                    // Just translate the page
+                    applyTranslation();
+                }
+                
+                // Find out user's theme (user property extensions)
+                if (isUseUserPropertyExtensions() && isSignedInUser())
+                {
+                    getUserPropertyExtensions();
+                }
+                else
+                {
+                    setupStyle();
+                }
+            });
+            
+            form.on('submit', function(submission)
+            {
+                console.log(submission);
+            });
+        });
+        fillUserInfo();
+    }
+    else
+    {
+        console.log('The onload code wont be executed because we are running inside iFrame');
+    }
+};
+
+/**
  * Sets up the header and layout elements excluding a form
  */
 function setupLayout() {
