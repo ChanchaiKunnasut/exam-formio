@@ -170,7 +170,7 @@ function setupLayout() {
             $("#feedbackInserted").hide();
         }
  
-        //“We add the keydown listener only when feedback is enabled in order to avoid unnecessary triggers and improve performance 
+        // We add the keydown listener only when feedback is enabled in order to avoid unnecessary triggers and improve performance 
         if(headerObj.hasOwnProperty("feedback") && headerObj["feedback"] === true)
         {
             //On press escape close feedback     
@@ -179,6 +179,7 @@ function setupLayout() {
                 if(e.keyCode === 27)  //ESC
                 {
                     $('#feedbackOverlayBackground').hide();
+                    $('#feedbackLeftFormContainer').hide();
                 }    
             });
         }    
@@ -211,15 +212,6 @@ function setupLayout() {
         }
     });
     
-    //On press escape close feedback     
-    $(document).on('keydown', function(e)
-    {
-        if(e.keyCode === 27)  //ESC
-        {
-            $('#feedbackOverlayBackground').hide();
-        }    
-    });
-    
     $('.user-settings-card').click(function (e)
     {
         if (!$(this).hasClass('extended-card'))
@@ -248,7 +240,8 @@ function setupLayout() {
     //Close feedback on click without feedback div
     $('#feedbackOverlayBackground').click(function()
     {
-        $('#feedbackOverlayBackground').hide();   
+        $('#feedbackOverlayBackground').hide();
+        $('#feedbackLeftFormContainer').hide();
     });
     
     $('#feedbackMainContainer').click(function(e)
@@ -754,10 +747,15 @@ function showFeedbackDialog()
     if(feedback.style.display === 'none')
     {
         $('#feedbackOverlayBackground').show();
+        setTimeout(function()
+        {
+          $('#feedbackLeftFormContainer').show();
+        }, 1000);
     }
     else
     {
         $('#feedbackOverlayBackground').hide();
+        $('#feedbackLeftFormContainer').hide();
     }
 }
 
