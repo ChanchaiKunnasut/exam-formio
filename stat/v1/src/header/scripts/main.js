@@ -743,19 +743,10 @@ function cancelTheme(e)
  */
 function showFeedbackDialog()
 {
-    var feedback = document.getElementById('feedbackOverlayBackground');
-    if(feedback.style.display === 'none')
-    {
         $('#feedbackOverlayBackground').show();
         setTimeout(function()
         {
           $('#feedbackLeftFormContainer').show();
         }, 1000);
-    }
-    else
-    {
-        $('#feedbackOverlayBackground').hide();
-        $('#feedbackLeftFormContainer').hide();
-    }
 }
 
