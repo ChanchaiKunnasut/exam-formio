@@ -6,7 +6,7 @@ var headerObj = {
     "settings": true,
     "help": true,
     "account": true,
-    "theme settings": true
-    "feedbacl": true
+    "theme settings": true,
+    "feedback": true
 };
 $.holdReady(false);
