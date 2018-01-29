@@ -108,7 +108,14 @@ function applyTranslation()
             } else if ($this.attr("lang-tran") !== undefined && langObj.i18n.resources.hasOwnProperty(languageSelector.selectedLanguage)
                 && langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")] !== undefined)
             {
-                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")]);
+                // This case may occur when we need to populate help menu with some texts defined in the form
+                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran-placeholder")]);
+            }
+            
+            if ($this.attr("lang-tran-placeholder") !== undefined && langLayoutObj.hasOwnProperty(languageSelector.selectedLanguage)
+                && langLayoutObj[languageSelector.selectedLanguage][$this.attr("lang-tran-placeholder")] !== undefined)
+            {
+                $this.attr("placeholder", langLayoutObj[languageSelector.selectedLanguage][$this.attr("lang-tran-placeholder")]);
             }
         });
     };
