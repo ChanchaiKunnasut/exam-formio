@@ -21,7 +21,7 @@ function setupApp()
     {      
         if (isSignedInUser())
         {
-            document.getElementById('mymessage').innerHTML='ADAL logic finished...';
+            console.log('ADAL logic finished...');
         }
         
         // Initializing the form
