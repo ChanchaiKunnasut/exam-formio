@@ -9,6 +9,7 @@
 		<link href="./ress/css/formio.full.min.css" rel="stylesheet">
 		<script src="./scripts/vendor/formio.full.min.js"></script>
         <script src="./scripts/vendor/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">$.holdReady(true);$.holdReady(true);$.holdReady(true);$.holdReady(true);</script>
         <script src="./scripts/vendor/adal.min.js"></script>
         <script src="./scripts/lang.js"></script>
         <script src="./scripts/tz.js"></script>
@@ -21,7 +22,7 @@
             
             // Check if we have an URI paramater which specifies
             // a path to the app configuration. If so we'll use it.
-            var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)")
+            var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)");
             var appDefParam = appRegex.exec(window.location.href);
             if (appDefParam && appDefParam[2])
             {
@@ -50,109 +51,17 @@
         <script src="./scripts/lang-form.json.js"></script>
         <script src="./scripts/lang-layout.json.js"></script>
         <script type="text/javascript">
-            window.onload = function() {                
-                // if this code runs in iFrame it means it is used from ADAL in the background...in that case we don't want to execute our APP logic
-                if (!isIframe()) {      
-                    if (isSignedInUser()) {
-                       document.getElementById('mymessage').innerHTML='ADAL logic finished...';
-                    }
-                    
-                    // Initializing the form
-                    setupLayout();
-                    var hooksObj = {
-                        input: function(input) {
-                            this.addEventListener(input, 'focus', (function(comp) {
-                                return function() {
-                                    $('#divHelp').empty();
-                                    if (comp && comp.hasOwnProperty("component") && comp.component.hasOwnProperty("properties")
-                                            && comp.component.properties.hasOwnProperty("formhelp")) {
-                                        var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
-                                        $('#divHelp').append(vhelpform);
-                                        $('#formHelp').html(comp.component.properties.formhelp).attr("lang-tran", comp.component.properties.formhelp).translate();
-                                    }
-                                    
-                                    if (comp && comp.hasOwnProperty("component") && comp.component.hasOwnProperty("properties")
-                                            && comp.component.properties.hasOwnProperty("fieldhelp")) {
-                                        var vhelpfield = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="fieldHelp"></span></div></div></div>';
-                                        $('#divHelp').append(vhelpfield);
-                                        $('#fieldHelp').html(comp.component.properties.fieldhelp).attr("lang-tran", comp.component.properties.fieldhelp).translate();
-                                    }
-                                    
-                                    if(comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
-                                            && comp.component.properties.hasOwnProperty("processimagelink") 
-                                            && comp.component.properties.hasOwnProperty("processlink")){
-                                        var vprocess = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="bussinesplabel"></span></div></div></div><div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="processlink"><img class="help-photo-container" id="processimagelink"></a></div></div></div>';
-                                        $('#divHelp').append(vprocess);
-                                        $('#processimagelink').attr('src',comp.component.properties.processimagelink);
-                                        $('#processlink').attr('href',comp.component.properties.processlink);
-                                        $('#bussinesplabel').html('Bussines process: ');
-                                    }
-                                    
-                                    if(comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
-                                            && comp.component.properties.hasOwnProperty("elearningimagelink")
-                                            && comp.component.properties.hasOwnProperty("elearninglink")){
-                                        var velearning = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="elearninglabel"></span></div></div></div><div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="elearninglink"><img class="help-photo-container" id="elearningimagelink"></a></div></div></div>';
-                                        $('#divHelp').append(velearning);
-                                        $('#elearningimagelink').attr('src',comp.component.properties.elearningimagelink);
-                                        $('#elearninglink').attr('href',comp.component.properties.elearninglink);
-                                        $('#elearninglabel').html('E-Learning: ');
-									}
-                                };
-                            })(this));
-                            this.addEventListener(input, 'blur', (function(comp) {
-                                return function() {
-                                    console.log(comp.component.key + ' out of focus');
-                                };
-                            })(this));
-                        }
-                    };
-                    langObj.hooks = hooksObj;
-                    Formio.createForm(document.getElementById('formio'), formObj, langObj)
-                    .then(function(form) {
-                        form.header = {
-                            user: currentUser,
-                            settings: {
-                                brand: brandObj,
-                                customization: customizationObj,
-                                headerConfiguration: headerObj
-                            }
-                        };
-                        form.header.settings.brand.mainlogopath = $("#mainLogo").find("img").attr("src");
-                        form.header.settings.brand.faviconpath = $("#pageIcon").attr("href");
-                        var qsjson = parse_query_string(window.location.search.substring(1));
-                        form.submission = {"data":qsjson};
-                        form.httprequest = {
-                           protocol : window.location.protocol.substring(0,window.location.protocol.length-1),
-                           hostname: window.location.hostname,
-                           pathname: window.location.pathname,
-                           querystring: window.location.search,
-                           queryjson: qsjson
-                        }
-                        window.setLanguage = function (lang) {
-                            form.language = lang;
-                        };
-                        
-                        form.ready.then(function() {
-                            // Find out user's mailbox settings
-                            if (isUseOutlookMailSettings() && isSignedInUser()) {
-                                getmailboxsettingsdata('https://graph.microsoft.com/beta/me/mailboxSettings');
-                                getSupportedTimeZones();
-                            } else {
-                                // Just translate the page
-                                applyTranslation();
-                                setupStyle();
-                            }
-                        });
-                        
-                        form.on('submit', function(submission) {
-                            console.log(submission);
-                        });
-                    });
-                    fillUserInfo();         
+        $(document).ready(function() {
+            if (document.readyState === 'complete') {
+                setupApp();
+            } else {
+                if(window.addEventListener){
+                    window.addEventListener('load', setupApp);
                 } else {
-                  console.log('The onload code wont be executed because we are running inside iFrame');
+                    window.attachEvent('onload', setupApp);
                 }
-            };    
+            }
+        });
 		</script>
     </head>
     <body>
@@ -174,7 +83,7 @@
                         <img />
                     </div>
                     <div id="appTitle" class="header-common app-header rsp-lar-visible" style="display: none">
-                        <p class="app-menu-brand">Risktech APP</a>
+                        <p class="app-menu-brand">Risktech APP</p>
                     </div>
                 </div>
                 <div class="header-common header-center"></div>
@@ -518,6 +427,7 @@
             <div id="mymessage"></div>
             <div id="mailboxsettingsmessage"></div>
             <div id="supportedtimezonesmessage"></div>
+            <div id="userpropertyextensionsmessage"></div>
             <div id="userphotomessage"></div>
             <div class="container body-content">
 		        <div id='formio'></div>
@@ -535,7 +445,7 @@
         <div id="applauncher" class="app-launcher-wrapper">
             <div class="app-launcher-content">
                 <div class="app-launcher-header">
-                    <a href="http://www.office.com/" class="app-launcher-button office" target="_blank">
+                    <a id="officeHomeLink" href="https://portal.office.com/" class="app-launcher-button office" target="_blank">
                         <svg class="app-launcher-button-glyph" focusable="false" viewBox="0 0 16 16">
                             <g>
                                 <polygon points="10.066596 16.003531 1.5 12.8404802 10.066596 13.9889688 10.066596 2.48525422 4.39946326 3.85967512 4.39946326 11.6919915 1.5 12.8216525 1.5 3.21953388 10.066596 1.42108547e-14 14.8299999 1.35559321 14.8299999 14.6479378"></polygon>
@@ -543,7 +453,7 @@
                         </svg>
                         <span>Office.com</span>
                     </a>
-                    <a href="https://account.activedirectory.windowsazure.com/r#/applications" class="app-launcher-button azure" target="_blank">
+                    <a id="allAppsLink" href="https://account.activedirectory.windowsazure.com/r#/applications" class="app-launcher-button azure" target="_blank">
                         <svg class="app-launcher-button-glyph" focusable="false" viewBox="0 0 16 16">
                             <g>
                                 <polygon points="3.65 14.2 16 14.2 9.35 2.67 7.32 8.24 11.21 12.86 3.65 14.2"></polygon>

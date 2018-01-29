@@ -6,7 +6,7 @@
     
     // Check if we have an URI paramater which specifies
     // a path to the form definition. If so we'll use it.
-    var formRegex = new RegExp("[?&]form(=([^&#]*)|&|#|$)")
+    var formRegex = new RegExp("[?&]form(=([^&#]*)|&|#|$)");
     var formDefParam = formRegex.exec(window.location.href);
     var formSet = false;
     if (formDefParam && formDefParam[2])
