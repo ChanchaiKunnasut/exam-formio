@@ -238,7 +238,7 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
                msg+='\n\nError details:\n'+error;
             }
             var dologin = false;
-            if (errcode=='login_required' || errcode=='interaction_required' || errcode=='account_selection_required' || errcode=='consent_required' || errcode=='login required' || errcode=='access_denied') {
+            if (errcode=='login_required' || errcode=='interaction_required' || errcode=='account_selection_required' || errcode=='consent_required' || errcode=='access_denied') {
                dologin = true;
                msg='You will be redirected to the login page.\n\n'+msg;
             } else if (errcode=='Token Renewal Failed') {
@@ -261,7 +261,6 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
                msg = 'Token is not acquired!\n\n'+msg;
             }
             console.log(msg);
-            alert(msg);
             if (dologin) {
                ADAL.login();
             } 
@@ -275,7 +274,6 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
         if (ajaxurl==null) {
            var noaurlmsg = 'The function "'+getFunctionName(callbackfunc)+'" will not be called because URL is not provided!';
            console.log(noaurlmsg);
-           alert(noaurlmsg);
         } else {
          callbackfunc(token,ajaxurl,ajaxjsondata);
         }
@@ -331,7 +329,6 @@ function getdatanoadalmailboxsettings(token,url) {
         applyTranslation();
         console.log('getmailboxsettingsdata call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -362,7 +359,6 @@ function getDataOnAdalSupportedTimeZones(token, url) {
         mailboxSettingsAvailable = false;
         console.log('getSupportedTimeZones call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -389,7 +385,6 @@ function patchdatanoadal(token, url, payload) {
     }).fail(function (err, textStatus, errorThrown) {
         console.log('patchmailboxsettingsdata call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -421,7 +416,6 @@ function getdatanoadalphotometadata(token,url) {
     }).fail(function (err, textStatus, errorThrown) {
         console.log('getuserphotometadata call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -447,7 +441,6 @@ function getdatanoadalphoto(token,url) {
         } else {
             console.log('getdatanoadalphoto call failed');
             console.log("AJAX REQUEST FAILED:"+request.statusText);
-            alert("AJAX REQUEST FAILED:"+request.statusText);
         }
     };
     request.send(null);
@@ -482,7 +475,6 @@ function postdataonadal(token, url, payload) {
         userPropertyExtensionsAvailable = false;
         console.log('postdataonadal call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -530,7 +522,6 @@ function getdatanoadaluserpropertyextensions(token, url) {
         setupStyle();
         console.log('getUserPropertyExtensions call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -560,6 +551,5 @@ function patchThemePropertyExtensionOnAdal(token, url, payload) {
     }).fail(function (err, textStatus, errorThrown) {
         console.log('patchThemePropertyExtensionOnAdal call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
