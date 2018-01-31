@@ -126,7 +126,7 @@ function applyTranslation()
  */
 function setChosenLanguage()
 {
-    var languageChanged = (languageSelector.selectedLanguage === languageSelector.currentLanguage);
+    var languageChanged = (languageSelector.selectedLanguage !== languageSelector.currentLanguage);
     applyTranslation();
     
     return languageChanged;
