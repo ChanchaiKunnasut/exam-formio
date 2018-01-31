@@ -144,6 +144,10 @@ body {
     background-position: bottom;
 }
 
+.appl-button.static:hover, .appl-button.static:active {
+    background-position: top;
+}
+
 .appl-button.opened {
     background-position: bottom;
 }

@@ -209,6 +209,11 @@ function setupLayout() {
     
     if (typeof headerObj !== 'undefined')
     {
+        if (headerObj.hasOwnProperty("app launcher") && headerObj["app launcher"] === false)
+        {
+            $(".appl-button").addClass('static').prop('onclick', null).off('click');
+        }
+        
         var hasEnvironments = true;
         if (headerObj.hasOwnProperty("environment") && headerObj["environment"] === false)
         {
