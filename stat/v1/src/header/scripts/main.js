@@ -137,7 +137,7 @@ function setupApp()
                 }
                 else
                 {
-                    setupStyle();
+                    setupStyle(false);
                 }
             });
             

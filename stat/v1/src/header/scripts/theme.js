@@ -138,14 +138,14 @@ function setupTheme(theme) {
     if (themesMap[theme]) {
         themeSelector.selectedTheme = theme;
         themeSelector.currentTheme = theme;
-        setupStyle();
+        setupStyle(true);
     }
 }
 
 /**
  * Reads style settings (bootswatch theme) from brand.json.js and applies it
  */
-function setupStyle()
+function setupStyle(overrideBrandTheme)
 {
     var bootswatchStyleDE = document.createElement("link");
     bootswatchStyleDE.id = "bodystyle";
@@ -153,7 +153,7 @@ function setupStyle()
     
     // We should show the form after new styles has been loaded to prevent FOUC
     bootswatchStyleDE.onload = showContentOnStyleApply();
-    if (typeof brandObj !== 'undefined' && brandObj["bootswatchtheme"])
+    if (!overrideBrandTheme && typeof brandObj !== 'undefined' && brandObj["bootswatchtheme"])
     {
         themeSelector.currentTheme = brandObj["bootswatchtheme"];
         themeSelector.selectedTheme = themeSelector.currentTheme;
