@@ -9,60 +9,15 @@
 		<link href="./ress/css/formio.full.min.css" rel="stylesheet">
 		<script src="./scripts/vendor/formio.full.min.js"></script>
         <script src="./scripts/vendor/jquery-1.10.2.min.js"></script>
-        <script type="text/javascript">$.holdReady(true);$.holdReady(true);$.holdReady(true);$.holdReady(true);</script>
         <script src="./scripts/vendor/adal.min.js"></script>
         <script src="./scripts/lang.js"></script>
         <script src="./scripts/tz.js"></script>
         <script src="./scripts/theme.js"></script>
         <script src="./scripts/main.js"></script>
         <script src="./scripts/auth.js"></script>
-        <script id="appConfImport" type="text/javascript">
-        (function() {
-            var appDef = "../appcnfs/app.json.js";
-            
-            // Check if we have an URI paramater which specifies
-            // a path to the app configuration. If so we'll use it.
-            var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)");
-            var appDefParam = appRegex.exec(window.location.href);
-            if (appDefParam && appDefParam[2])
-            {
-                var appUriParam = decodeURIComponent(appDefParam[2].replace(/\+/g, " "));
-                if (appUriParam === "/")
-                {
-                    appDef = "../appcnfs/app.json.js";
-                }
-                else
-                {
-                    appDef = "../appcnfs/" + appUriParam + "/app.json.js";
-                }
-            }
-            
-            var appDSE = document.createElement("script");
-            appDSE.src = appDef;
-            appDSE.id = "appdef";
-            var currentNode = document.getElementById("appConfImport");
-            currentNode.parentNode.insertBefore(appDSE, currentNode.nextSibling);
-            
-            var checkAppDefinitionSE = document.createElement("script");
-            checkAppDefinitionSE.src = "./scripts/checkapp.js";
-            currentNode.parentNode.insertBefore(checkAppDefinitionSE, currentNode.nextSibling);
-        })();
-        </script>
+        <script src="./scripts/defimp.js"></script>
         <script src="./scripts/lang-form.json.js"></script>
         <script src="./scripts/lang-layout.json.js"></script>
-        <script type="text/javascript">
-        $(document).ready(function() {
-            if (document.readyState === 'complete') {
-                setupApp();
-            } else {
-                if(window.addEventListener){
-                    window.addEventListener('load', setupApp);
-                } else {
-                    window.attachEvent('onload', setupApp);
-                }
-            }
-        });
-		</script>
     </head>
     <body>
 	    <div class="header-border">

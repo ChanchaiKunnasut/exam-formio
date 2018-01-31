@@ -1,4 +1,79 @@
-(function() {
+(
+    function ()
+    {
+        var appDef = "../appcnfs/app.json.js";
+        
+        // Check if we have an URI paramater which specifies
+        // a path to the app configuration. If so we'll use it.
+        var appRegex = new RegExp("[?&]app(=([^&#]*)|&|#|$)");
+        var appDefParam = appRegex.exec(window.location.href);
+        if (appDefParam && appDefParam[2])
+        {
+            var appUriParam = decodeURIComponent(appDefParam[2].replace(/\+/g, " "));
+            if (appUriParam === "/")
+            {
+                appDef = "../appcnfs/app.json.js";
+            }
+            else
+            {
+                appDef = "../appcnfs/" + appUriParam + "/app.json.js";
+            }
+        }
+        
+        loadScript(appDef, checkAppCofig);
+    }
+)();
+
+/**
+ * Loads script from specified URL by creating a new script element and appending it to the head part of the html.
+ * Runs a callback function when the script gets loaded. Runs the errorHandler function if the script fails to load.
+ */
+function loadScript(url, callback, errorHandler)
+{
+    var scriptElement = document.createElement("script");
+    scriptElement.src = url;
+    
+    // Bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    scriptElement.onreadystatechange = callback;
+    scriptElement.onload = callback;
+    if (typeof errorHandler === 'undefined')
+    {
+        scriptElement.onerror = callback;
+    }
+    else
+    {
+        scriptElement.onerror = errorHandler;
+    }
+    
+    document.getElementsByTagName('head')[0].appendChild(scriptElement);
+}
+
+/**
+ * Checks if app config is already defined. If so loads other definitions.
+ * Otherwise looks for the app configuration on another hardcoded location.
+ */
+function checkAppCofig()
+{
+    var appDefinition = document.getElementById("appdef");
+    
+    // Check if appObj is defined. If not try with a new hardcoded value
+    if (typeof appObj === "undefined")
+    {
+        loadScript("./defs/app.json.js", loadDefinitions);
+    }
+    else
+    {
+        loadDefinitions();
+    }
+}
+
+/**
+ * Loads form, brand, customization and header definitions and sets up the app
+ * once everything is loaded including the document itself.
+ */
+function loadDefinitions()
+{
     var formDef = "./defs/form.json.js";
     var brandDef;
     var customizationDef;
@@ -112,29 +187,71 @@
         }
     }
     
-    var formDSE = document.createElement("script");
-    formDSE.src = formDef;
-    var currentNode = document.getElementById("appConfImport");
-    currentNode.parentNode.insertBefore(formDSE, currentNode.nextSibling);
+    loadScript(formDef, checkForAppSetup, loadDefaultForm);
     
     if (brandDef)
     {
-        var brandDSE = document.createElement("script");
-        brandDSE.src = brandDef;
-        currentNode.parentNode.insertBefore(brandDSE, currentNode.nextSibling);
+        loadScript(brandDef, checkForAppSetup, loadDefaultBrand);
     }
     
     if (customizationDef)
     {
-        var customizationDSE = document.createElement("script");
-        customizationDSE.src = customizationDef;
-        currentNode.parentNode.insertBefore(customizationDSE, currentNode.nextSibling);
+        loadScript(customizationDef, checkForAppSetup, loadDefaultCustomization);
     }
     
     if (headerConfig)
     {
-        var headerCSE = document.createElement("script");
-        headerCSE.src = headerConfig;
-        currentNode.parentNode.insertBefore(headerCSE, currentNode.nextSibling);
+        loadScript(headerConfig, checkForAppSetup, loadDefaultHeader);
     }
-})();
+}
+
+function loadDefaultForm()
+{
+    var formDef = "./defs/form.json.js";
+    loadScript(formDef, checkForAppSetup);
+}
+
+function loadDefaultBrand()
+{
+    var brandDef = "./defs/brand.json.js";
+    loadScript(brandDef, checkForAppSetup);
+}
+
+function loadDefaultCustomization()
+{
+    var customizationDef = "./defs/customization.json.js";
+    loadScript(customizationDef, checkForAppSetup);
+}
+
+function loadDefaultHeader()
+{
+    var headerDef = "./defs/header.json.js";
+    loadScript(headerDef, checkForAppSetup);
+}
+
+/**
+ * Checks if all definition files has been loaded.
+ * If so adds the app setup function as listener for the window load event
+ * or runs the app setup if the window load event is already fired.
+ */
+function checkForAppSetup()
+{
+    if (typeof headerObj !== 'undefined' && typeof customizationObj !== 'undefined' && typeof brandObj !== 'undefined' && typeof formObj !== 'undefined')
+    {
+        if (document.readyState === 'complete')
+        {
+            setupApp();
+        }
+        else
+        {
+            if(window.addEventListener)
+            {
+                window.addEventListener('load', setupApp);
+            }
+            else
+            {
+                window.attachEvent('onload', setupApp);
+            }
+        }
+    }
+}
