@@ -8,5 +8,5 @@ var headerObj = {
     "help": true,
     "account": true,
     "theme settings": false,
-    "feedback": true
+    "feedback": false
 };
