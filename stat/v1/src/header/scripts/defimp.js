@@ -187,7 +187,7 @@ function loadDefinitions()
         }
     }
     
-    loadScript(formDef, checkForAppSetup, loadDefaultForm);
+    loadScript(formDef, formObjLoaded, loadDefaultForm);
     
     if (brandDef)
     {
@@ -254,4 +254,22 @@ function checkForAppSetup()
             }
         }
     }
+}
+
+/**
+ * Runs when the form definition has been loaded to perform tasks that should be performed immidiately
+ * and then checks if all definition files has been loaded.
+ */
+function formObjLoaded()
+{
+    if (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("formtitle"))
+    {
+        document.title = formObj.properties.formtitle;
+    }
+    else
+    {
+        document.title = "Layout";
+    }
+    
+    checkForAppSetup();
 }
