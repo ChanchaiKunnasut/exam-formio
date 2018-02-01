@@ -42,6 +42,12 @@ function setupApp()
                             $('#divHelp').append(vhelpform);
                             $('#formHelp').html(comp.component.properties.formhelp).attr("lang-tran", comp.component.properties.formhelp).translate();
                         }
+                        else if (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("formhelp"))
+                        {
+                            var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
+                            $('#divHelp').append(vhelpform);
+                            $('#formHelp').html(formObj.properties.formhelp).attr("lang-tran", formObj.properties.formhelp).translate();
+                        }
                         
                         if (comp && comp.hasOwnProperty("component") && comp.component.hasOwnProperty("properties")
                                 && comp.component.properties.hasOwnProperty("fieldhelp"))
@@ -51,25 +57,35 @@ function setupApp()
                             $('#fieldHelp').html(comp.component.properties.fieldhelp).attr("lang-tran", comp.component.properties.fieldhelp).translate();
                         }
                         
-                        if(comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
-                                && comp.component.properties.hasOwnProperty("processimagelink") 
+                        if(((comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("processimagelink"))
+                            || (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("processimagelink")))
+                                && ((comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
                                 && comp.component.properties.hasOwnProperty("processlink"))
+                            || (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("processlink"))))
                         {
                             var vprocess = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="bussinesplabel"></span></div></div></div><div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="processlink"><img class="help-photo-container" id="processimagelink"></a></div></div></div>';
                             $('#divHelp').append(vprocess);
-                            $('#processimagelink').attr('src',comp.component.properties.processimagelink);
-                            $('#processlink').attr('href',comp.component.properties.processlink);
+                            $('#processimagelink').attr('src', (comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("processimagelink") ? comp.component.properties.processimagelink : formObj.properties.processimagelink));
+                            $('#processlink').attr('href', (comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("processlink") ? comp.component.properties.processlink : formObj.properties.processlink));
                             $('#bussinesplabel').html('Bussines process: ');
                         }
                         
-                        if(comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
-                                && comp.component.properties.hasOwnProperty("elearningimagelink")
+                        if(((comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("elearningimagelink"))
+                            || (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("elearningimagelink")))
+                                && ((comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
                                 && comp.component.properties.hasOwnProperty("elearninglink"))
+                            || (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("elearninglink"))))
                         {
                             var velearning = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="elearninglabel"></span></div></div></div><div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="elearninglink"><img class="help-photo-container" id="elearningimagelink"></a></div></div></div>';
                             $('#divHelp').append(velearning);
-                            $('#elearningimagelink').attr('src',comp.component.properties.elearningimagelink);
-                            $('#elearninglink').attr('href',comp.component.properties.elearninglink);
+                            $('#elearningimagelink').attr('src', (comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("elearningimagelink") ? comp.component.properties.elearningimagelink : formObj.properties.elearningimagelink));
+                            $('#elearninglink').attr('href', (comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
+                                && comp.component.properties.hasOwnProperty("elearninglink") ? comp.component.properties.elearninglink : formObj.properties.elearninglink));
                             $('#elearninglabel').html('E-Learning: ');
                         }
                     };
