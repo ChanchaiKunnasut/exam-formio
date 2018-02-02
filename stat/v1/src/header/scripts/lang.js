@@ -109,7 +109,7 @@ function applyTranslation()
                 && langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")] !== undefined)
             {
                 // This case may occur when we need to populate help menu with some texts defined in the form
-                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran-placeholder")]);
+                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")]);
             }
             
             if ($this.attr("lang-tran-placeholder") !== undefined && langLayoutObj.hasOwnProperty(languageSelector.selectedLanguage)
