@@ -342,8 +342,7 @@ function setupLayout() {
             {
                 if(e.keyCode === 27)  //ESC
                 {
-                    $('#feedbackOverlayBackground').hide();
-                    $('#feedbackLeftFormContainer').hide();
+                    closeFeedbackContent();
                 }    
             });
         }    
@@ -401,17 +400,36 @@ function setupLayout() {
     
     setupLanguageMenu();
 
-    //Close feedback on click without feedback div
+    // Closing the feedback division when clicking outside of the feedback division
     $('#feedbackOverlayBackground').click(function()
     {
-        $('#feedbackOverlayBackground').hide();
-        $('#feedbackLeftFormContainer').hide();
+        closeFeedbackContent();
     });
     
     $('#feedbackMainContainer').click(function(e)
     {
         e.stopPropagation();  
     });
+    
+    // Set active button in left form container(feedback) 
+    $('#feedbackOverallAnchorsContainer button').on('click', function()
+    {
+        $(this).siblings().removeClass('feedback-overall-anchor-active');
+        $(this).addClass('feedback-overall-anchor-active');
+    });
+}
+
+/**
+ * Hide feedback content and reset feedback content to default view and values.
+ */
+function closeFeedbackContent()
+{
+    $('#feedbackOverlayBackground').hide();
+    $('#feedbackLeftFormContainer').hide().removeClass('slide-left');
+    $('#feedbackMiddleFormContainer').hide().removeClass('slide-left');
+    $('#feedbackOverallAnchorsContainer button').removeClass('feedback-overall-anchor-active');
+    $('#feedbackBasicFormQuestionMiddleText').html('');
+    $('#feedbackBasicFormComment').val('');
 }
 
 /**
@@ -482,6 +500,7 @@ function openUserMenu(userMenuButton)
                             
                             $('#transparentbutton').removeClass('header-hidden-element');
                             $('#transparentbutton').addClass('rsp-hidden');
+                            $('#feedbackContainer').addClass('open-user-settings-small');
                         }
                         
                         wrapper.classList.remove('header-hidden-element');
@@ -502,7 +521,7 @@ function openUserMenu(userMenuButton)
                         }
                     }
                 }
-            } 
+            }   
         }
     }
 }
@@ -564,6 +583,7 @@ function closeUserMenu()
     
     $('#transparentbutton').removeClass('rsp-hidden');
     $('#transparentbutton').addClass('header-hidden-element');
+    $('#feedbackContainer').removeClass('open-user-settings-small');
 }
 
 /**
@@ -914,3 +934,20 @@ function showFeedbackDialog()
         }, 1000);
 }
 
+/**
+ * Show feedback fields and change the title depending on selected button 
+ */
+function showFeedbackFields(buttonSetText)
+{
+    $('#feedbackBasicFormQuestionMiddleText').html(langLayoutObj[languageSelector.selectedLanguage][buttonSetText]);
+    $('#feedbackLeftFormContainer').addClass('slide-left');
+    $('#feedbackMiddleFormContainer').addClass('slide-left');
+    
+    // Set value for email field if currentUser exist
+    if(typeof currentUser !== 'undefined' && currentUser !== null && 
+        typeof currentUser.uid !== 'undefined' && currentUser.uid !== null)
+    {
+        $('#emailOptional').val(currentUser.uid);
+    }
+    $('#feedbackMiddleFormContainer').show();
+} 

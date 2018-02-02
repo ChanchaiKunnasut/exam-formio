@@ -7,6 +7,6 @@ var headerObj = {
     "settings": true,
     "help": true,
     "account": true,
-    "theme settings": false,
+    "theme settings": true,
     "feedback": false
 };

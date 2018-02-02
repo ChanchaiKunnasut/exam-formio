@@ -87,7 +87,7 @@ function applyTranslation()
     var oldLanguage = languageSelector.currentLanguage;
     languageSelector.currentLanguage = languageSelector.selectedLanguage;
     setLanguage(languageSelector.selectedLanguage);
-    $("[lang-tran]").translate();
+    $("[lang-tran],[lang-tran-placeholder]").translate();
     changeLanguageForThemeSettings(oldLanguage, languageSelector.currentLanguage);
 }
 
