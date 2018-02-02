@@ -84,7 +84,7 @@ function selectTimeZone(timeZoneButton, timeZone)
  */
 function setChosenTimeZone()
 {
-    var timeZoneChanged = (timeZoneSelector.currentTimeZone === timeZoneSelector.selectedTimeZone);
+    var timeZoneChanged = (timeZoneSelector.currentTimeZone !== timeZoneSelector.selectedTimeZone);
     timeZoneSelector.currentTimeZone = timeZoneSelector.selectedTimeZone;
     
     return timeZoneChanged;

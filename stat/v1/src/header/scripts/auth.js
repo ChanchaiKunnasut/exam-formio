@@ -238,7 +238,7 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
                msg+='\n\nError details:\n'+error;
             }
             var dologin = false;
-            if (errcode=='login_required' || errcode=='interaction_required' || errcode=='account_selection_required' || errcode=='consent_required' || errcode=='login required' || errcode=='access_denied') {
+            if (errcode=='login_required' || errcode=='interaction_required' || errcode=='account_selection_required' || errcode=='consent_required' || errcode=='access_denied') {
                dologin = true;
                msg='You will be redirected to the login page.\n\n'+msg;
             } else if (errcode=='Token Renewal Failed') {
@@ -261,7 +261,6 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
                msg = 'Token is not acquired!\n\n'+msg;
             }
             console.log(msg);
-            alert(msg);
             if (dologin) {
                ADAL.login();
             } 
@@ -275,7 +274,6 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
         if (ajaxurl==null) {
            var noaurlmsg = 'The function "'+getFunctionName(callbackfunc)+'" will not be called because URL is not provided!';
            console.log(noaurlmsg);
-           alert(noaurlmsg);
         } else {
          callbackfunc(token,ajaxurl,ajaxjsondata);
         }
@@ -293,8 +291,7 @@ function getFunctionName(funct) {
    }
 }
 
-function getmailboxsettingsdata(url) {   
-    document.getElementById('mailboxsettingsmessage').innerHTML='Waiting for data...';
+function getmailboxsettingsdata(url) {
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com",getdatanoadalmailboxsettings,url);
 }
 
@@ -311,7 +308,6 @@ function getdatanoadalmailboxsettings(token,url) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('getmailboxsettingsdata call successfully executed');
-        document.getElementById('mailboxsettingsmessage').innerHTML='Mailbox data successfully retrieved!';
         if (data && data["language"] && data["language"]["locale"]) {
             languageSelector.selectedLanguage = convertGraphLanguage(data["language"]["locale"]);
         }
@@ -332,14 +328,11 @@ function getdatanoadalmailboxsettings(token,url) {
         mailboxSettingsAvailable = false;
         applyTranslation();
         console.log('getmailboxsettingsdata call failed');
-        document.getElementById('mailboxsettingsmessage').innerHTML='Failed to retrieve the mailbox data!';
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
 function getSupportedTimeZones() {
-    document.getElementById('supportedtimezonesmessage').innerHTML='Waiting for data...';
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getDataOnAdalSupportedTimeZones, 'https://graph.microsoft.com/beta/me/outlook/supportedTimeZones');
 }
 
@@ -356,7 +349,6 @@ function getDataOnAdalSupportedTimeZones(token, url) {
     
     $.ajax(settings).done(function (data, textStatus, request) {
         console.log('getSupportedTimeZones call successfully executed');
-        document.getElementById('supportedtimezonesmessage').innerHTML='Supported time zones successfully retrieved!';
         if (data && data["value"]) {
             setSupportedTimeZones(data["value"]);
             console.log('Supported time zones successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
@@ -366,14 +358,11 @@ function getDataOnAdalSupportedTimeZones(token, url) {
     }).fail(function (err, textStatus, errorThrown) {
         mailboxSettingsAvailable = false;
         console.log('getSupportedTimeZones call failed');
-        document.getElementById('supportedtimezonesmessage').innerHTML='Failed to retrieve supported time zones!';
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
 function patchmailboxsettingsdata(url, payload) {
-    document.getElementById('mailboxsettingsmessage').innerHTML="Updating user's data...";
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com",patchdatanoadal,url,payload);
 }
 
@@ -392,18 +381,14 @@ function patchdatanoadal(token, url, payload) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('patchmailboxsettingsdata call successfully executed');
-        document.getElementById('mailboxsettingsmessage').innerHTML="User's data successfully updated!";
         console.log('Data successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         console.log('patchmailboxsettingsdata call failed');
-        document.getElementById('mailboxsettingsmessage').innerHTML="Failed to update user's data!";
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
 function getuserphotometadata() {
-    document.getElementById('userphotomessage').innerHTML="Waiting for user's photo meta data...";
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com",getdatanoadalphotometadata,"https://graph.microsoft.com/beta/me/photo");
 }
 
@@ -420,25 +405,21 @@ function getdatanoadalphotometadata(token,url) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('getuserphotometadata call successfully executed');
-        document.getElementById('userphotomessage').innerHTML="User's photo meta data successfully retrieved!";
         
         if (data && data["width"] && data["width"] > 1) {
             getuserphoto();
         } else {
-            document.getElementById('userphotomessage').innerHTML="User hasn't set his photo.";
+            console.log("User hasn't set his photo.");
         }
         
         console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         console.log('getuserphotometadata call failed');
-        document.getElementById('userphotomessage').innerHTML='Failed to retrieve the photo meta data!';
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
 function getuserphoto() {
-    document.getElementById('userphotomessage').innerHTML="Waiting for user's photo...";
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com",getdatanoadalphoto,"https://graph.microsoft.com/beta/me/photo/$value");
 }
 
@@ -450,7 +431,6 @@ function getdatanoadalphoto(token,url) {
     request.onload = function () {
         if (request.readyState === 4 && request.status === 200) {
             console.log('getuserphoto call successfully executed');
-            document.getElementById('userphotomessage').innerHTML="User's photo successfully retrieved!";
             
             var reader = new FileReader();
             reader.onload = function () {
@@ -460,9 +440,7 @@ function getdatanoadalphoto(token,url) {
             reader.readAsDataURL(request.response);
         } else {
             console.log('getdatanoadalphoto call failed');
-            document.getElementById('userphotomessage').innerHTML='Failed to retrieve the photo!';
             console.log("AJAX REQUEST FAILED:"+request.statusText);
-            alert("AJAX REQUEST FAILED:"+request.statusText);
         }
     };
     request.send(null);
@@ -474,7 +452,6 @@ function createThemePropertyExtension(theme) {
         "extensionName": themePropertyExtensionId,
         "theme": theme
     };
-    document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension doesn't exist. Will be created.";
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postdataonadal, "https://graph.microsoft.com/beta/me/extensions", payload);
 }
 
@@ -493,19 +470,15 @@ function postdataonadal(token, url, payload) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('postdataonadal call successfully executed');
-        document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension successfully created.";
         console.log('Data successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         userPropertyExtensionsAvailable = false;
         console.log('postdataonadal call failed');
-        document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to create user's theme property extension.";
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
 function getUserPropertyExtensions() {
-    document.getElementById('userpropertyextensionsmessage').innerHTML='Waiting for data...';
     executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions");
 }
 
@@ -528,7 +501,6 @@ function getdatanoadaluserpropertyextensions(token, url) {
             var themeFound = false;
             for (var i = 0; i < data.extensions.length; i++) {
                 if (data.extensions[i].id === themePropertyExtensionId && data.extensions[i].theme) {
-                    document.getElementById('userpropertyextensionsmessage').innerHTML="User's property extensions (theme) successfully retrieved!";
                     setupTheme(data.extensions[i].theme);
                     themeFound = true;
                     break;
@@ -537,21 +509,19 @@ function getdatanoadaluserpropertyextensions(token, url) {
             
             if (!themeFound) {
                 createThemePropertyExtension(themeSelector.currentTheme);
-                setupStyle();
+                setupStyle(false);
             }
         } else {
             createThemePropertyExtension(themeSelector.currentTheme);
-            setupStyle();
+            setupStyle(false);
         }
         
         console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         userPropertyExtensionsAvailable = false;
-        setupStyle();
+        setupStyle(false);
         console.log('getUserPropertyExtensions call failed');
-        document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to retrieve user's property extensions (theme)!";
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
@@ -559,8 +529,7 @@ function updateThemePropertyExtension(theme) {
     var payload = {
         "theme": theme
     };
-    document.getElementById('userpropertyextensionsmessage').innerHTML="Updating user's theme property extension...";
-    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchThemePropertyExtensionOnAdal, "https://graph.microsoft.com/v1.0/me/extensions/" + themePropertyExtensionId, payload);
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchThemePropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + themePropertyExtensionId, payload);
 }
 
 function patchThemePropertyExtensionOnAdal(token, url, payload) {
@@ -578,12 +547,9 @@ function patchThemePropertyExtensionOnAdal(token, url, payload) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('patchThemePropertyExtensionOnAdal call successfully executed');
-        document.getElementById('userpropertyextensionsmessage').innerHTML="User's theme property extension successfully updated!";
         console.log("User's theme property extension successfully updated! DATA="+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         console.log('patchThemePropertyExtensionOnAdal call failed');
-        document.getElementById('userpropertyextensionsmessage').innerHTML="Failed to update user's theme property extension!";
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
-        alert("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
