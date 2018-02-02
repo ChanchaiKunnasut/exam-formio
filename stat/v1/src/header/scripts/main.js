@@ -919,14 +919,12 @@ function showFeedbackDialog()
 function showFeedbackFields(buttonSetText)
 {
     $('#feedbackBasicFormQuestionMiddleText').html(langLayoutObj[languageSelector.selectedLanguage][buttonSetText]);
-    $('#feedbackBasicFormQuestionMiddleText').html(langLayoutObj[languageSelector.selectedLanguage][buttonSetText]);
-    $('#feedbackBasicFormQuestionMiddleText').html(langLayoutObj[languageSelector.selectedLanguage][buttonSetText]);
     $('#feedbackLeftFormContainer').addClass('slide-left');
     $('#feedbackMiddleFormContainer').addClass('slide-left');
     
     // Set value for email field if currentUser exist
     if(typeof currentUser !== 'undefined' && currentUser !== null && 
-    typeof currentUser.uid !== 'undefined' && currentUser.uid !== null)
+        typeof currentUser.uid !== 'undefined' && currentUser.uid !== null)
     {
         $('#emailOptional').val(currentUser.uid);
     }
