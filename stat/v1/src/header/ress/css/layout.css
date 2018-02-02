@@ -13,11 +13,6 @@ body {
     overflow-y: hidden;
 }
 
-label {
-    margin-bottom: 0px!important;
-    font-weight: normal!important;
-}
-
 .header-hidden-element {
     display: none !important;
 }
@@ -1740,6 +1735,11 @@ label {
     font-size: 0; 
 }
 
+.feedback-form-container label {
+    margin-bottom: 0px!important;
+    font-weight: normal!important;
+}
+
 .feedback-question-left-text {
     padding-top: 24px;
     padding-bottom: 18px;
@@ -1996,7 +1996,7 @@ label {
     text-decoration: none;
 }
 
-.open-user-setting-mobile-view {
+.open-user-settings-small {
     right: 370px;
 }
 
