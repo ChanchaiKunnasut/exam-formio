@@ -1,5 +1,6 @@
 var mailboxSettingsAvailable = true;
 var userPropertyExtensionsAvailable = true;
+var themePropertyExtensionExists = false;
 var ADAL = null;  
 
 // output ADAL logs to the console
@@ -452,10 +453,10 @@ function createThemePropertyExtension(theme) {
         "extensionName": themePropertyExtensionId,
         "theme": theme
     };
-    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postdataonadal, "https://graph.microsoft.com/beta/me/extensions", payload);
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postthemepropertyextensiononadal, "https://graph.microsoft.com/beta/me/extensions", payload);
 }
 
-function postdataonadal(token, url, payload) {
+function postthemepropertyextensiononadal(token, url, payload) {
     var settings = {
         "crossDomain": true,
         "url": url,
@@ -469,11 +470,12 @@ function postdataonadal(token, url, payload) {
     };
     
     $.ajax(settings).done(function (data,textStatus,request) {
-        console.log('postdataonadal call successfully executed');
+        themePropertyExtensionExists = true;
+        console.log('postthemepropertyextensiononadal call successfully executed');
         console.log('Data successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         userPropertyExtensionsAvailable = false;
-        console.log('postdataonadal call failed');
+        console.log('postthemepropertyextensiononadal call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
@@ -495,29 +497,28 @@ function getdatanoadaluserpropertyextensions(token, url) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('getUserPropertyExtensions call successfully executed');
+        themePropertyExtensionExists = false;
         
         // Parse the payload data and create or use existing property extension
         if (data && data.extensions && data.extensions.length > 0) {
-            var themeFound = false;
             for (var i = 0; i < data.extensions.length; i++) {
                 if (data.extensions[i].id === themePropertyExtensionId && data.extensions[i].theme) {
                     setupTheme(data.extensions[i].theme);
-                    themeFound = true;
+                    themePropertyExtensionExists = true;
                     break;
                 }
             }
             
-            if (!themeFound) {
-                createThemePropertyExtension(themeSelector.currentTheme);
+            if (!themePropertyExtensionExists) {
                 setupStyle(false);
             }
         } else {
-            createThemePropertyExtension(themeSelector.currentTheme);
             setupStyle(false);
         }
         
         console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
+        themePropertyExtensionExists = false;
         userPropertyExtensionsAvailable = false;
         setupStyle(false);
         console.log('getUserPropertyExtensions call failed');
@@ -526,10 +527,14 @@ function getdatanoadaluserpropertyextensions(token, url) {
 }
 
 function updateThemePropertyExtension(theme) {
-    var payload = {
-        "theme": theme
-    };
-    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchThemePropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + themePropertyExtensionId, payload);
+    if (themePropertyExtensionExists) {
+        var payload = {
+            "theme": theme
+        };
+        executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchThemePropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + themePropertyExtensionId, payload);
+    } else {
+        createThemePropertyExtension(theme);
+    }
 }
 
 function patchThemePropertyExtensionOnAdal(token, url, payload) {
