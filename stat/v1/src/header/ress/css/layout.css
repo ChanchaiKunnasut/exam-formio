@@ -13,6 +13,11 @@ body {
     overflow-y: hidden;
 }
 
+label {
+    margin-bottom: 0px!important;
+    font-weight: normal!important;
+}
+
 .header-hidden-element {
     display: none !important;
 }
@@ -1657,13 +1662,7 @@ body {
 #feedbackLeftFormContainer {
     float: left;
     margin-left: 180px;
-}
-
-.feedback-form-container {
-    height: 100%;
-    width: 360px;
-    position: relative;
-    font-size: 0; 
+    display: none;
 }
 
 @media (max-width: 882px) {
@@ -1671,10 +1670,74 @@ body {
         float: left;
         margin-left: 0;
     }
- 
-    #feedbackMiddleFormContainer {
-        margin-left: 0;
+}
+
+#feedbackLeftFormContainer.slide-left{
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: feedback-LeftFormContainerSlideLeft;
+    -moz-animation-name: feedback-LeftFormContainerSlideLeft;
+    -o-animation-name: feedback-LeftFormContainerSlideLeft;
+    animation-name: feedback-LeftFormContainerSlideLeft;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards
+}
+
+@media (max-width: 882px) {
+    #feedbackLeftFormContainer.slide-left {
+        display: none!important;
+        margin-left:0;
+        transition-property: none;
+        transform: none;
+        animation: none;
     }
+}
+
+@-webkit-keyframes feedback-LeftFormContainerSlideLeft {
+    from {
+        margin-left: 180px
+    }
+    to {
+        margin-left: 0
+    }
+}
+
+@-moz-keyframes feedback-LeftFormContainerSlideLeft {
+    from {
+        margin-left: 180px
+    }
+    to {
+        margin-left: 0
+    }
+}
+
+@-o-keyframes feedback-LeftFormContainerSlideLeft {
+    from {
+        margin-left: 180px
+    }
+    to {
+        margin-left: 0
+    }
+}
+
+@keyframes feedback-LeftFormContainerSlideLeft {
+    from {
+        margin-left: 180px
+    }
+    to {
+        margin-left: 0
+    }
+}
+
+.feedback-form-container {
+    height: 100%;
+    width: 360px;
+    position: relative;
+    font-size: 0; 
 }
 
 .feedback-question-left-text {
@@ -1713,6 +1776,10 @@ body {
     outline: 1px solid transparent;
 }
 
+.feedback-overall-anchor-active {
+    background-color: #0167B0;
+}
+
 .feedback-overall-image {
     width: 24px;
     height: 24px;
@@ -1745,6 +1812,77 @@ body {
 
 #feedbackMiddleFormContainer {
     margin-left: 540px;
+    display: none;
+}
+
+#feedbackMiddleFormContainer.slide-left {
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: feedback-MiddleFormContainerSlideLeft;
+    -moz-animation-name: feedback-MiddleFormContainerSlideLeft;
+    -o-animation-name: feedback-MiddleFormContainerSlideLeft;
+    animation-name: feedback-MiddleFormContainerSlideLeft;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    animation-fill-mode: forwards
+}
+
+@media (max-width: 882px) {
+    #feedbackMiddleFormContainer.slide-left {
+        margin-left: 0px;
+        display: block!important;
+        transition-property: none;
+        transform: none;
+        animation: none;
+    }
+    #feedbackBasicFormContainer {
+        margin-left: 0px;
+    }
+}
+
+@-webkit-keyframes feedback-MiddleFormContainerSlideLeft {
+    from {
+        margin-left: 540px
+    }
+    to {
+        margin-left: 360px
+    }
+}
+
+@-moz-keyframes feedback-MiddleFormContainerSlideLeft {
+    from {
+        margin-left: 540px
+    }
+    to {
+        margin-left: 360px
+    }
+}
+
+@-o-keyframes feedback-MiddleFormContainerSlideLeft {
+    from {
+        margin-left: 540px
+    }
+    to {
+        margin-left: 360px
+    }
+}
+
+@keyframes feedback-MiddleFormContainerSlideLeft {
+    from {
+        margin-left: 540px
+    }
+    to {
+        margin-left: 360px
+    }
+}
+
+.feedback-form-question-middle-text {
+    padding-top: 24px;
+    padding-bottom: 18px;
+    display: block;
 }
 
 .feedback-margin-left-60px {
@@ -1803,6 +1941,13 @@ body {
     vertical-align: middle;
 }
 
+.feedback-form-screenshot-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
 .feedback-form-submit-button-container {
     display: inline-block;
     vertical-align: middle;
@@ -1849,6 +1994,10 @@ body {
 }
 .feedback-container:hover {
     text-decoration: none;
+}
+
+.open-user-setting-mobile-view {
+    right: 370px;
 }
 
 .feedback-header {

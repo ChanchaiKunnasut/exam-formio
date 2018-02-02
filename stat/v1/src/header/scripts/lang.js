@@ -87,7 +87,7 @@ function applyTranslation()
     var oldLanguage = languageSelector.currentLanguage;
     languageSelector.currentLanguage = languageSelector.selectedLanguage;
     setLanguage(languageSelector.selectedLanguage);
-    $("[lang-tran]").translate();
+    $("[lang-tran],[lang-tran-placeholder]").translate();
     changeLanguageForThemeSettings(oldLanguage, languageSelector.currentLanguage);
 }
 
@@ -109,7 +109,7 @@ function applyTranslation()
                 && langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")] !== undefined)
             {
                 // This case may occur when we need to populate help menu with some texts defined in the form
-                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran-placeholder")]);
+                $this.html(langObj.i18n.resources[languageSelector.selectedLanguage].translation[$this.attr("lang-tran")]);
             }
             
             if ($this.attr("lang-tran-placeholder") !== undefined && langLayoutObj.hasOwnProperty(languageSelector.selectedLanguage)
