@@ -8,5 +8,6 @@ var headerObj = {
     "help": true,
     "account": true,
     "theme settings": true,
-    "feedback": false
+    "feedback": false,
+    "maximize": false
 };

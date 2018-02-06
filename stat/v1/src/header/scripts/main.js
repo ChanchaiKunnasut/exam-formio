@@ -267,6 +267,26 @@ function setupLayout()
         $(".appl-button").addClass('static').prop('onclick', null).off('click');
     }
     
+    // Check if we should maximize the browser window (IE only)
+    var maximizeBrowserWindow = false;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("maximize"))
+    {
+        if (formObj.properties["maximize"] === true)
+        {
+            maximizeBrowserWindow = true;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("maximize") && headerObj["maximize"] === true)
+    {
+        maximizeBrowserWindow = true;
+    }
+    
+    if (maximizeBrowserWindow)
+    {
+        window.moveTo(0, 0);
+        window.resizeTo(screen.availWidth, screen.availHeight);
+    }
+    
     // Check if we should hide the environments dropdown
     var hasEnvironments = true;
     if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("environment"))
