@@ -46,6 +46,13 @@ themesMap['flatly'] =
     navbarInverseBackgroundColor: '#18bc9c'
 };
 
+themesMap['greenie'] =
+{
+    bootswatchtheme: 'greenie',
+    name: 'Greenie',
+    navbarInverseBackgroundColor: '#336666'
+};
+
 themesMap['journal'] =
 {
     bootswatchtheme: 'journal',
