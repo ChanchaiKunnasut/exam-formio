@@ -156,7 +156,7 @@ function isUseOutlookMailSettings() {
 }
 
 function isUseUserPropertyExtensions() {
-    return typeof headerObj !== 'undefined' && headerObj["use user property extensions"];
+    return typeof headerObj !== 'undefined' && headerObj["use user property extensions"] && headerObj["theme settings"];
 }
    
 function fillUserInfo() {
