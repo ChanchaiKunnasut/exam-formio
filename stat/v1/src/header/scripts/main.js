@@ -173,184 +173,330 @@ function setupApp()
 /**
  * Sets up the header and layout elements excluding a form
  */
-function setupLayout() {
+function setupLayout()
+{    
     // Check app configuration
-    if (typeof brandObj !== 'undefined')
+    // Set up the main logo
+    var mainLogoPath = "./ress/jpeg/risktech/Risktech48.jpg";
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["mainlogopath"])
     {
-        // Set up the main logo
-        if (brandObj["mainlogopath"])
-        {
-            $("#mainLogo").find("img").attr("src", brandObj["mainlogopath"]);
-        }
-        else
-        {
-            $("#mainLogo").find("img").attr("src", "./ress/jpeg/risktech/Risktech48.jpg");
-        }
-        
-        // Set up side logo and show it if defined
-        if (brandObj["sidelogopath"])
-        {
-            $("#sideLogo").find("img").attr("src", brandObj["sidelogopath"]);
-            $("#sideLogo").show();
-        }
-        
-        // Set up favicon
-        var faviconElement = document.createElement("link");
-        faviconElement.rel = "shortcut icon";
-        faviconElement.type = "image/x-icon";
-        faviconElement.id = "pageIcon";
-        if (brandObj["faviconpath"])
-        {
-            faviconElement.href = brandObj["faviconpath"];
-        }
-        else
-        {
-            // If favicon is not specified use the main logo
-            faviconElement.href = $("#mainLogo").find("img").attr("src");
-        }
-        
-        var pageTitleNode = document.getElementById("pageTitle");
-        pageTitleNode.parentNode.insertBefore(faviconElement, pageTitleNode.nextSibling);
+        mainLogoPath = formObj.properties["mainlogopath"];
+    }
+    else if (typeof brandObj !== 'undefined' && brandObj != null && brandObj["mainlogopath"])
+    {
+        mainLogoPath = brandObj["mainlogopath"];
     }
     
-    if (typeof customizationObj !== 'undefined')
-    {
-        // Set up client's logo (customization logo) and show it if defined
-        if (customizationObj["customizationlogopath"])
-        {
-            $("#customizationLogo").find(".client-logo").attr("src", customizationObj["customizationlogopath"]);
-            $("#customizationLogo").show();
-        }
-    }
-    
-    if (typeof headerObj !== 'undefined')
-    {
-        if (headerObj.hasOwnProperty("app launcher") && headerObj["app launcher"] === false)
-        {
-            $(".appl-button").addClass('static').prop('onclick', null).off('click');
-        }
-        
-        var hasEnvironments = true;
-        if (headerObj.hasOwnProperty("environment") && headerObj["environment"] === false)
-        {
-            $("#environmentcontainerl").hide();
-            hiddenWrappers.push("environmentcontainerl");
-            $("#environmentcontainers").hide();
-            hiddenWrappers.push("environmentcontainers");
-            hasEnvironments = false;
-        }
-        
-        var missingHeaderElements = 0;
-        if (headerObj.hasOwnProperty("notifications") && headerObj["notifications"] === false)
-        {
-            $("#notificationsCommandWrapper").hide();
-            hiddenWrappers.push("notificationsCommandWrapper");
-            missingHeaderElements ++;
-        }
-        else
-        {
-            firstMenuItem = 'notificationsWrapper';
-        }
-        
-        if (headerObj.hasOwnProperty("settings") && headerObj["settings"] === false)
-        {
-            $("#settingsCommandWrapper").hide();
-            hiddenWrappers.push("settingsCommandWrapper");
-            missingHeaderElements ++;
-            firstMenuItem = 'helpWrapper';
-        }
-        else if (firstMenuItem === 'notdefined')
-        {
-            firstMenuItem = 'settingsWrapper';
-        }
-        
-        if (headerObj.hasOwnProperty("help") && headerObj["help"] === false)
-        {
-            $("#helpCommandWrapper").hide();
-            hiddenWrappers.push("helpCommandWrapper");
-            missingHeaderElements ++;
-        }
-        else if (firstMenuItem === 'notdefined')
-        {
-            firstMenuItem = 'helpWrapper';
-        }
-        
-        var hasAccount = true;
-        if (headerObj.hasOwnProperty("account") && headerObj["account"] === false)
-        {
-            $("#accountsCommandWrapperL").hide();
-            hiddenWrappers.push("accountsCommandWrapperL");
-            $("#accountsCommandWrapperS").hide();
-            hiddenWrappers.push("accountsCommandWrapperS");
-            hasAccount = false;
-        }
-        else if (firstMenuItem === 'notdefined')
-        {
-            firstMenuItem = 'accountsWrapper';
-        }
-        
-        if (hasEnvironments && (missingHeaderElements > 0 || !hasAccount))
-        {
-            if (hasAccount)
-            {
-                switch (missingHeaderElements)
-                {
-                    case 1:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-one");
-                        break;
-                    case 2:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-two");
-                        break;
-                    case 3:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-three");
-                }
-            }
-            else
-            {
-                switch (missingHeaderElements)
-                {
-                    case 0:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts");
-                        break;
-                    case 1:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts-one");
-                        break;
-                    case 2:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts-two");
-                        break;
-                    case 3:
-                        $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts-three");
-                }
-            }
-        }
-        
-        if (headerObj.hasOwnProperty("theme settings") && headerObj["theme settings"] === true)
-        {
-            $('#themeCardWrapper').show();
-        }
-        
-        if (!headerObj.hasOwnProperty("feedback") || headerObj["feedback"] === false)
-        {
-            $("#feedbackInserted").hide();
-        }
- 
-        // We add the keydown listener only when feedback is enabled in order to avoid unnecessary triggers and improve performance 
-        if(headerObj.hasOwnProperty("feedback") && headerObj["feedback"] === true)
-        {
-            //On press escape close feedback     
-            $(document).on('keydown', function(e)
-            {
-                if(e.keyCode === 27)  //ESC
-                {
-                    closeFeedbackContent();
-                }    
-            });
-        }    
-    }
+    $("#mainLogo").find("img").attr("src", mainLogoPath);
     
     // Display the main logo even if its path is not defined in brandObj
     // In this case we use hardcoded path
     $("#mainLogo").show();
+    
+    // Set up side logo and show it if defined
+    var sideLogoPath;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["sidelogopath"])
+    {
+        sideLogoPath = formObj.properties["sidelogopath"];
+    }
+    else if (typeof brandObj !== 'undefined' && brandObj != null && brandObj["sidelogopath"])
+    {
+        sideLogoPath = brandObj["sidelogopath"];
+    }
+    
+    if (typeof sideLogoPath !== 'undefined')
+    {
+        $("#sideLogo").find("img").attr("src", sideLogoPath);
+        $("#sideLogo").show();
+    }
+    
+    // Set up favicon
+    var faviconElement = document.createElement("link");
+    faviconElement.rel = "shortcut icon";
+    faviconElement.type = "image/x-icon";
+    faviconElement.id = "pageIcon";
+    
+    // If favicon is not specified use the main logo
+    var faviconPath = mainLogoPath;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["faviconpath"])
+    {
+        faviconPath = formObj.properties["faviconpath"];
+    }
+    else if (typeof brandObj !== 'undefined' && brandObj != null && brandObj["faviconpath"])
+    {
+        faviconPath = brandObj["faviconpath"];
+    }
+    
+    faviconElement.href = faviconPath;
+    var pageTitleNode = document.getElementById("pageTitle");
+    pageTitleNode.parentNode.insertBefore(faviconElement, pageTitleNode.nextSibling);
+    
+    // Set up client's logo (customization logo) and show it if defined
+    var customizationLogoPath;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["customizationlogopath"])
+    {
+        customizationLogoPath = formObj.properties["customizationlogopath"];
+    }
+    else if (typeof customizationObj !== 'undefined' && customizationObj !== null && customizationObj["customizationlogopath"])
+    {
+        customizationLogoPath = customizationObj["customizationlogopath"];
+    }
+    
+    if (typeof customizationLogoPath !== 'undefined')
+    {
+        $("#customizationLogo").find(".client-logo").attr("src", customizationLogoPath);
+        $("#customizationLogo").show();
+    }
+    
+    // Check if we should enable the app launcher button
+    var appLauncherDisabled = false;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("app launcher"))
+    {
+        if (formObj.properties["app launcher"] == false)
+        {
+            appLauncherDisabled = true;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("app launcher") && headerObj["app launcher"] === false)
+    {
+        appLauncherDisabled = true;
+    }
+    
+    if (appLauncherDisabled)
+    {
+        $(".appl-button").addClass('static').prop('onclick', null).off('click');
+    }
+    
+    // Check if we should maximize the browser window (IE only)
+    var maximizeBrowserWindow = false;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("maximize"))
+    {
+        if (formObj.properties["maximize"] === true)
+        {
+            maximizeBrowserWindow = true;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("maximize") && headerObj["maximize"] === true)
+    {
+        maximizeBrowserWindow = true;
+    }
+    
+    if (maximizeBrowserWindow)
+    {
+        window.moveTo(0, 0);
+        window.resizeTo(screen.availWidth, screen.availHeight);
+    }
+    
+    // Check if we should hide the environments dropdown
+    var hasEnvironments = true;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("environment"))
+    {
+        if (formObj.properties["environment"] === false)
+        {
+            hasEnvironments = false;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("environment") && headerObj["environment"] === false)
+    {
+        hasEnvironments = false;
+    }
+    
+    if (!hasEnvironments)
+    {
+        $("#environmentcontainerl").hide();
+        hiddenWrappers.push("environmentcontainerl");
+        $("#environmentcontainers").hide();
+        hiddenWrappers.push("environmentcontainers");
+    }
+    
+    // Count how many menu items are missing to apply appropriate css class later
+    var missingHeaderElements = 0;
+    
+    // Check if we should hide the notifications menu
+    var hasNotifications = true;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("notifications"))
+    {
+        if (formObj.properties["notifications"] === false)
+        {
+            hasNotifications = false;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("notifications") && headerObj["notifications"] === false)
+    {
+        hasNotifications = false;
+    }
+    
+    if (hasNotifications)
+    {
+        firstMenuItem = 'notificationsWrapper';
+    }
+    else
+    {
+        $("#notificationsCommandWrapper").hide();
+        hiddenWrappers.push("notificationsCommandWrapper");
+        missingHeaderElements ++;
+    }
+    
+    // Check if we should hide the settings menu
+    var hasSettings = true;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("settings"))
+    {
+        if (formObj.properties["settings"] === false)
+        {
+            hasSettings = false;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("settings") && headerObj["settings"] === false)
+    {
+        hasSettings = false;
+    }
+    
+    if (!hasSettings)
+    {
+        $("#settingsCommandWrapper").hide();
+        hiddenWrappers.push("settingsCommandWrapper");
+        missingHeaderElements ++;
+    }
+    else if (firstMenuItem === 'notdefined')
+    {
+        firstMenuItem = 'settingsWrapper';
+    }
+    
+    // Check if we should hide the help menu
+    var hasHelp = true;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("help"))
+    {
+        if (formObj.properties["help"] === false)
+        {
+            hasHelp = false;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("help") && headerObj["help"] === false)
+    {
+        hasHelp = false;
+    }
+    
+    if (!hasHelp)
+    {
+        $("#helpCommandWrapper").hide();
+        hiddenWrappers.push("helpCommandWrapper");
+        missingHeaderElements ++;
+    }
+    else if (firstMenuItem === 'notdefined')
+    {
+        firstMenuItem = 'helpWrapper';
+    }
+    
+    // Check if we should hide the account menu
+    var hasAccount = true;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("account"))
+    {
+        if (formObj.properties["account"] === false)
+        {
+            hasAccount = false;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("account") && headerObj["account"] === false)
+    {
+        hasAccount = false;
+    }
+    
+    if (!hasAccount)
+    {
+        $("#accountsCommandWrapperL").hide();
+        hiddenWrappers.push("accountsCommandWrapperL");
+        $("#accountsCommandWrapperS").hide();
+        hiddenWrappers.push("accountsCommandWrapperS");
+    }
+    else if (firstMenuItem === 'notdefined')
+    {
+        firstMenuItem = 'accountsWrapper';
+    }
+    
+    if (hasEnvironments && (missingHeaderElements > 0 || !hasAccount))
+    {
+        if (hasAccount)
+        {
+            switch (missingHeaderElements)
+            {
+                case 1:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-one");
+                    break;
+                case 2:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-two");
+                    break;
+                case 3:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-three");
+            }
+        }
+        else
+        {
+            switch (missingHeaderElements)
+            {
+                case 0:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts");
+                    break;
+                case 1:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts-one");
+                    break;
+                case 2:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts-two");
+                    break;
+                case 3:
+                    $("#environmentcontainerl").find(".environment-dropdown").addClass("minus-accounts-three");
+            }
+        }
+    }
+    
+    // Check if we should show theme selection option in the settings menu
+    var hasThemeSettings = false;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("theme settings"))
+    {
+        if (formObj.properties["theme settings"] === true)
+        {
+            hasThemeSettings = true;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("theme settings") && headerObj["theme settings"] === true)
+    {
+        hasThemeSettings = true;
+    }
+    
+    if (hasThemeSettings)
+    {
+        $('#themeCardWrapper').show();
+    }
+    
+    // Check if we should show the button which opens the feedback form
+    var hasFeedback = false;
+    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("feedback"))
+    {
+        if (formObj.properties["feedback"])
+        {
+            hasFeedback = true;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("feedback") && headerObj["feedback"] === true)
+    {
+        hasFeedback = true;
+    }
+    
+    if (hasFeedback)
+    {
+        // We add the keydown listener only when feedback is enabled in order to avoid unnecessary triggers and improve performance
+        // On press escape close feedback
+        $(document).on('keydown', function(e)
+        {
+            if(e.keyCode === 27)  // ESC
+            {
+                closeFeedbackContent();
+            }
+        });
+    }
+    else
+    {
+        $("#feedbackInserted").hide();
+    }
     
     // Set up the header title
     if (formObj.hasOwnProperty("title"))

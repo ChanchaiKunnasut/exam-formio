@@ -46,6 +46,13 @@ themesMap['flatly'] =
     navbarInverseBackgroundColor: '#18bc9c'
 };
 
+themesMap['greenie'] =
+{
+    bootswatchtheme: 'greenie',
+    name: 'Greenie',
+    navbarInverseBackgroundColor: '#336666'
+};
+
 themesMap['journal'] =
 {
     bootswatchtheme: 'journal',
@@ -153,10 +160,21 @@ function setupStyle(overrideBrandTheme)
     
     // We should show the form after new styles has been loaded to prevent FOUC
     bootswatchStyleDE.onload = showContentOnStyleApply();
-    if (!overrideBrandTheme && typeof brandObj !== 'undefined' && brandObj["bootswatchtheme"])
+    if (!overrideBrandTheme)
     {
-        themeSelector.currentTheme = brandObj["bootswatchtheme"];
-        themeSelector.selectedTheme = themeSelector.currentTheme;
+        // We should check first if the theme is configured in the form object
+        if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties")
+            && formObj.properties.hasOwnProperty("bootswatchtheme") && themesMap.hasOwnProperty(formObj.properies["bootswatchtheme"]))
+        {
+            themeSelector.currentTheme = formObj.properies["bootswatchtheme"];
+            themeSelector.selectedTheme = themeSelector.currentTheme;
+        }
+        else if (typeof brandObj !== 'undefined' && brandObj != null && brandObj.hasOwnProperty("bootswatchtheme")
+            && themesMap.hasOwnProperty(brandObj["bootswatchtheme"]))
+        {
+            themeSelector.currentTheme = brandObj["bootswatchtheme"];
+            themeSelector.selectedTheme = themeSelector.currentTheme;
+        }
     }
     
     setupThemeMenu();
