@@ -134,25 +134,36 @@ function setupApp()
             
             form.ready.then(function()
             {
-                // Find out user's mailbox settings
                 if (isUseOutlookMailSettings() && isSignedInUser())
                 {
+                    // Find out user's mailbox settings
                     getmailboxsettingsdata('https://graph.microsoft.com/beta/me/mailboxSettings');
                     getSupportedTimeZones();
+                    if (isUseUserPropertyExtensions())
+                    {
+                        // Find out user's theme (user property extensions)
+                        getUserPropertyExtensions(false);
+                    }
+                    else
+                    {
+                        // Set default theme
+                        setupStyle(false);
+                    }
+                }
+                else if (isUseUserPropertyExtensions() && isSignedInUser())
+                {
+                    // We set the default time zone choices beacuse
+                    // we don't read them from the mailbox settings
+                    setDefaultTimeZonesChoices();
+                    
+                    // Find out user's language, time zone and theme settings
+                    // defined in user's property extensions on AAD
+                    getUserPropertyExtensions(true);
                 }
                 else
                 {
-                    // Just translate the page
+                    // Just translate the page and set default theme
                     applyTranslation();
-                }
-                
-                // Find out user's theme (user property extensions)
-                if (isUseUserPropertyExtensions() && isSignedInUser())
-                {
-                    getUserPropertyExtensions();
-                }
-                else
-                {
                     setupStyle(false);
                 }
             });
@@ -1015,23 +1026,41 @@ function saveLTZ(e)
     e.stopPropagation();
     var languageChanged = setChosenLanguage();
     var timeZoneChanged = setChosenTimeZone();
-    if ((languageChanged || timeZoneChanged) && isUseOutlookMailSettings() && mailboxSettingsAvailable && isSignedInUser())
+    if ((languageChanged || timeZoneChanged) && isSignedInUser())
     {
-        var payload;
-        if (languageChanged && timeZoneChanged)
+        if (isUseOutlookMailSettings() && mailboxSettingsAvailable)
         {
-            payload = {"timeZone":timeZoneSelector.currentTimeZone,"language":{"locale":languageSelector.currentLanguage}};
+            var payload;
+            if (languageChanged && timeZoneChanged)
+            {
+                payload = {"timeZone":timeZoneSelector.currentTimeZone,"language":{"locale":languageSelector.currentLanguage}};
+            }
+            else if (languageChanged)
+            {
+                payload = {"language":{"locale":languageSelector.currentLanguage}};
+            }
+            else
+            {
+                payload = {"timeZone":timeZoneSelector.currentTimeZone};
+            }
+            
+            patchmailboxsettingsdata("https://graph.microsoft.com/beta/me/mailboxSettings", payload);
         }
-        else if (languageChanged)
+        else if (isUseUserPropertyExtensions() && userPropertyExtensionsAvailable)
         {
-            payload = {"language":{"locale":languageSelector.currentLanguage}};
+            if (languageChanged && timeZoneChanged)
+            {
+                updateLanguageTimeZonePropertyExtensions(languageSelector.currentLanguage, timeZoneSelector.currentTimeZone);
+            }
+            else if (languageChanged)
+            {
+                updateLanguageTimeZonePropertyExtensions(languageSelector.currentLanguage, null);
+            }
+            else
+            {
+                updateLanguageTimeZonePropertyExtensions(null, timeZoneSelector.currentTimeZone);
+            }
         }
-        else
-        {
-            payload = {"timeZone":timeZoneSelector.currentTimeZone};
-        }
-        
-        patchmailboxsettingsdata("https://graph.microsoft.com/beta/me/mailboxSettings", payload);
     }
     
     $('#LTZCard').closeExtendedCard();

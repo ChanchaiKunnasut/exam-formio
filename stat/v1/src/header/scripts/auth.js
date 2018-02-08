@@ -1,6 +1,12 @@
 var mailboxSettingsAvailable = true;
 var userPropertyExtensionsAvailable = true;
+var userPropertyExtensionId = "frm-hdr-user-properies";
+var userPropertyExtensionExists = false;
+var languagePropertyExtensionExists = false;
+var timeZonePropertyExtensionExists = false;
 var themePropertyExtensionExists = false;
+var languagePropertyExtension;
+var timeZonePropertyExtension;
 var ADAL = null;  
 
 // output ADAL logs to the console
@@ -447,16 +453,50 @@ function getdatanoadalphoto(token,url) {
     request.send(null);
 }
 
+/**
+ * Creates a new user property extension on AAD and stores user's language and time zone there
+ * @param {string} language Alias of user's language. It should be null if the language shouldn't be stored.
+ * @param {string} timeZone Alias of ser's time zone. It should be null if the time zone shouldn't be stored.
+ */
+function createLanguageTimeZonePropertyExtension(language, timeZone) {
+    if (language !== null && timeZone !== null) {
+        var payload = {
+            "@odata.type": "microsoft.graph.openTypeExtension",
+            "extensionName": userPropertyExtensionId,
+            "language": language,
+            "timeZone": timeZone
+        };
+    } else if (language !== null) {
+        var payload = {
+            "@odata.type": "microsoft.graph.openTypeExtension",
+            "extensionName": userPropertyExtensionId,
+            "language": language
+        };
+    } else if (timeZone !== null) {
+        var payload = {
+            "@odata.type": "microsoft.graph.openTypeExtension",
+            "extensionName": userPropertyExtensionId,
+            "timeZone": timeZone
+        };
+    } else {
+        console.log("createLanguageTimeZonePropertyExtension failed because both language and timeZone are null");
+        
+        return;
+    }
+    
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postuserpropertyextensiononadal, "https://graph.microsoft.com/beta/me/extensions", payload);
+}
+
 function createThemePropertyExtension(theme) {
     var payload = {
         "@odata.type": "microsoft.graph.openTypeExtension",
-        "extensionName": themePropertyExtensionId,
+        "extensionName": userPropertyExtensionId,
         "theme": theme
     };
-    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postthemepropertyextensiononadal, "https://graph.microsoft.com/beta/me/extensions", payload);
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", postuserpropertyextensiononadal, "https://graph.microsoft.com/beta/me/extensions", payload);
 }
 
-function postthemepropertyextensiononadal(token, url, payload) {
+function postuserpropertyextensiononadal(token, url, payload) {
     var settings = {
         "crossDomain": true,
         "url": url,
@@ -470,21 +510,21 @@ function postthemepropertyextensiononadal(token, url, payload) {
     };
     
     $.ajax(settings).done(function (data,textStatus,request) {
-        themePropertyExtensionExists = true;
-        console.log('postthemepropertyextensiononadal call successfully executed');
+        userPropertyExtensionExists = true;
+        console.log('postuserpropertyextensiononadal call successfully executed');
         console.log('Data successfully updated! DATA='+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         userPropertyExtensionsAvailable = false;
-        console.log('postthemepropertyextensiononadal call failed');
+        console.log('postuserpropertyextensiononadal call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
-function getUserPropertyExtensions() {
-    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions");
+function getUserPropertyExtensions(fetchLTZ) {
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions", fetchLTZ);
 }
 
-function getdatanoadaluserpropertyextensions(token, url) {
+function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
     var settings = {
         "crossDomain": true,
         "url": url,
@@ -497,16 +537,55 @@ function getdatanoadaluserpropertyextensions(token, url) {
     
     $.ajax(settings).done(function (data,textStatus,request) {
         console.log('getUserPropertyExtensions call successfully executed');
+        userPropertyExtensionExists = false;
+        languagePropertyExtensionExists = false;
+        timeZonePropertyExtensionExists = false;
         themePropertyExtensionExists = false;
         
         // Parse the payload data and create or use existing property extension
         if (data && data.extensions && data.extensions.length > 0) {
             for (var i = 0; i < data.extensions.length; i++) {
-                if (data.extensions[i].id === themePropertyExtensionId && data.extensions[i].theme) {
+                if (data.extensions[i].id === userPropertyExtensionId && data.extensions[i].language) {
+                    languagePropertyExtensionExists = true;
+                    if (fetchLTZ) {
+                        languageSelector.selectedLanguage = data.extensions[i].language;
+                    
+                        // Translate the page
+                        setupPredefinedLanguage();
+                        console.log("Current user's language: " + languageSelector.selectedLanguage);
+                    } else {
+                        languagePropertyExtension = data.extensions[i].language;
+                        console.log("Language property in open extension: " + languagePropertyExtension);
+                    }
+                    
+                }
+                
+                if (data.extensions[i].id === userPropertyExtensionId && data.extensions[i].timeZone) {
+                    timeZonePropertyExtensionExists = true;
+                    if (fetchLTZ) {
+                        setInitialTimeZone(data.extensions[i].timeZone);
+                        console.log("Current user's time zone alias: " + data.extensions[i].timeZone);
+                    } else {
+                        timeZonePropertyExtension = data.extensions[i].timeZone;
+                        console.log("Time zone property in open extension: " + timeZonePropertyExtension);
+                    }
+                }
+                
+                if (data.extensions[i].id === userPropertyExtensionId && data.extensions[i].theme) {
                     setupTheme(data.extensions[i].theme);
                     themePropertyExtensionExists = true;
+                    console.log("Stored theme: " + data.extensions[i].theme);
+                }
+                
+                if (languagePropertyExtensionExists || timeZonePropertyExtensionExists || themePropertyExtensionExists) {
+                    userPropertyExtensionExists = true;
+                    
                     break;
                 }
+            }
+            
+            if (!languagePropertyExtensionExists) {
+                applyTranslation();
             }
             
             if (!themePropertyExtensionExists) {
@@ -514,30 +593,98 @@ function getdatanoadaluserpropertyextensions(token, url) {
             }
         } else {
             setupStyle(false);
+            applyTranslation();
         }
         
         console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
-        themePropertyExtensionExists = false;
+        userPropertyExtensionExists = false;
         userPropertyExtensionsAvailable = false;
         setupStyle(false);
+        applyTranslation();
         console.log('getUserPropertyExtensions call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }
 
+/**
+ * Updates language and time zone stored in user's property extensions on AAD
+ * @param {string} language Alias of a new user's language. It should be null if the language hasn't been changed.
+ * @param {string} timeZone Alias of a new user's time zone. It should be null if the time zone hasn't been changed.
+ */
+function updateLanguageTimeZonePropertyExtensions(language, timeZone) {
+    if (!userPropertyExtensionExists) {
+        createLanguageTimeZonePropertyExtension(language, timeZone);
+    } else if (language !== null && timeZone !== null) {
+        var payload = {
+            "language": language,
+            "timeZone": timeZone
+        };
+        
+        if (themePropertyExtensionExists) {
+            payload.theme = themeSelector.currentTheme;
+        }
+        executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchUserPropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + userPropertyExtensionId, payload);
+    } else if (language !== null) {
+        var payload = {
+            "language": language
+        };
+        
+        if (timeZonePropertyExtensionExists) {
+            payload.timeZone = themeSelector.currentTimeZone;
+        }
+        
+        if (themePropertyExtensionExists) {
+            payload.theme = themeSelector.currentTheme;
+        }
+        
+        executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchUserPropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + userPropertyExtensionId, payload);
+    } else if (timeZone !== null) {
+        var payload = {
+            "timeZone": timeZone
+        };
+        
+        if (languagePropertyExtensionExists) {
+            payload.language = languageSelector.currentLanguage;
+        }
+        
+        if (themePropertyExtensionExists) {
+            payload.theme = themeSelector.currentTheme;
+        }
+        
+        executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchUserPropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + userPropertyExtensionId, payload);
+    }
+}
+
 function updateThemePropertyExtension(theme) {
-    if (themePropertyExtensionExists) {
+    if (userPropertyExtensionExists) {
         var payload = {
             "theme": theme
         };
-        executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchThemePropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + themePropertyExtensionId, payload);
+        
+        if (languagePropertyExtensionExists) {
+            if (isUseOutlookMailSettings()) {
+                payload.language = languagePropertyExtension;
+            } else {
+                payload.language = languageSelector.currentLanguage;
+            }
+        }
+        
+        if (timeZonePropertyExtensionExists) {
+            if (isUseOutlookMailSettings()) {
+                payload.timeZone = timeZonePropertyExtension;
+            } else {
+                payload.timeZone = timeZoneSelector.currentTimeZone;
+            }
+        }
+        
+        executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", patchUserPropertyExtensionOnAdal, "https://graph.microsoft.com/beta/me/extensions/" + userPropertyExtensionId, payload);
     } else {
         createThemePropertyExtension(theme);
     }
 }
 
-function patchThemePropertyExtensionOnAdal(token, url, payload) {
+function patchUserPropertyExtensionOnAdal(token, url, payload) {
     var settings = {
         "crossDomain": true,
         "url": url,
@@ -551,10 +698,10 @@ function patchThemePropertyExtensionOnAdal(token, url, payload) {
     }
     
     $.ajax(settings).done(function (data,textStatus,request) {
-        console.log('patchThemePropertyExtensionOnAdal call successfully executed');
+        console.log('patchUserPropertyExtensionOnAdal call successfully executed');
         console.log("User's theme property extension successfully updated! DATA="+(data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
-        console.log('patchThemePropertyExtensionOnAdal call failed');
+        console.log('patchUserPropertyExtensionOnAdal call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
 }

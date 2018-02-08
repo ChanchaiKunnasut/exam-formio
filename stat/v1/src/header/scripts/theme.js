@@ -139,8 +139,6 @@ var themeSelector =
     selectedTheme: 'cosmo'
 };
 
-var themePropertyExtensionId = "frm-hdr-user-properies";
-
 function setupTheme(theme) {
     if (themesMap[theme]) {
         themeSelector.selectedTheme = theme;
