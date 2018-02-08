@@ -189,7 +189,12 @@ function setupLayout()
     // Check app configuration
     // Set up the main logo
     var mainLogoPath = "./ress/jpeg/risktech/Risktech48.jpg";
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["mainlogopath"])
+    var mainLogoUrl = checkForUrlParameter("mainlogopath");
+    if (mainLogoUrl)
+    {
+        mainLogoPath = mainLogoUrl;
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["mainlogopath"])
     {
         mainLogoPath = formObj.properties["mainlogopath"];
     }
@@ -206,7 +211,12 @@ function setupLayout()
     
     // Set up side logo and show it if defined
     var sideLogoPath;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["sidelogopath"])
+    var sideLogoUrl = checkForUrlParameter("sidelogopath");
+    if (sideLogoUrl)
+    {
+        sideLogoPath = sideLogoUrl;
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["sidelogopath"])
     {
         sideLogoPath = formObj.properties["sidelogopath"];
     }
@@ -229,7 +239,12 @@ function setupLayout()
     
     // If favicon is not specified use the main logo
     var faviconPath = mainLogoPath;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["faviconpath"])
+    var faviconUrl = checkForUrlParameter("faviconpath");
+    if (faviconUrl)
+    {
+        faviconPath = faviconUrl;
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["faviconpath"])
     {
         faviconPath = formObj.properties["faviconpath"];
     }
@@ -244,7 +259,12 @@ function setupLayout()
     
     // Set up client's logo (customization logo) and show it if defined
     var customizationLogoPath;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["customizationlogopath"])
+    var customizationLogoUrl = checkForUrlParameter("customizationlogopath");
+    if (customizationLogoUrl)
+    {
+        customizationLogoPath = customizationLogoUrl;
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties["customizationlogopath"])
     {
         customizationLogoPath = formObj.properties["customizationlogopath"];
     }
@@ -261,7 +281,15 @@ function setupLayout()
     
     // Check if we should enable the app launcher button
     var appLauncherDisabled = false;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("app launcher"))
+    var appLauncherUrl = checkForUrlParameter("app launcher");
+    if (appLauncherUrl === "false" || appLauncherUrl === "true")
+    {
+        if (appLauncherUrl === "false")
+        {
+            appLauncherDisabled = true;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("app launcher"))
     {
         if (formObj.properties["app launcher"] == false)
         {
@@ -280,7 +308,15 @@ function setupLayout()
     
     // Check if we should maximize the browser window (IE only)
     var maximizeBrowserWindow = false;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("maximize"))
+    var maximizeBrowserWindowUrl = checkForUrlParameter("maximize");
+    if (maximizeBrowserWindowUrl === "false" || maximizeBrowserWindowUrl === "true")
+    {
+        if (maximizeBrowserWindowUrl === "true")
+        {
+            maximizeBrowserWindow = true;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("maximize"))
     {
         if (formObj.properties["maximize"] === true)
         {
@@ -300,7 +336,15 @@ function setupLayout()
     
     // Check if we should hide the environments dropdown
     var hasEnvironments = true;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("environment"))
+    var hasEnvironmentsUrl = checkForUrlParameter("environment");
+    if (hasEnvironmentsUrl === "false" || hasEnvironmentsUrl === "true")
+    {
+        if (hasEnvironmentsUrl === "false")
+        {
+            hasEnvironments = false;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("environment"))
     {
         if (formObj.properties["environment"] === false)
         {
@@ -325,7 +369,15 @@ function setupLayout()
     
     // Check if we should hide the notifications menu
     var hasNotifications = true;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("notifications"))
+    var hasNotificationsUrl = checkForUrlParameter("notifications");
+    if (hasNotificationsUrl === "false" || hasNotifications === "true")
+    {
+        if (hasNotificationsUrl === "false")
+        {
+            hasNotifications = false;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("notifications"))
     {
         if (formObj.properties["notifications"] === false)
         {
@@ -350,7 +402,15 @@ function setupLayout()
     
     // Check if we should hide the settings menu
     var hasSettings = true;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("settings"))
+    var hasSettingsUrl = checkForUrlParameter("settings");
+    if (hasSettingsUrl === "false" || hasSettingsUrl === "true")
+    {
+        if (hasSettingsUrl === "false")
+        {
+            hasSettings = false;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("settings"))
     {
         if (formObj.properties["settings"] === false)
         {
@@ -375,7 +435,15 @@ function setupLayout()
     
     // Check if we should hide the help menu
     var hasHelp = true;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("help"))
+    var hasHelpUrl = checkForUrlParameter("help");
+    if (hasHelpUrl === "false" || hasHelpUrl === "true")
+    {
+        if (hasHelpUrl === "false")
+        {
+            hasHelp = false;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("help"))
     {
         if (formObj.properties["help"] === false)
         {
@@ -400,7 +468,15 @@ function setupLayout()
     
     // Check if we should hide the account menu
     var hasAccount = true;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("account"))
+    var hasAccountUrl = checkForUrlParameter("account");
+    if (hasAccountUrl === "false" || hasAccountUrl === "true")
+    {
+        if (hasAccountUrl === "false")
+        {
+            hasAccount = false;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("account"))
     {
         if (formObj.properties["account"] === false)
         {
@@ -461,7 +537,15 @@ function setupLayout()
     
     // Check if we should show theme selection option in the settings menu
     var hasThemeSettings = false;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("theme settings"))
+    var hasThemeSettingsUrl = checkForUrlParameter("theme settings");
+    if (hasThemeSettingsUrl === "false" || hasThemeSettingsUrl === "true")
+    {
+        if (hasThemeSettingsUrl === "true")
+        {
+            hasThemeSettings = true;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("theme settings"))
     {
         if (formObj.properties["theme settings"] === true)
         {
@@ -480,7 +564,15 @@ function setupLayout()
     
     // Check if we should show the button which opens the feedback form
     var hasFeedback = false;
-    if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("feedback"))
+    var hasFeedbackUrl = checkForUrlParameter("feedback");
+    if (hasFeedbackUrl === "false" || hasFeedbackUrl === "true")
+    {
+        if (hasFeedbackUrl === "true")
+        {
+            hasFeedback = true;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("feedback"))
     {
         if (formObj.properties["feedback"])
         {
@@ -574,6 +666,22 @@ function setupLayout()
         $(this).siblings().removeClass('feedback-overall-anchor-active');
         $(this).addClass('feedback-overall-anchor-active');
     });
+}
+
+/**
+ * Checks if there is a given URL parameter
+ * @param {string} parameterName URL parameter name whose existence should be checked
+ */
+function checkForUrlParameter(parameterName)
+{
+    var paramRegex = new RegExp("[?&]" + encodeURIComponent(parameterName) + "(=([^&#]*)|&|#|$)");
+    var paramValue = paramRegex.exec(window.location.href);
+    if (paramValue && paramValue[2])
+    {
+        return decodeURIComponent(paramValue[2].replace(/\+/g, " "));
+    }
+    
+    return null;
 }
 
 /**
