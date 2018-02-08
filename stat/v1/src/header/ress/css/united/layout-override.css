@@ -70,3 +70,134 @@
     background-color: #aea79f;
     border-radius: 4px;
 }
+
+.feedback-form-control {
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.feedback-submit-button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.feedback-submit-button-primary {
+    color: #ffffff;
+    background-color: #e95420;
+    border-color: #e95420;
+}
+
+.feedback-submit-button-primary:hover {
+    color: #ffffff;
+    background-color: #c34113;
+    border-color: #b93e12;
+}
+
+.feedback-button-default  {
+    color: #ffffff;
+    background-color: #aea79f;
+    border-color: #aea79f;
+}
+
+.feedback-button {
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    user-select: none;
+}
+
+.feedback-overall-anchor {
+    color: #ffffff;
+    background-color: #978e83;
+    border-color: #92897e;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+.path-anchor-first  {
+    fill: #978e83;
+    stroke: #978e83;
+}
+
+.path-anchor-second {
+    fill: #ffffff;
+    stroke: #978e83;
+}
+
+.feedback-overall-anchor:hover {
+    color: #ffffff;
+    background-color: #c34113;
+    border-color: #b93e12;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-first {
+    fill: #c34113;
+    stroke: #c34113;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-second {
+    fill: #ffffff;
+    stroke: #c34113; 
+}
+
+.feedback-overall-anchor-active {
+    color: #ffffff;
+    background-color: #e95420;
+    border-color: #e95420;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-first {
+    fill: #e95420;
+    stroke: #e95420;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-second {
+    stroke: #e95420;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-first {
+    fill: #c34113;
+    stroke: #c34113;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-second {
+    fill: #ffffff;
+    stroke: #c34113;
+}
