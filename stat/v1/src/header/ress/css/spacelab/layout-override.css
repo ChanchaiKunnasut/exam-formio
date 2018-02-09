@@ -112,51 +112,6 @@
     background-color: #f5f5f5;
 }
 
-.feedback-submit-button-primary:hover {
-    background-image: -webkit-linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
-    background-image: -o-linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#5f8ab9), color-stop(50%, #3e648d), to(#385a7f));
-    background-image: linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
-    background-repeat: no-repeat;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5f8ab9', endColorstr='#ff385a7f', GradientType=0);
-    -webkit-filter: none;
-    filter: none;
-    border: 1px solid #2e4b69;
-}
-
-.feedback-submit-button-primary:hover {
-    color: #ffffff;
-    background-color: #345578;
-    border-color: #315070;
-}
-
-.feedback-submit-button:hover, .feedback-submit-button:focus, .feedback-submit-button.focus {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.feedback-submit-button-primary {
-    background-image: -webkit-linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
-    background-image: -o-linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#6d94bf), color-stop(50%, #446e9b), to(#3e648d));
-    background-image: linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
-    background-repeat: no-repeat;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6d94bf', endColorstr='#ff3e648d', GradientType=0);
-    -webkit-filter: none;
-    filter: none;
-    border: 1px solid #345578;
-}
-
-.feedback-submit-button {
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-}
-
-.feedback-submit-button-primary {
-    color: #ffffff;
-    background-color: #446e9b;
-    border-color: #446e9b;
-}
-
 .feedback-submit-button {
     display: inline-block;
     margin-bottom: 0;
@@ -177,12 +132,22 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background-image: linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
+    background-repeat: no-repeat;
+    filter: none;
+    border: 1px solid #345578;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+    color: #ffffff;
+    background-color: #446e9b;
 }
 
-.feedback-button-default  {
+.feedback-submit-button:hover {
+    background-image: linear-gradient(#5f8ab9, #3e648d 50%, #385a7f);
+    background-repeat: no-repeat;
+    filter: none;
+    border: 1px solid #2e4b69;
     color: #ffffff;
-    background-color: #474949;
-    border-color: #474949;
+    background-color: #345578;
 }
 
 .feedback-button {
@@ -196,9 +161,12 @@
     padding: 8px 12px;
     font-size: 14px;
     line-height: 1.42857143;
+    border: 1px solid #2e2f2f;
     border-radius: 4px;
     user-select: none;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    background-color: #474949;
 }
 
 .feedback-overall-anchor {

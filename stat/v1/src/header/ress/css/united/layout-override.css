@@ -97,7 +97,7 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #e95420;
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 14px;
@@ -107,24 +107,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-.feedback-submit-button-primary {
     color: #ffffff;
     background-color: #e95420;
-    border-color: #e95420;
 }
 
-.feedback-submit-button-primary:hover {
+.feedback-submit-button:hover {
     color: #ffffff;
     background-color: #c34113;
     border-color: #b93e12;
-}
-
-.feedback-button-default  {
-    color: #ffffff;
-    background-color: #aea79f;
-    border-color: #aea79f;
 }
 
 .feedback-button {
@@ -135,12 +125,14 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #aea79f;
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 14px;
     line-height: 1.42857143;
     user-select: none;
+    color: #ffffff;
+    background-color: #aea79f;
 }
 
 .feedback-overall-anchor {

@@ -119,26 +119,16 @@
     cursor: pointer;
     user-select: none;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #003366;
     border-radius: 4px;
-}
-
-.feedback-submit-button-primary {
     color: #fff;
     background-color: #003366;
-    border-color: #003366;
 }
 
-.feedback-submit-button-primary:hover {
+.feedback-submit-button:hover {
     color: #fff;
     background-color: #002c57;
     border-color: #002c57;
-}
-
-.feedback-button-default  {
-    color: #333;
-    background-color: #cccccc;
-    border-color: #cccccc;
 }
 
 .feedback-button {
@@ -155,8 +145,10 @@
     cursor: pointer;
     user-select: none;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #cccccc;
     border-radius: 4px;
+    color: #333;
+    background-color: #cccccc;
 }
 
 /**/
@@ -164,8 +156,7 @@
 .feedback-overall-anchor {
     color: #333;
     background-color: #cccccc;
-    border-color: #cccccc;
-    border: 1px solid;
+    border: 1px solid #cccccc;
     border-radius: 4px;
 }
 

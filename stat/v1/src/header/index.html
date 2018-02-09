@@ -385,7 +385,7 @@
             <div id="renderIndicator" class="rendered btn" />
             <div id="feedbackInserted" class="feedback-inserted">
                 <a id="feedbackContainer" class="feedback-container" onclick="showFeedbackDialog();" href="javascript:void(0)" data-clicking="custom">
-                    <div class="feedback-button-default feedback-button">
+                    <div class="feedback-button">
                         <span class="feedback-icon"><i class="ms-Icon ms-Icon--Chat" aria-hidden="true"></i></span>
                         <span lang-tran="Feedback">Feedback</span>
                     </div>
@@ -490,15 +490,14 @@
                     <div id="feedbackMiddleFormContainer" class="feedback-form-container">
                         <div id="feedbackBasicFormContainer" class="feedback-basic-form-container">
                             <label for="feedbackBasicFormComment" id="feedbackBasicFormQuestionMiddleText" class="feedback-font-subtitle feedback-line-height feedback-text-align-left feedback-form-question-middle-text"></label>
-                            <textarea lang-tran-placeholder="Feedback Comment" placeholder="Please type in your comment" maxlength="1000" id="feedbackBasicFormComment" class="feedback-font-text feedback-form-comment feedback-text-input feedback-form-control"></textarea>
+                            <textarea lang-tran-placeholder="Feedback Comment" placeholder="Please type in your comment" maxlength="1000" id="feedbackBasicFormComment" class="feedback-font-text feedback-form-comment feedback-text-input feedback-form-control" required data-errormessage-value-missing="this.setCustomValidity('This field cannot be left blank!')" onchange="Thank you for your feedback !"></textarea>
                             <div class="feedback-form-bottom-container">
                                 <div class="feedback-form-screenshot-container">
                                     <input type="checkbox" value="unchecked" id="feedbackBasicFormScreenshotCheckbox" class="feedback-basic-form-screenshot-checkbox">
                                     <label lang-tran="Include screenshot" for="feedbackBasicFormScreenshotCheckbox" class="feedback-font-text feedback-text-align-left feedback-line-height feedback-form-screenshot-label">Include screenshot</label>
                                 </div>
                                 <div class="feedback-form-submit-button-container">
-                                    <button lang-tran="Submit" id="feedbackBasicFormSubmitButton" class="feedback-font-text feedback-submit-button feedback-submit-button-primary ">Submit</button>
-                                    <div id="feedbackBasicFormSubmitButtonSpinner" class="feedback-spinner" style="display:none"></div>
+                                    <button lang-tran="Submit" id="feedbackBasicFormSubmitButton" class="feedback-font-text feedback-submit-button">Submit</button>
                                 </div>
                             </div>
                         </div>

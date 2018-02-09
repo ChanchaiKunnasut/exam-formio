@@ -97,28 +97,6 @@
     background-color: #f8f5f0;
 }
 
-.feedback-submit-button-primary, .feedback-submit-button-primary:hover {
-    background-image: -webkit-linear-gradient(#e72510, #d9230f 6%, #cb210e);
-    background-image: -o-linear-gradient(#e72510, #d9230f 6%, #cb210e);
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#e72510), color-stop(6%, #d9230f), to(#cb210e));
-    background-image: linear-gradient(#e72510, #d9230f 6%, #cb210e);
-    background-repeat: no-repeat;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe72510', endColorstr='#ffcb210e', GradientType=0);
-    -webkit-filter: none;
-    filter: none;
-    border: 1px solid #a91b0c;
-}
-
-.feedback-submit-button {
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.feedback-submit-button-primary {
-    color: #ffffff;
-    background-color: #d9230f;
-    border-color: #d9230f;
-}
-
 .feedback-submit-button {
     display: inline-block;
     margin-bottom: 0;
@@ -128,7 +106,6 @@
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
-    background-image: none;
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 8px 12px;
@@ -139,12 +116,17 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border: 1px solid #a91b0c;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #ffffff;
+    background-color: #d9230f;
+    background-image: linear-gradient(#e72510, #d9230f 6%, #cb210e);
+    background-repeat: no-repeat;
 }
 
-.feedback-button-default  {
+.feedback-submit-button:hover {
     color: #ffffff;
-    background-color: #474949;
-    border-color: #474949;
+    background-color: #a91b0c;
 }
 
 .feedback-button {
@@ -158,9 +140,12 @@
     padding: 8px 12px;
     font-size: 13px;
     line-height: 1.42857143;
+    border: 1px solid #2e2f2f;
     border-radius: 4px;
     user-select: none;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    background-color: #474949;
 }
 
 .feedback-overall-anchor {

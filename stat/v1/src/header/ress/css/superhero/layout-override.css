@@ -110,24 +110,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-.feedback-submit-button-primary {
     color: #ffffff;
     background-color: #df691a;
-    border-color: transparent;
 }
 
-.feedback-submit-button-primary:hover {
+.feedback-submit-button:hover {
     color: #ffffff;
     background-color: #b15315;
     border-color: rgba(0,0,0,0);
-}
-
-.feedback-button-default  {
-    color: #ffffff;
-    background-color: #4e5d6c;
-    border-color: transparent;
 }
 
 .feedback-button {
@@ -145,6 +135,8 @@
     line-height: 1.42857143;
     border-radius: 0;
     user-select: none;
+    color: #ffffff;
+    background-color: #4e5d6c;
 }
 
 .feedback-overall-anchor {

@@ -111,26 +111,13 @@
     line-height: 22px;
     font-weight: 500;
     text-transform: uppercase;
-}
-
-.feedback-submit-button:hover {
-    border-color: transparent;
-}
-
-.feedback-submit-button-primary {
     color: #ffffff;
     background-color: #325d88;
 }
 
-.feedback-submit-button-primary:hover {
+.feedback-submit-button:hover {
     color: #ffffff;
     background-color: #244363;
-}
-
-.feedback-button-default  {
-    color: #ffffff;
-    background-color: #3e3f3a;
-    border-color: transparent;
 }
 
 .feedback-button {
@@ -149,29 +136,31 @@
     line-height: 22px;
     font-weight: 500;
     text-transform: uppercase;
+    color: #ffffff;
+    background-color: #3e3f3a;
 }
 
 .feedback-overall-anchor {
     color: #ffffff;
-    background-color: #393a35;
-    border-color: transparent;
+    background-color: #3e3f3a;
+    border: none;
     border-radius: 4px;
 }
 
 .path-anchor-first  {
-    fill: #393a35;
-    stroke: #393a35;
+    fill: #3e3f3a;
+    stroke: #3e3f3a;
 }
 
 .path-anchor-second {
     fill: #ffffff;
-    stroke: #393a35;
+    stroke: #3e3f3a;
 }
 
 .feedback-overall-anchor:hover {
     color: #ffffff;
     background-color: #244363;
-    border-color: transparent;
+    border: none;
 }
 
 .feedback-overall-anchor:hover > div > svg > .path-anchor-first {

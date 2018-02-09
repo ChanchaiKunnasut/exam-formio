@@ -102,7 +102,7 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #2a9fd6;
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 14px;
@@ -112,24 +112,14 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
-
-.feedback-submit-button-primary {
     color: #ffffff;
     background-color: #2a9fd6;
-    border-color: #2a9fd6;
 }
 
-.feedback-submit-button-primary:hover {
+.feedback-submit-button:hover {
     color: #ffffff;
     background-color: #2180ac;
     border-color: #1f79a3;
-}
-
-.feedback-button-default  {
-    color: #ffffff;
-    background-color: #424242;
-    border-color: #424242;
 }
 
 .feedback-button {
@@ -140,20 +130,21 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid;
+    border: 1px solid #424242;
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
     user-select: none;
+    color: #ffffff;
+    background-color: #424242;
 }
 
 .feedback-overall-anchor {
     color: #ffffff;
     background-color: #424242;
-    border-color: #424242;
-    border: 1px solid;
+    border: 1px solid #424242;
     border-radius: 4px;
 }
 

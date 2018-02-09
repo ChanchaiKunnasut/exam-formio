@@ -128,7 +128,7 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #4582ec;
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 16px;
@@ -137,24 +137,14 @@
     -ms-user-select: none;
     user-select: none;
     font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.feedback-submit-button-primary {
     color: #ffffff;
     background-color: #4582ec;
-    border-color: #4582ec;
 }
 
-.feedback-submit-button-primary:hover {
+.feedback-submit-button:hover {
     color: #ffffff;
     background-color: #1863e6;
     border-color: #175fdd;
-}
-
-.feedback-button-default {
-    color: #333333;
-    background-color: #ffffff;
-    border-color: #dddddd;
 }
 
 .feedback-button {
@@ -165,7 +155,7 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid;
+    border: 1px solid #dddddd;
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 16px;
@@ -173,13 +163,14 @@
     border-radius: 4px;
     user-select: none; 
     font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333333;
+    background-color: #ffffff;
 }
 
 .feedback-overall-anchor {
     color: #333333;
     background-color: #ffffff;
-    border-color: #dddddd;
-    border: 1px solid;
+    border: 1px solid #dddddd;
     border-radius: 4px;
 }
 
