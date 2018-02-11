@@ -1,5 +1,5 @@
   var confObjs={}
-  "forms":[{"./defs","formgroup":"","formname":"form", "formversion":""}],
+  "forms":[{"path":"./defs","formgroup":"","formname":"form", "formversion":""}],
   "apps":[{"path":"./defs","name":"app"}],
   "brands":[{"path":"./defs","name":"brand"}],
   "cstmzs":[{"path":"./defs","name":"customization"}],
