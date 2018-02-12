@@ -132,7 +132,6 @@
 .feedback-submit-button:hover {
     border-color: rgba(0, 0, 0, 0.6);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-    color: #ffffff;
     background-color: #62686d;
     background-image: linear-gradient(#404448, #4e5458 40%, #53595d);
     background-repeat: no-repeat;
