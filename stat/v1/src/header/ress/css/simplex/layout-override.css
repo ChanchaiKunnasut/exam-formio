@@ -76,3 +76,131 @@
     color: white !important;
     border-radius: 4px;
 }
+
+.feedback-form-control {
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #3e3f3a;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #dfd7ca;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.feedback-main-container {
+    background-color: #f8f5f0;
+}
+
+.feedback-submit-button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #a91b0c;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #ffffff;
+    background-color: #d9230f;
+    background-image: linear-gradient(#e72510, #d9230f 6%, #cb210e);
+    background-repeat: no-repeat;
+}
+
+.feedback-submit-button:hover {
+    background-color: #a91b0c;
+}
+
+.feedback-button {
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    border: 1px solid #2e2f2f;
+    border-radius: 4px;
+    user-select: none;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    background-color: #474949;
+}
+
+.feedback-overall-anchor {
+    color: #ffffff;
+    background-color: #2e2f2f;
+    border: 1px solid #2e2f2f;
+    border-radius: 4px;
+}
+
+.path-anchor-first  {
+    fill: #2e2f2f;
+    stroke: #2e2f2f;
+}
+
+.path-anchor-second {
+    fill: #ffffff;
+    stroke: #2e2f2f;
+}
+
+.feedback-overall-anchor:hover {
+    color: #ffffff;
+    background-color: #a91b0c;
+    border-color: #a91b0c;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-first {
+    fill: #a91b0c;
+    stroke: #a91b0c;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-second {
+    fill: #ffffff;
+    stroke: #a91b0c; 
+}
+
+.feedback-overall-anchor-active {
+    color: #ffffff;
+    background-color: #d9230f;
+    border-color: #a91b0c;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-first {
+    fill: #d9230f;
+    stroke: #d9230f;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-second {
+    stroke: #d9230f;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-first {
+    fill: #a91b0c;
+    stroke: #a91b0c;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-second {
+    fill: #ffffff;
+    stroke: #a91b0c;
+}

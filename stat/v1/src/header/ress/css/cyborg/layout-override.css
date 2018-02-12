@@ -75,3 +75,125 @@
     background-color: #424242;
     border-radius: 4px;
 }
+
+.feedback-form-control {
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #888888;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #282828;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.feedback-submit-button {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #2a9fd6;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #ffffff;
+    background-color: #2a9fd6;
+}
+
+.feedback-submit-button:hover {
+    background-color: #2180ac;
+    border-color: #1f79a3;
+}
+
+.feedback-button {
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid #424242;
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    user-select: none;
+    color: #ffffff;
+    background-color: #424242;
+}
+
+.feedback-overall-anchor {
+    color: #ffffff;
+    background-color: #424242;
+    border: 1px solid #424242;
+    border-radius: 4px;
+}
+
+.path-anchor-first  {
+    fill: #424242;
+    stroke: #424242;
+}
+
+.path-anchor-second {
+    fill: #ffffff;
+    stroke: #424242;
+}
+
+.feedback-overall-anchor:hover {
+    color: #ffffff;
+    background-color: #2180ac;
+    border-color: #1f79a3;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-first {
+    fill: #2180ac;
+    stroke: #2180ac;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-second {
+    fill: white;
+    stroke: #2180ac; 
+}
+
+.feedback-overall-anchor-active {
+    color: #ffffff;
+    background-color: #2a9fd6;
+    border-color: #2a9fd6;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-first {
+    fill: #2a9fd6;
+    stroke: #2a9fd6;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-second {
+    stroke: #2a9fd6;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-first {
+    fill: #2180ac;
+    stroke: #2180ac;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-second {
+    fill: white;
+    stroke: #2180ac;
+}

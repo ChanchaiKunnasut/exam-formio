@@ -85,6 +85,130 @@
     color: #ffcc66 !important;
 }
 
+.feedback-form-control {
+    display: block;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;   
+} 
+
+.feedback-main-container {
+    background-color: #f4f4f4;
+}
+
+.feedback-submit-button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #003366;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #003366;
+}
+
+.feedback-submit-button:hover {
+    background-color: #002c57;
+    border-color: #002c57;
+}
+
+.feedback-button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    color: #333;
+    background-color: #cccccc;
+}
+
+.feedback-overall-anchor {
+    color: #333;
+    background-color: #cccccc;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+.path-anchor-first  {
+    fill: #cccccc;
+    stroke: #cccccc;
+}
+
+.path-anchor-second {
+    fill: #333;
+    stroke: #cccccc;
+}
+
+.feedback-overall-anchor:hover {
+    color: #fff;
+    background-color: #002c57;
+    border-color: #002c57;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-first {
+    fill: #002c57;
+    stroke: #002c57;
+}
+
+.feedback-overall-anchor:hover > div > svg > .path-anchor-second {
+    fill: #ffffff;
+    stroke: ##002c57;
+}
+
+.feedback-overall-anchor-active {
+    color: #fff;
+    background-color: #003366;
+    border-color: #003366;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-first {
+    fill: #003366;
+    stroke: #003366;
+}
+
+.feedback-overall-anchor-active > div > svg > .path-anchor-second {
+    fill: #fff;
+    stroke: #003366;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-first {
+    fill: #002c57;
+    stroke: #002c57;
+}
+
+.feedback-overall-anchor-active:hover > div > svg > .path-anchor-second {
+    fill: #fff;
+    stroke:#002c57;
+}
+
 /**
  * Bootstrap override
  */
