@@ -101,6 +101,16 @@ function setupApp()
             }
         };
         
+        var formDisplay = checkForUrlParameter("display");
+        if (formDisplay)
+        {
+            formObj["display"] = formDisplay;
+        }
+        else if (typeof appObj !== 'undefined' && appObj !== null && appObj.hasOwnProperty("display") && appObj["display"])
+        {
+            formObj["display"] = appObj["display"];
+        }
+        
         langObj.hooks = hooksObj;
         Formio.createForm(document.getElementById('formio'), formObj, langObj)
         .then(function(form)
