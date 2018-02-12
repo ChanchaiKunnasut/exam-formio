@@ -133,24 +133,24 @@
     user-select: none;
     color: #ffffff;
     background-color: #aea79f;
+    border-radius: 4px;
 }
 
 .feedback-overall-anchor {
     color: #ffffff;
-    background-color: #978e83;
-    border-color: #92897e;
-    border: 1px solid;
+    background-color: #aea79f;
+    border: 1px solid #aea79f;
     border-radius: 4px;
 }
 
 .path-anchor-first  {
-    fill: #978e83;
-    stroke: #978e83;
+    fill: #aea79f;
+    stroke: #aea79f;
 }
 
 .path-anchor-second {
     fill: #ffffff;
-    stroke: #978e83;
+    stroke: #aea79f;
 }
 
 .feedback-overall-anchor:hover {

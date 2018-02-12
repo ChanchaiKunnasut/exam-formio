@@ -148,13 +148,13 @@
 }
 
 .path-anchor-first  {
-    fill: #808080;
-    stroke: #808080;
+    fill: #999999;
+    stroke: #999999;
 }
 
 .path-anchor-second {
     fill: #ffffff;
-    stroke: #808080;
+    stroke: #999999;
 }
 
 .feedback-overall-anchor:hover {

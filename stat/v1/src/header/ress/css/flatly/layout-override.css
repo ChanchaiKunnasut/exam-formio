@@ -132,7 +132,7 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid #95a5a6;
+    border: 2px solid #95a5a6;
     white-space: nowrap;
     padding: 10px 15px;
     font-size: 15px;
@@ -146,19 +146,19 @@
 
 .feedback-overall-anchor {
     color: #ffffff;
-    background-color: #798d8f;
-    border: 1px solid #74898a;
+    background-color: #95a5a6;
+    border: 2px solid #95a5a6;
     border-radius: 4px;
 }
 
 .path-anchor-first  {
-    fill: #798d8f;
-    stroke: #798d8f;
+    fill: #95a5a6;
+    stroke: #95a5a6;
 }
 
 .path-anchor-second {
     fill: #ffffff;
-    stroke: #798d8f;
+    stroke: #95a5a6;
 }
 
 .feedback-overall-anchor:hover {

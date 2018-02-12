@@ -142,7 +142,7 @@
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid #e2e2e2;
+    border-color: #e2e2e2;
     white-space: nowrap;
     line-height: 1.42857143;
     border-radius: 4px;
@@ -159,7 +159,8 @@
 .feedback-overall-anchor {
     color: #555555;
     background-color: #eeeeee;
-    border: 1px solid #e2e2e2;
+    border-width: 0 1px 4px 1px;
+    border-color: #e2e2e2;
     border-radius: 4px;
 }
 

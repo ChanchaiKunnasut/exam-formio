@@ -142,8 +142,7 @@
 .feedback-overall-anchor {
     color: #ffffff;
     background-color: #4e5d6c;
-    border-color: transparent;
-    border: 1px solid;
+    border: 1px solid transparent;
     border-radius: 0px;
 }
 

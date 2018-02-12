@@ -576,6 +576,7 @@ function closeFeedbackContent()
     $('#feedbackOverallAnchorsContainer button').removeClass('feedback-overall-anchor-active');
     $('#feedbackBasicFormQuestionMiddleText').html('');
     $('#feedbackBasicFormComment').val('');
+    $('#feedbackBasicFormScreenshotCheckbox').prop('checked', false);
 }
 
 /**

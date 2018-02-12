@@ -172,8 +172,7 @@
 .feedback-overall-anchor {
     color: #ffffff;
     background-color: #2e2f2f;
-    border-color: #292a2a;
-    border: 1px solid;
+    border: 1px solid #292a2a;
     border-radius: 4px;
 }
 
@@ -190,7 +189,7 @@
 .feedback-overall-anchor:hover {
     color: #ffffff;
     background-color: #345578;
-    border-color: #315070;
+    border-color: #2e4b69;
 }
 
 .feedback-overall-anchor:hover > div > svg > .path-anchor-first {

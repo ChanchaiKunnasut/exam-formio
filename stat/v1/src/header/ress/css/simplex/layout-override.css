@@ -151,8 +151,7 @@
 .feedback-overall-anchor {
     color: #ffffff;
     background-color: #2e2f2f;
-    border-color: #2e2f2f;
-    border: 1px solid;
+    border: 1px solid #2e2f2f;
     border-radius: 4px;
 }
 

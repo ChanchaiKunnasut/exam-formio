@@ -145,14 +145,13 @@
     vertical-align: middle;
     touch-action: manipulation;
     cursor: pointer;
-    border: 1px solid #3a3f44;
+    border: 1px solid rgba(0, 0, 0, 0.6);
     white-space: nowrap;
     padding: 8px 12px;
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
     user-select: none;
-    border-color: rgba(0, 0, 0, 0.6);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     color: #ffffff;
     background-color: #3a3f44;
@@ -161,8 +160,7 @@
 .feedback-overall-anchor {
     color: #ffffff;
     background-color: #3a3f44;
-    border-color:  #3a3f44;
-    border: 1px solid;
+    border: 1px solid rgba(0, 0, 0, 0.6);
     border-radius: 4px;
 }
 
@@ -179,7 +177,7 @@
 .feedback-overall-anchor:hover {
     color: #ffffff;
     background-color: #62686d;
-    border-color: #5d6368;
+    border-color: rgba(0, 0, 0, 0.6);
 }
 
 .feedback-overall-anchor:hover > div > svg > .path-anchor-first {
