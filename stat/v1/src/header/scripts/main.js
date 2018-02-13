@@ -239,6 +239,9 @@ function setupLayout()
     {
         $("#sideLogo").find("img").attr("src", sideLogoPath);
         $("#sideLogo").show();
+        $("#mainLogo").find("img").removeClass("logo-background");
+        $("#mainLogo").addClass("logo-background");
+        $("#sideLogo").find("img").addClass("logo-background");
     }
     
     // Set up favicon

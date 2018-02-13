@@ -216,3 +216,15 @@
     fill: #ffffff;
     stroke: #158cba;
 }
+
+/**
+ * LOGO BACKGROUND (legibility issues)
+ */
+
+.logo-background {
+    background-color: #999999;
+}
+
+.client-logo {
+    background-color: #999999;
+}
