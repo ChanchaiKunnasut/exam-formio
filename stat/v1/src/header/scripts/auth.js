@@ -235,7 +235,7 @@ function parse_string(str,del) {
     return query_string;
 }
 
-function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsondata) {
+function executeAjaxRequestWithAdalLogic(resource, callbackfunc, ajaxurl, ajaxjsondata, justCheck, callbackfunc2, callbackParam1, callbackParam2) {
     ADAL.acquireToken(resource, function (error, token, errcode) {
         // Handle ADAL Error
         if (error || errcode || !token) {
@@ -282,7 +282,7 @@ function executeAjaxRequestWithAdalLogic(resource,callbackfunc,ajaxurl,ajaxjsond
            var noaurlmsg = 'The function "'+getFunctionName(callbackfunc)+'" will not be called because URL is not provided!';
            console.log(noaurlmsg);
         } else {
-         callbackfunc(token,ajaxurl,ajaxjsondata);
+           callbackfunc(token, ajaxurl, ajaxjsondata, justCheck, callbackfunc2, callbackParam1, callbackParam2);
         }
     });
 }
@@ -521,10 +521,24 @@ function postuserpropertyextensiononadal(token, url, payload) {
 }
 
 function getUserPropertyExtensions(fetchLTZ) {
-    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions", fetchLTZ);
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions", {}, fetchLTZ, false);
 }
 
-function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
+/**
+ * Queries for user's property extensions used by the header APP. Updates GUI or just updates global variables depending
+ * on the justCheck parameter. Can call a callback function on success.
+ * @param {string} token Security token which is passed in the request header of the API call
+ * @param {string} url URL of the API function which is called to retrieve the open property extensions
+ * @param {object} payload Payload which should be sent in the request. This is not used in this function.
+ * @param {boolean} fetchLTZ Specifies if the function should update the GUI with language and time zone data (true) or
+ * just update global variables with language and time zone settins.
+ * @param {boolean} justCheck If the value is true the function just updates the global varioables with a current open
+ * property extension values
+ * @param {function} callbackfunc A function which will be called after a success response from the API has been received.
+ * @param {any} callbackParam1 The first parameter which will be passed to the callback function.
+ * @param {any} callbackParam2 The second parameter which will be passed to the callback function.
+ */
+function getdatanoadaluserpropertyextensions(token, url, payload, fetchLTZ, justCheck, callbackfunc, callbackParam1, callbackParam2) {
     var settings = {
         "crossDomain": true,
         "url": url,
@@ -547,7 +561,7 @@ function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
             for (var i = 0; i < data.extensions.length; i++) {
                 if (data.extensions[i].id === userPropertyExtensionId && data.extensions[i].language) {
                     languagePropertyExtensionExists = true;
-                    if (fetchLTZ) {
+                    if (fetchLTZ && !justCheck) {
                         languageSelector.selectedLanguage = data.extensions[i].language;
                     
                         // Translate the page
@@ -562,7 +576,7 @@ function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
                 
                 if (data.extensions[i].id === userPropertyExtensionId && data.extensions[i].timeZone) {
                     timeZonePropertyExtensionExists = true;
-                    if (fetchLTZ) {
+                    if (fetchLTZ && !justCheck) {
                         setInitialTimeZone(data.extensions[i].timeZone);
                         console.log("Current user's time zone alias: " + data.extensions[i].timeZone);
                     } else {
@@ -572,7 +586,10 @@ function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
                 }
                 
                 if (data.extensions[i].id === userPropertyExtensionId && data.extensions[i].theme) {
-                    setupTheme(data.extensions[i].theme);
+                    if (!justCheck) {
+                        setupTheme(data.extensions[i].theme);
+                    }
+                    
                     themePropertyExtensionExists = true;
                     console.log("Stored theme: " + data.extensions[i].theme);
                 }
@@ -584,24 +601,35 @@ function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
                 }
             }
             
-            if (!languagePropertyExtensionExists) {
+            if (!languagePropertyExtensionExists && fetchLTZ && !justCheck) {
                 applyTranslation();
             }
             
-            if (!themePropertyExtensionExists) {
+            if (!themePropertyExtensionExists && !justCheck) {
                 setupStyle(false);
             }
-        } else {
+        } else if (!justCheck) {
             setupStyle(false);
-            applyTranslation();
+            if (fetchLTZ) {
+                applyTranslation();
+            }
+        }
+        
+        if (typeof callbackfunc !== 'undefined') {
+            callbackfunc(callbackParam1, callbackParam2);
         }
         
         console.log('Data successfully retrieved! payload: ' + (data!=null ? JSON.stringify(data) : null));
     }).fail(function (err, textStatus, errorThrown) {
         userPropertyExtensionExists = false;
         userPropertyExtensionsAvailable = false;
-        setupStyle(false);
-        applyTranslation();
+        if (!justCheck) {
+            setupStyle(false);
+            if (fetchLTZ) {
+                applyTranslation();
+            }
+        }
+        
         console.log('getUserPropertyExtensions call failed');
         console.log("AJAX REQUEST FAILED:"+err.toString()+',textStatus='+textStatus+', errorThrown='+errorThrown);
     });
@@ -613,6 +641,11 @@ function getdatanoadaluserpropertyextensions(token, url, fetchLTZ) {
  * @param {string} timeZone Alias of a new user's time zone. It should be null if the time zone hasn't been changed.
  */
 function updateLanguageTimeZonePropertyExtensions(language, timeZone) {
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions", {}, true, true,
+        updateLanguageTimeZonePropertyExtensionsCallback, language, timeZone);
+}
+
+function updateLanguageTimeZonePropertyExtensionsCallback(language, timeZone) {
     if (!userPropertyExtensionExists) {
         createLanguageTimeZonePropertyExtension(language, timeZone);
     } else if (language !== null && timeZone !== null) {
@@ -657,6 +690,11 @@ function updateLanguageTimeZonePropertyExtensions(language, timeZone) {
 }
 
 function updateThemePropertyExtension(theme) {
+    executeAjaxRequestWithAdalLogic("https://graph.microsoft.com", getdatanoadaluserpropertyextensions, "https://graph.microsoft.com/beta/me/?$select=id,displayName&$expand=extensions", {}, true, true,
+        updateThemePropertyExtensionCallback, theme);
+}
+
+function updateThemePropertyExtensionCallback(theme) {
     if (userPropertyExtensionExists) {
         var payload = {
             "theme": theme
