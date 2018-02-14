@@ -9,5 +9,6 @@ var headerObj = {
     "account": true,
     "theme settings": true,
     "feedback": false,
-    "maximize": false
+    "maximize": false,
+    "mailbox photo": false
 };

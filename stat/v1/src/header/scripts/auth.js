@@ -167,7 +167,7 @@ function isUseUserPropertyExtensions() {
    
 function fillUserInfo() {
     var signeduser = ADAL!=null ? ADAL.getCachedUser() : null;
-    if (signeduser && headerObj !== 'undefined' && headerObj.hasOwnProperty("account") && headerObj["account"]) {
+    if (signeduser && headerObj !== 'undefined' && headerObj != null && headerObj.hasOwnProperty("account") && headerObj["account"]) {
         if (signeduser.profile.upn) {
             // For work or school accounts (tenant members)
             currentUser.member = true;
@@ -195,7 +195,11 @@ function fillUserInfo() {
         $("#allAppsLink").attr("href", "https://account.activedirectory.windowsazure.com/r?tenantId=" + ADAL.config.tenant + "#/applications");
         currentUser.name = signeduser.profile.name;
         $('.username').html(signeduser.profile.name);
-        getuserphotometadata();
+        if (headerObj !== 'undefined' && headerObj != null && headerObj.hasOwnProperty("mailbox photo") && headerObj["mailbox photo"] === true) {
+            getuserphotometadata();
+        } else {
+            getUserThumbnailPhoto();
+        }
     }
 }
    
@@ -235,7 +239,7 @@ function parse_string(str,del) {
     return query_string;
 }
 
-function executeAjaxRequestWithAdalLogic(resource, callbackfunc, ajaxurl, ajaxjsondata, justCheck, callbackfunc2, callbackParam1, callbackParam2) {
+function executeAjaxRequestWithAdalLogic(resource, callbackfunc, ajaxurl, ajaxjsondata, fetchLTZ, justCheck, callbackfunc2, callbackParam1, callbackParam2) {
     ADAL.acquireToken(resource, function (error, token, errcode) {
         // Handle ADAL Error
         if (error || errcode || !token) {
@@ -282,7 +286,7 @@ function executeAjaxRequestWithAdalLogic(resource, callbackfunc, ajaxurl, ajaxjs
            var noaurlmsg = 'The function "'+getFunctionName(callbackfunc)+'" will not be called because URL is not provided!';
            console.log(noaurlmsg);
         } else {
-           callbackfunc(token, ajaxurl, ajaxjsondata, justCheck, callbackfunc2, callbackParam1, callbackParam2);
+           callbackfunc(token, ajaxurl, ajaxjsondata, fetchLTZ, justCheck, callbackfunc2, callbackParam1, callbackParam2);
         }
     });
 }
@@ -447,6 +451,33 @@ function getdatanoadalphoto(token,url) {
             reader.readAsDataURL(request.response);
         } else {
             console.log('getdatanoadalphoto call failed');
+            console.log("AJAX REQUEST FAILED:"+request.statusText);
+        }
+    };
+    request.send(null);
+}
+
+function getUserThumbnailPhoto() {
+    executeAjaxRequestWithAdalLogic("https://graph.windows.net",getdatanoadalphoto,"https://graph.windows.net/me/thumbnailPhoto?api-version=1.6");
+}
+
+function getdatanoadalthumbnailphoto(token, url) {
+    var request = new XMLHttpRequest;
+    request.open("GET", url);
+    request.setRequestHeader("Authorization", "Bearer " + token);
+    request.responseType = "blob";
+    request.onload = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            console.log('getUserThumbnailPhoto call successfully executed');
+            
+            var reader = new FileReader();
+            reader.onload = function () {
+                $('.userphoto').attr('src', reader.result).show();
+            }
+            
+            reader.readAsDataURL(request.response);
+        } else {
+            console.log('getdatanoadalthumbnailphoto call failed');
             console.log("AJAX REQUEST FAILED:"+request.statusText);
         }
     };
