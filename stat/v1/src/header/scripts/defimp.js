@@ -229,6 +229,18 @@ function loadDefaultHeader()
     loadScript(headerDef, checkForAppSetup);
 }
 
+function themesLoaded() {
+    themesMap = themesObj;
+    checkAppCofig();
+}
+
+function loadDefaultThemes()
+{
+    window.themesObj = themesMap;
+}
+
+var themeLoadStarted = false;
+
 /**
  * Checks if all definition files has been loaded.
  * If so adds the app setup function as listener for the window load event
@@ -236,7 +248,14 @@ function loadDefaultHeader()
  */
 function checkForAppSetup()
 {
-    if (typeof headerObj !== 'undefined' && typeof customizationObj !== 'undefined' && typeof brandObj !== 'undefined' && typeof formObj !== 'undefined')
+    if (!themeLoadStarted && typeof headerObj !== 'undefined' && headerObj != null && headerObj["themes"])
+    {
+        loadScript(headerObj["themes"], themesLoaded, loadDefaultThemes);
+        themeLoadStarted = true;
+    }
+    
+    if (typeof headerObj !== 'undefined' && typeof customizationObj !== 'undefined' && typeof brandObj !== 'undefined' && typeof formObj !== 'undefined'
+        && (typeof themesObj !== 'undefined' || (typeof headerObj !== 'undefined' && headerObj != null && !(headerObj["themes"]))))
     {
         if (document.readyState === 'complete')
         {

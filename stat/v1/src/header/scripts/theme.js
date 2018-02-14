@@ -6,128 +6,128 @@ var themesMap = {};
 
 themesMap['bluemeanie'] =
 {
-    bootswatchtheme: 'bluemeanie',
+    path: './ress/css/bluemeanie',
     name: 'Bluemeanie',
-    navbarInverseBackgroundColor: '#005aa1'
+    color: '#005aa1'
 };
 
 themesMap['cerulean'] =
 {
-    bootswatchtheme: 'cerulean',
+    path: './ress/css/cerulean',
     name: 'Cerulean',
-    navbarInverseBackgroundColor: '#033c73'
+    color: '#033c73'
 };
 
 themesMap['cosmo'] =
 {
-    bootswatchtheme: 'cosmo',
+    path: './ress/css/cosmo',
     name: 'Cosmo',
-    navbarInverseBackgroundColor: '#2780e3'
+    color: '#2780e3'
 };
 
 themesMap['cyborg'] =
 {
-    bootswatchtheme: 'cyborg',
+    path: './ress/css/cyborg',
     name: 'Cyborg',
-    navbarInverseBackgroundColor: '#222222'
+    color: '#222222'
 };
 
 themesMap['darkly'] =
 {
-    bootswatchtheme: 'darkly',
+    path: './ress/css/darkly',
     name: 'Darkly',
-    navbarInverseBackgroundColor: '#00bc8c'
+    color: '#00bc8c'
 };
 
 themesMap['flatly'] =
 {
-    bootswatchtheme: 'flatly',
+    path: './ress/css/flatly',
     name: 'Flatly',
-    navbarInverseBackgroundColor: '#18bc9c'
+    color: '#18bc9c'
 };
 
 themesMap['greenie'] =
 {
-    bootswatchtheme: 'greenie',
+    path: './ress/css/greenie',
     name: 'Greenie',
-    navbarInverseBackgroundColor: '#336666'
+    color: '#336666'
 };
 
 themesMap['journal'] =
 {
-    bootswatchtheme: 'journal',
+    path: './ress/css/journal',
     name: 'Journal',
-    navbarInverseBackgroundColor: '#eb6864'
+    color: '#eb6864'
 };
 
 themesMap['lumen'] =
 {
-    bootswatchtheme: 'lumen',
+    path: './ress/css/lumen',
     name: 'Lumen',
-    navbarInverseBackgroundColor: '#ffffff'
+    color: '#ffffff'
 };
 
 themesMap['paper'] =
 {
-    bootswatchtheme: 'paper',
+    path: './ress/css/paper',
     name: 'Paper',
-    navbarInverseBackgroundColor: '#2196f3'
+    color: '#2196f3'
 };
 
 themesMap['readable'] =
 {
-    bootswatchtheme: 'readable',
+    path: './ress/css/readable',
     name: 'Readable',
-    navbarInverseBackgroundColor: '#ffffff'
+    color: '#ffffff'
 };
 
 themesMap['sandstone'] =
 {
-    bootswatchtheme: 'sandstone',
+    path: './ress/css/sandstone',
     name: 'Sandstone',
-    navbarInverseBackgroundColor: '#93c54b'
+    color: '#93c54b'
 };
 
 themesMap['simplex'] =
 {
-    bootswatchtheme: 'simplex',
+    path: './ress/css/simplex',
     name: 'Simplex',
-    navbarInverseBackgroundColor: '#d9230f'
+    color: '#d9230f'
 };
 
 themesMap['slate'] =
 {
-    bootswatchtheme: 'slate',
+    path: './ress/css/slate',
     name: 'Slate',
-    navbarInverseBackgroundColor: '#7a8288'
+    color: '#7a8288'
 };
 
 themesMap['spacelab'] =
 {
-    bootswatchtheme: 'spacelab',
+    path: './ress/css/spacelab',
     name: 'Spacelab',
-    navbarInverseBackgroundColor: '#446e9b'
+    color: '#446e9b'
 };
 
 themesMap['superhero'] =
 {
-    bootswatchtheme: 'superhero',
+    path: './ress/css/superhero',
     name: 'Superhero',
-    navbarInverseBackgroundColor: '#df691a'
+    color: '#df691a'
 };
 
 themesMap['united'] =
 {
-    bootswatchtheme: 'united',
+    path: './ress/css/united',
     name: 'United',
-    navbarInverseBackgroundColor: '#772953'
+    color: '#772953'
 };
 
 themesMap['yeti'] =
 {
-    bootswatchtheme: 'yeti',
+    path: './ress/css/yeti',
     name: 'Yeti',
-    navbarInverseBackgroundColor: '#008cba'
+    color: '#008cba'
 };
 
 /**
@@ -177,14 +177,14 @@ function setupStyle(overrideBrandTheme)
     
     setupThemeMenu();
     
-    bootswatchStyleDE.href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/bootstrap.min.css";
+    bootswatchStyleDE.href = themesMap[themeSelector.currentTheme].path + "/bootstrap.min.css";
     var layoutStyleNode = document.getElementById("layoutstyle");
     layoutStyleNode.parentNode.insertBefore(bootswatchStyleDE, layoutStyleNode.nextSibling);
     
     var headerStyleDE = document.createElement("link");
     headerStyleDE.id = "themelayoutstyle";
     headerStyleDE.rel = "stylesheet";
-    headerStyleDE.href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/layout-override.css";
+    headerStyleDE.href = themesMap[themeSelector.currentTheme].path + "/layout-override.css";
     layoutStyleNode.parentNode.insertBefore(headerStyleDE, layoutStyleNode.nextSibling);
 }
 
@@ -201,7 +201,7 @@ function setupThemeMenu()
                 : ('" title="' + langLayoutObj[languageSelector.currentLanguage]["Apply theme"])) + value.name + '" onclick="selectTheme(\'' + code + '\')">'
             + '<div class="theme-image-wrapper" title="'
             + (code === themeSelector.currentTheme ? (langLayoutObj[languageSelector.currentLanguage]["Selected theme"])
-                : (langLayoutObj[languageSelector.currentLanguage]["Apply theme"])) + value.name + '" style="background-color: ' + value.navbarInverseBackgroundColor + '">'
+                : (langLayoutObj[languageSelector.currentLanguage]["Apply theme"])) + value.name + '" style="background-color: ' + value.color + '">'
             + '<img class="theme-image"/></div></a>';
         $('#themeList').append(languageItem);
     });
@@ -229,7 +229,7 @@ function setThemeValue()
 {
     $('#themeValue').html('<a tabindex="0" title="' + langLayoutObj[languageSelector.currentLanguage]["Selected theme"] + themesMap[themeSelector.currentTheme].name
         + '"><div class="current-theme-image-wrapper" title="' + langLayoutObj[languageSelector.currentLanguage]["Selected theme"] + themesMap[themeSelector.currentTheme].name
-        + '" style="background-color: ' + themesMap[themeSelector.currentTheme].navbarInverseBackgroundColor + '"><img class="current-theme-image"/></div></a><span class="current-theme-setting">'
+        + '" style="background-color: ' + themesMap[themeSelector.currentTheme].color + '"><img class="current-theme-image"/></div></a><span class="current-theme-setting">'
         + themesMap[themeSelector.currentTheme].name + '</span>');
 }
 
@@ -250,8 +250,8 @@ function applyTheme()
     $('.content-wrapper').hide();
     themeSelector.currentTheme = themeSelector.selectedTheme;
     setThemeValue();
-    document.getElementById('themelayoutstyle').href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/layout-override.css";
-    document.getElementById('bodystyle').href = "./ress/css/" + themesMap[themeSelector.currentTheme].bootswatchtheme + "/bootstrap.min.css";
+    document.getElementById('themelayoutstyle').href = themesMap[themeSelector.currentTheme].path + "/layout-override.css";
+    document.getElementById('bodystyle').href = themesMap[themeSelector.currentTheme].path + "/bootstrap.min.css";
     
     // We should show the form after new styles has been loaded to prevent FOUC
     document.getElementById('bodystyle').onload = showContentOnStyleApply();

@@ -10,5 +10,6 @@ var headerObj = {
     "theme settings": true,
     "feedback": false,
     "maximize": false,
-    "mailbox photo": false
+    "mailbox photo": false,
+    "themes": "./defs/themes.json.js"
 };
