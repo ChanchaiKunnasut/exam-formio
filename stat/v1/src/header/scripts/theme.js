@@ -18,6 +18,13 @@ themesMap['cerulean'] =
     color: '#033c73'
 };
 
+themesMap['constru'] =
+{
+    path: "./ress/css/constru",
+    name: "Constru",
+    color: "#153d6e"
+};
+
 themesMap['cosmo'] =
 {
     path: './ress/css/cosmo',
