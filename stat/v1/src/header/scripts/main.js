@@ -261,6 +261,10 @@ function setupLayout()
     {
         faviconPath = formObj.properties["faviconpath"];
     }
+    else if (typeof customizationObj !== 'undefined' && customizationObj !== null && customizationObj["faviconpath"])
+    {
+        faviconPath = customizationObj["faviconpath"];
+    }
     else if (typeof brandObj !== 'undefined' && brandObj != null && brandObj["faviconpath"])
     {
         faviconPath = brandObj["faviconpath"];
