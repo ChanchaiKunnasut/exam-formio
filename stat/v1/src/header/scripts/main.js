@@ -149,7 +149,7 @@ function setupApp()
                     // Find out user's mailbox settings
                     getmailboxsettingsdata('https://graph.microsoft.com/beta/me/mailboxSettings');
                     getSupportedTimeZones();
-                    if (isUseUserPropertyExtensions())
+                    if (isUseUserPropertyExtensions() && headerObj !== 'undefined' && headerObj != null && headerObj["theme settings"])
                     {
                         // Find out user's theme (user property extensions)
                         getUserPropertyExtensions(false);

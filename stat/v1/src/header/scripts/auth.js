@@ -157,17 +157,26 @@ function isSignedInUser () {
     return ADAL!=null && ADAL.getCachedUser()!=null;
 }
 
+/**
+ * Checks if we should use outlook mailbox settings for language and time zone
+ */
 function isUseOutlookMailSettings() {
-    if (typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("use outlook settings"))
-    {
+    if (typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("use outlook settings")) {
         return formObj.properties["use outlook settings"] === true;
     }
     
     return typeof headerObj !== 'undefined' && headerObj != null && headerObj["use outlook settings"];
 }
 
+/**
+ * Checks if we should use user property extensions for theme (and language and time zone if not stored in the mailbox)
+ */
 function isUseUserPropertyExtensions() {
-    return typeof headerObj !== 'undefined' && headerObj["use user property extensions"] && headerObj["theme settings"];
+    if (typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("use user property extensions")) {
+        return formObj.properties["use user property extensions"] === true;
+    }
+    
+    return typeof headerObj !== 'undefined' && headerObj != null && headerObj["use user property extensions"];
 }
    
 function fillUserInfo() {
