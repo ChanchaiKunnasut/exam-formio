@@ -229,16 +229,35 @@ function loadDefaultHeader()
     loadScript(headerDef, checkForAppSetup);
 }
 
+/**
+ * Callback executed when themes.json.js has been loaded
+ */
 function themesLoaded() {
+    // Update the themesMap to override the hardcoded values
     themesMap = themesObj;
+    
+    // Check if anything else should be loaded
     checkAppCofig();
 }
 
+/**
+ * Callback executed when themes.json.js can't be loaded
+ */
 function loadDefaultThemes()
 {
+    // We haven't found themes.json.js so we will use the hardcoded themes list
+    // defined in the themesMap global variable. We still need to define the
+    // themesObj as a global variable because we check if it is defined in the
+    // checkForAppSetup function when we want to know if the themes are initialized
     window.themesObj = themesMap;
+    
+    // Check if anything else should be loaded
+    checkAppCofig();
 }
 
+/**
+ * Flag which indicates if the themes definition (themes.json.js) loading has been started
+ */
 var themeLoadStarted = false;
 
 /**
@@ -248,14 +267,26 @@ var themeLoadStarted = false;
  */
 function checkForAppSetup()
 {
-    if (!themeLoadStarted && typeof headerObj !== 'undefined' && headerObj != null && headerObj["themes"])
+    // Check if the themes.json.js should be loaded
+    if (!themeLoadStarted && typeof headerObj !== 'undefined' && headerObj != null && typeof formObj !== 'undefined' && formObj != null)
     {
-        loadScript(headerObj["themes"], themesLoaded, loadDefaultThemes);
+        // If the themes definition path has been specified in the form definition we will use it
+        if (formObj.hasOwnProperty("properties") && formObj.properties["themes"])
+        {
+            loadScript(formObj.properties["themes"], themesLoaded, loadDefaultThemes);
+        }
+        // Otherwise we use the path from the header configuration
+        else if (headerObj["themes"])
+        {
+            loadScript(headerObj["themes"], themesLoaded, loadDefaultThemes);
+        }
+        
         themeLoadStarted = true;
     }
     
     if (typeof headerObj !== 'undefined' && typeof customizationObj !== 'undefined' && typeof brandObj !== 'undefined' && typeof formObj !== 'undefined'
-        && (typeof themesObj !== 'undefined' || (typeof headerObj !== 'undefined' && headerObj != null && !(headerObj["themes"]))))
+        && (typeof themesObj !== 'undefined' || (typeof headerObj !== 'undefined' && headerObj != null && !(headerObj["themes"])
+            && typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties") && !(formObj.properties["themes"]))))
     {
         if (document.readyState === 'complete')
         {
