@@ -60,24 +60,21 @@ function checkAppCofig()
     // Check if appObj is defined. If not try with a new hardcoded value
     if (typeof appObj === "undefined")
     {
-        loadScript("./defs/app.json.js", loadDefinitions);
+        loadScript("./defs/app.json.js", loadFormDefinition);
     }
     else
     {
-        loadDefinitions();
+        loadFormDefinition();
     }
 }
 
 /**
- * Loads form, brand, customization and header definitions and sets up the app
- * once everything is loaded including the document itself.
+ * Loads form definition, then loads brand, customization and header definitions
+ * and sets up the app once everything is loaded including the document itself.
  */
-function loadDefinitions()
+function loadFormDefinition()
 {
     var formDef = "./defs/form.json.js";
-    var brandDef;
-    var customizationDef;
-    var headerConfig;
     
     // Check if we have an URI paramater which specifies
     // a path to the form definition. If so we'll use it.
@@ -98,6 +95,29 @@ function loadDefinitions()
         
         formSet = true;
     }
+    
+    if (typeof appObj !== 'undefined')
+    {
+        // We have found app.json.js so we will use it to load other definitions
+        // If we have form definition already defined in query parameter we will use it
+        if (!formSet && appObj["formdefinition"])
+        {
+            formDef = appObj["formdefinition"];
+        }
+    }
+    
+    loadScript(formDef, formObjLoaded, loadDefaultForm);
+}
+
+/**
+ * Loads brand, customization and header definitions and sets up the app
+ * once everything is loaded including the document itself.
+ */
+function loadConfigurations()
+{
+    var brandDef;
+    var customizationDef;
+    var headerConfig;
     
     // Check if we have an URI paramater which specifies
     // a path to the brand definition. If so we'll use it.
@@ -159,56 +179,88 @@ function loadDefinitions()
         hdrcnfSet = true;
     }
     
+    if (typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties"))
+    {
+        // We have a form defition loaded so we will use it to get paths for other definition files
+        // If we have brand definition already defined in query parameter we will use it
+        if (!brandSet && formObj.properties["branddefinition"])
+        {
+            brandDef = formObj.properties["branddefinition"];
+            brandSet = true;
+        }
+        
+        // If we have customization definition already defined in query parameter we will use it
+        if (!cstmzSet && formObj.properties["customizationdefinition"])
+        {
+            customizationDef = formObj.properties["customizationdefinition"];
+            cstmzSet = true;
+        }
+        
+        // If we have header definition already defined in query parameter we will use it
+        if (!hdrcnfSet && formObj.properties["headerconfiguration"])
+        {
+            headerConfig = formObj.properties["headerconfiguration"];
+            hdrcnfSet = true;
+        }
+    }
+    
     if (typeof appObj !== 'undefined')
     {
         // We have found app.json.js so we will use it to load other definitions
-        // If we have form definition already defined in query parameter we will use it
-        if (!formSet && appObj["formdefinition"])
-        {
-            formDef = appObj["formdefinition"];
-        }
-        
-        // If we have brand definition already defined in query parameter we will use it
+        // If we have brand definition already defined in query parameter or in form definition
+        // we will use it. Otherwise we use the value from the app.json.js
         if (!brandSet && appObj["branddefinition"])
         {
             brandDef = appObj["branddefinition"];
         }
         
-        // If we have customization definition already defined in query parameter we will use it
+        // If we have customization definition already defined in query parameter or in form
+        // definition we will use it. Otherwise we use the value from the app.json.js
         if (!cstmzSet && appObj["customizationdefinition"])
         {
             customizationDef = appObj["customizationdefinition"];
         }
         
-        // If we have header configuration already defined in query parameter we will use it
+        // If we have header configuration already defined in query parameter or in form definition
+        // we will use it. Otherwise we use the value from the app.json.js
         if (!hdrcnfSet && appObj["headerconfiguration"])
         {
             headerConfig = appObj["headerconfiguration"];
         }
     }
     
-    loadScript(formDef, formObjLoaded, loadDefaultForm);
-    
     if (brandDef)
     {
         loadScript(brandDef, checkForAppSetup, loadDefaultBrand);
+    }
+    else 
+    {
+        loadDefaultBrand();
     }
     
     if (customizationDef)
     {
         loadScript(customizationDef, checkForAppSetup, loadDefaultCustomization);
     }
+    else
+    {
+        loadDefaultCustomization();
+    }
     
     if (headerConfig)
     {
         loadScript(headerConfig, checkForAppSetup, loadDefaultHeader);
+    }
+    else
+    {
+        loadDefaultHeader();
     }
 }
 
 function loadDefaultForm()
 {
     var formDef = "./defs/form.json.js";
-    loadScript(formDef, checkForAppSetup);
+    loadScript(formDef, loadConfigurations);
 }
 
 function loadDefaultBrand()
@@ -308,7 +360,7 @@ function checkForAppSetup()
 
 /**
  * Runs when the form definition has been loaded to perform tasks that should be performed immidiately
- * and then checks if all definition files has been loaded.
+ * and then starts to load all other definition files.
  */
 function formObjLoaded()
 {
@@ -321,5 +373,5 @@ function formObjLoaded()
         document.title = "Layout";
     }
     
-    checkForAppSetup();
+    loadConfigurations();
 }
