@@ -181,7 +181,7 @@ function isUseUserPropertyExtensions() {
    
 function fillUserInfo() {
     var signeduser = ADAL!=null ? ADAL.getCachedUser() : null;
-    if (signeduser && headerObj !== 'undefined' && headerObj != null && headerObj.hasOwnProperty("account") && headerObj["account"]) {
+    if (signeduser) {
         if (signeduser.profile.upn) {
             // For work or school accounts (tenant members)
             currentUser.member = true;
