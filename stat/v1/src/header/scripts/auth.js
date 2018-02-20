@@ -158,7 +158,12 @@ function isSignedInUser () {
 }
 
 function isUseOutlookMailSettings() {
-    return typeof headerObj !== 'undefined' && headerObj["use outlook settings"];
+    if (typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("use outlook settings"))
+    {
+        return formObj.properties["use outlook settings"] === true;
+    }
+    
+    return typeof headerObj !== 'undefined' && headerObj != null && headerObj["use outlook settings"];
 }
 
 function isUseUserPropertyExtensions() {
