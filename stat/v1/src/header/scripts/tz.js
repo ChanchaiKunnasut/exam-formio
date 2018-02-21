@@ -606,6 +606,8 @@ function setSupportedTimeZones(values)
         
         timeZoneSelector.supportedTimeZonesSet = true;
         $('#timeZoneWrapper').show();
+        $('#Language').show();
+        $('#languageAndTimeZone').attr('lang-tran', 'Language and time zone').html('Language and time zone').translate();
         
         // If user's time zone is already retrieved we need to update GUI now,
         // because we couldn't do that when we didn't have time zone choices
