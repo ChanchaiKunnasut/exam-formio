@@ -4,23 +4,23 @@
  * and the country component follows 2-letter codes as defined in ISO 3166-1 alpha-2.
  */
 var languagesMap = {};
-languagesMap['BG-BG'] = 'български (България)';
-languagesMap['CS-CZ'] = 'čeština (Česká&nbsp;republika)';
-languagesMap['DE-AT'] = 'Deutsch (Österreich)';
-languagesMap['ET-EE'] = 'eesti (Eesti)';
-languagesMap['EN-GB'] = 'English (International)';
-languagesMap['HR-HR'] = 'hrvatski (Hrvatska)';
-languagesMap['HU-HU'] = 'magyar (Magyarország)';
-languagesMap['KK-KZ'] = 'Қазақ (Қазақстан)';
-languagesMap['LT-LT'] = 'lietuvių (Lietuva)';
-languagesMap['PL-PL'] = 'polski (Polska)';
-languagesMap['RO-RO'] = 'română (România)';
-languagesMap['SR-LATN-CS'] = 'srpski (Srbija)';
-languagesMap['RU-RU'] = 'русский (Россия)';
-languagesMap['SL-SI'] = 'slovenščina (Slovenija)';
-languagesMap['SK-SK'] = 'slovenčina (Slovenská&nbsp;republika)';
-languagesMap['TR-TR'] = 'Türkçe (Türkiye)';
-languagesMap['UK-UA'] = 'українська (Україна)';
+languagesMap['BG-BG'] = 'български (България&nbsp;-&nbsp;BG)';
+languagesMap['CS-CZ'] = 'čeština (Česká&nbsp;republika&nbsp;-&nbsp;CZ)';
+languagesMap['DE-AT'] = 'Deutsch (Österreich&nbsp;-&nbsp;AT)';
+languagesMap['ET-EE'] = 'eesti (Eesti&nbsp;-&nbsp;EE)';
+languagesMap['EN-GB'] = 'English (United&nbsp;Kingdom&nbsp;-&nbsp;GB)';
+languagesMap['HR-HR'] = 'hrvatski (Hrvatska&nbsp;-&nbsp;HR)';
+languagesMap['HU-HU'] = 'magyar (Magyarország&nbsp;-&nbsp;HU)';
+languagesMap['KK-KZ'] = 'Қазақ (Қазақстан&nbsp;-&nbsp;KZ)';
+languagesMap['LT-LT'] = 'lietuvių (Lietuva&nbsp;-&nbsp;LT)';
+languagesMap['PL-PL'] = 'polski (Polska&nbsp;-&nbsp;PL)';
+languagesMap['RO-RO'] = 'română (România&nbsp;-&nbsp;RO)';
+languagesMap['SR-LATN-CS'] = 'srpski (Srbija&nbsp;-&nbsp;RS)';
+languagesMap['RU-RU'] = 'русский (Россия&nbsp;-&nbsp;RU)';
+languagesMap['SL-SI'] = 'slovenščina (Slovenija&nbsp;-&nbsp;SI)';
+languagesMap['SK-SK'] = 'slovenčina (Slovensko&nbsp;-&nbsp;SK)';
+languagesMap['TR-TR'] = 'Türkçe (Türkiye&nbsp;-&nbsp;TR)';
+languagesMap['UK-UA'] = 'українська (Україна&nbsp;-&nbsp;UA)';
 
 /**
  * Language selector model
