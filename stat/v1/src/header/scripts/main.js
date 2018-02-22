@@ -95,7 +95,7 @@ function setupApp()
                 {
                     return function()
                     {
-                        console.log(comp.component.key + ' out of focus');
+                        setDefaultHelpContent();
                     };
                 })(this));
             }
@@ -144,6 +144,9 @@ function setupApp()
             
             form.ready.then(function()
             {
+                // Sets up form level defined help content
+                setDefaultHelpContent();
+                
                 if (isUseOutlookMailSettings() && isSignedInUser())
                 {
                     // Find out user's mailbox settings
@@ -699,6 +702,40 @@ function checkForUrlParameter(parameterName)
     }
     
     return null;
+}
+
+/**
+ * Sets default form level help content. Used when no form element has focus
+ */
+function setDefaultHelpContent()
+{
+    $('#divHelp').empty();
+    if (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("formhelp"))
+    {
+        var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
+        $('#divHelp').append(vhelpform);
+        $('#formHelp').html(formObj.properties.formhelp).attr("lang-tran", formObj.properties.formhelp).translate();
+    }
+    
+    if(formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("processimagelink")
+        && formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("processlink"))
+    {
+        var vprocess = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="bussinesplabel"></span></div></div></div><div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="processlink"><img class="help-photo-container" id="processimagelink"></a></div></div></div>';
+        $('#divHelp').append(vprocess);
+        $('#processimagelink').attr('src', formObj.properties.processimagelink);
+        $('#processlink').attr('href', formObj.properties.processlink);
+        $('#bussinesplabel').html('Bussines process: ');
+    }
+    
+    if(formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("elearningimagelink")
+        && formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("elearninglink"))
+    {
+        var velearning = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="elearninglabel"></span></div></div></div><div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><a id="elearninglink"><img class="help-photo-container" id="elearningimagelink"></a></div></div></div>';
+        $('#divHelp').append(velearning);
+        $('#elearningimagelink').attr('src', formObj.properties.elearningimagelink);
+        $('#elearninglink').attr('href', formObj.properties.elearninglink);
+        $('#elearninglabel').html('E-Learning: ');
+    }
 }
 
 /**
