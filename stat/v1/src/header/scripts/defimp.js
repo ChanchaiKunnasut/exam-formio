@@ -88,6 +88,10 @@ function loadFormDefinition()
         {
             formDef = "../forms/form.json.js";
         }
+        else if (formUriParam.startsWith("http://") || formUriParam.startsWith("https://"))
+        {
+            formDef = formUriParam;
+        }
         else
         {
             formDef = "../forms/" + formUriParam + "/form.json.js";
