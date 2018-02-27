@@ -201,7 +201,7 @@ function setupLayout()
 {    
     // Check app configuration
     // Set up the main logo
-    var mainLogoPath = "./ress/jpeg/risktech/Risktech48.jpg";
+    var mainLogoPath = "./ress/png/mainlogo.png";
     var mainLogoUrl = checkForUrlParameter("mainlogopath");
     if (mainLogoUrl)
     {
@@ -223,7 +223,7 @@ function setupLayout()
     $("#mainLogo").show();
     
     // Set up side logo and show it if defined
-    var sideLogoPath;
+    var sideLogoPath = "./ress/png/sidelogo.png";
     var sideLogoUrl = checkForUrlParameter("sidelogopath");
     if (sideLogoUrl)
     {
@@ -254,7 +254,7 @@ function setupLayout()
     faviconElement.id = "pageIcon";
     
     // If favicon is not specified use the main logo
-    var faviconPath = mainLogoPath;
+    var faviconPath = "./ress/png/favicon.png";
     var faviconUrl = checkForUrlParameter("faviconpath");
     if (faviconUrl)
     {
