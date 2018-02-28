@@ -374,7 +374,7 @@ function formObjLoaded()
     }
     else
     {
-        document.title = "Layout";
+        document.title = "Tog Formviewer";
     }
     
     loadConfigurations();
