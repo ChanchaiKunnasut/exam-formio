@@ -342,7 +342,7 @@ function checkForAppSetup()
     
     if (typeof headerObj !== 'undefined' && typeof customizationObj !== 'undefined' && typeof brandObj !== 'undefined' && typeof formObj !== 'undefined'
         && (typeof themesObj !== 'undefined' || (typeof headerObj !== 'undefined' && headerObj != null && !(headerObj["themes"])
-            && typeof formObj !== 'undefined' && formObj != null && formObj.hasOwnProperty("properties") && !(formObj.properties["themes"]))))
+            && typeof formObj !== 'undefined' && formObj != null && (!formObj.hasOwnProperty("properties") || !(formObj.properties["themes"])))))
     {
         if (document.readyState === 'complete')
         {

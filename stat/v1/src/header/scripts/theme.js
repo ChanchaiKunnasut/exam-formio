@@ -289,6 +289,7 @@ function showContentOnStyleApply()
     {
         $('.header-border').show();
         $('.content-wrapper').show();
+        $('.overlay').hide();
     }
     else
     {
