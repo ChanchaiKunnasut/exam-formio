@@ -10,14 +10,14 @@
 		<script src="./scripts/vendor/formio.full.min.js"></script>
         <script src="./scripts/vendor/jquery-1.10.2.min.js"></script>
         <script src="./scripts/vendor/adal.min.js"></script>
+        <script src="./scripts/lang-form.json.js"></script>
+        <script src="./scripts/lang-layout.json.js"></script>
         <script src="./scripts/lang.js"></script>
         <script src="./scripts/tz.js"></script>
         <script src="./scripts/theme.js"></script>
         <script src="./scripts/main.js"></script>
         <script src="./scripts/auth.js"></script>
         <script src="./scripts/defimp.js"></script>
-        <script src="./scripts/lang-form.json.js"></script>
-        <script src="./scripts/lang-layout.json.js"></script>
     </head>
     <body>
 	    <div class="header-border">
@@ -32,10 +32,10 @@
                         </button>
                     </div>
                     <div id="mainLogo" class="header-common app-header main-logo visiblesmcommands" style="display: none" onmousedown="return false">
-                        <img class="logo-background" src="./ress/jpeg/risktech/Risktech48.jpg" />
+                        <img class="logo-background" src="./ress/png/mainlogo.png" />
                     </div>
                     <div id="sideLogo" class="header-common app-header visiblesmcommands" style="display: none" onmousedown="return false">
-                        <img />
+                        <img src="./ress/png/sidelogo.png" />
                     </div>
                     <div id="appTitle" class="header-common app-header rsp-lar-visible" style="display: none">
                         <p class="app-menu-brand">Risktech APP</p>
@@ -49,7 +49,7 @@
                     <div id="environmentcontainerl" class="header-common app-header rsp-visible">
                         <button type="button" class="header-common app-menu-button app-menu-button-right environment-button" onclick="showEnvironmentDropdown(this)">
                             <div class="environment-wrapper">
-                                <span lang-tran="Envirnoment" class="environment-text environment-head">Environment</span>
+                                <span lang-tran="Environment" class="environment-text environment-head">Environment</span>
                                 <span class="environment-text environment-current">Tenant 1 (default)</span>
                             </div>
                             <svg class="environment-glyph" viewBox="0 0 16 16">
@@ -264,6 +264,46 @@
                                                             <div>
                                                                 <div class="header-common user-settings-card-collapse-area">
                                                                     <a id="collapseLTZ" class="user-settings-card-collapse-button">
+                                                                        <span class="ms-Icon ms-Icon--chevronUp"></span>
+                                                                    </a>
+                                                                    <div class="user-settings-card-expand-button">
+                                                                        <span class="ms-Icon ms-Icon--chevronDown"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="phraseAppCardWrapper" style="display: none">
+                                                        <div id="phraseAppCard" class="header-common user-settings-card collapsed-card">
+                                                            <div class="header-common user-settings-card-header">
+                                                                <div class="header-common user-settings-card-header-label">
+                                                                    <span lang-tran="Phrase APP">Phrase APP</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="header-common user-settings-card-value">
+                                                                <div>
+                                                                    <div id="phraseAppValue" class="user-settings-card-value-content">
+                                                                        <span id="phraseAppSwitched" lang-tran="Off">Off</span>
+                                                                    </div>
+                                                                    <div class="header-common user-settings-card-combo-wrapper">
+                                                                        <button type="button" class="user-settings-card-checkbox" onclick="changePhraseAppSelection()">
+                                                                            <span id="phraseAppCardCheckBox" class="ms-Icon ms-Icon--blank user-settings-card-checkbox-box"></span>
+                                                                            <span class="user-settings-card-checkbox-label" lang-tran="On">On</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="header-common user-settings-card-footer">
+                                                                <a id="savePhraseApp" class="header-common user-settings-button emphasized">
+                                                                    <span lang-tran="Save">Save</span>
+                                                                </a>
+                                                                <a id="cancelPhraseApp" class="header-common user-settings-button">
+                                                                    <span lang-tran="Cancel">Cancel</span>
+                                                                </a>
+                                                            </div>
+                                                            <div>
+                                                                <div class="header-common user-settings-card-collapse-area">
+                                                                    <a id="collapsePhraseApp" class="user-settings-card-collapse-button">
                                                                         <span class="ms-Icon ms-Icon--chevronUp"></span>
                                                                     </a>
                                                                     <div class="user-settings-card-expand-button">

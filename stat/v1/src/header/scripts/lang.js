@@ -86,9 +86,35 @@ function applyTranslation()
 {
     var oldLanguage = languageSelector.currentLanguage;
     languageSelector.currentLanguage = languageSelector.selectedLanguage;
-    setLanguage(languageSelector.selectedLanguage);
+    if (typeof phraseAppSelection === 'undefined' || !phraseAppSelection.phraseAppSwitched)
+    {
+        setLanguage(languageSelector.selectedLanguage);
+    }
+    
     $("[lang-tran],[lang-tran-placeholder]").translate();
     changeLanguageForThemeSettings(oldLanguage, languageSelector.currentLanguage);
+    if (typeof phraseAppSelection !== 'undefined' && phraseAppSelection.phraseAppSwitched)
+    {
+        $("#divHelp").prepareTranslation();
+    }
+}
+
+/**
+ * Prepares body (form) strings for the Phrase APP in-context editor
+ */
+function prepareBodyForTranslations()
+{
+    setLanguage("DEFAULT");
+    $("#divHelp").prepareTranslation();
+}
+
+/**
+ * Resets string after Phrase APP in-context editor has been switched off
+ */
+function resetBodyTranslation()
+{
+    setLanguage(languageSelector.currentLanguage);
+    $("#divHelp").translate();
 }
 
 /**
@@ -117,6 +143,24 @@ function applyTranslation()
             {
                 $this.attr("placeholder", langLayoutObj[languageSelector.selectedLanguage][$this.attr("lang-tran-placeholder")]);
             }
+        });
+    };
+}(jQuery));
+
+/**
+ * Prepares selected elements for the Phrase APP in-context editor
+ */
+(function($)
+{
+    $.fn.prepareTranslation = function()
+    {
+        return this.each(function()
+        {
+            $this = $(this);
+            if ($this.attr("lang-form") !== undefined)
+            {
+                $this.html($this.attr("lang-tran"));
+            }    
         });
     };
 }(jQuery));

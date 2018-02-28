@@ -11,5 +11,9 @@ var headerObj = {
     "feedback": false,
     "maximize": false,
     "mailbox photo": false,
-    "themes": "./defs/themes.json.js"
+    "themes": "./defs/themes.json.js",
+    "phraseapp": false,
+    "phraseapp project id": "",
+    "phraseapp prefix": "[[__",
+    "phraseapp suffix": "__]]"
 };

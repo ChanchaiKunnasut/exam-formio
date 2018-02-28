@@ -40,13 +40,13 @@ function setupApp()
                         {
                             var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
                             $('#divHelp').append(vhelpform);
-                            $('#formHelp').html(comp.component.properties.formhelp).attr("lang-tran", comp.component.properties.formhelp).translate();
+                            $('#formHelp').html(comp.component.properties.formhelp).attr("lang-tran", comp.component.properties.formhelp).attr("lang-form", "true").translate();
                         }
                         else if (formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("formhelp"))
                         {
                             var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
                             $('#divHelp').append(vhelpform);
-                            $('#formHelp').html(formObj.properties.formhelp).attr("lang-tran", formObj.properties.formhelp).translate();
+                            $('#formHelp').html(formObj.properties.formhelp).attr("lang-tran", formObj.properties.formhelp).attr("lang-form", "true").translate();
                         }
                         
                         if (comp && comp.hasOwnProperty("component") && comp.component.hasOwnProperty("properties")
@@ -54,7 +54,7 @@ function setupApp()
                         {
                             var vhelpfield = '<div id="fieldHelpCardWrapper"><div id="fieldHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="fieldHelp"></span></div></div></div>';
                             $('#divHelp').append(vhelpfield);
-                            $('#fieldHelp').html(comp.component.properties.fieldhelp).attr("lang-tran", comp.component.properties.fieldhelp).translate();
+                            $('#fieldHelp').html(comp.component.properties.fieldhelp).attr("lang-tran", comp.component.properties.fieldhelp).attr("lang-form", "true").translate();
                         }
                         
                         if(((comp && comp.hasOwnProperty("component")&& comp.component.hasOwnProperty("properties")
@@ -581,6 +581,33 @@ function setupLayout()
     {
         $('#themeCardWrapper').show();
     }
+     
+    // Check if we should show the phrase app settings
+    var hasPhraseAppSettings = false;
+    var hasPhraseAppSettingsUrl = checkForUrlParameter("phraseapp");
+    if (hasPhraseAppSettingsUrl === "false" || hasPhraseAppSettingsUrl === "true")
+    {
+        if (hasPhraseAppSettingsUrl === "true")
+        {
+            hasPhraseAppSettings = true;
+        }
+    }
+    else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("phraseapp"))
+    {
+        if (formObj.properties["phraseapp"] === true)
+        {
+            hasPhraseAppSettings = true;
+        }
+    }
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("phraseapp") && headerObj["phraseapp"] === true)
+    {
+        hasPhraseAppSettings = true;
+    }
+    
+    if (hasPhraseAppSettings)
+    {
+        loadScript("./scripts/phraseapp.js", showPhraseAppSettingsCard, showPhraseAppHelperLoadFailedWarning);
+    }
     
     // Check if we should show the button which opens the feedback form
     var hasFeedback = false;
@@ -714,7 +741,7 @@ function setDefaultHelpContent()
     {
         var vhelpform = '<div id="formHelpCardWrapper"><div id="formHelpCard" class="header-common user-help-card"><div class="header-common user-settings-card-header-label"><span id="formHelp"></span></div></div></div>';
         $('#divHelp').append(vhelpform);
-        $('#formHelp').html(formObj.properties.formhelp).attr("lang-tran", formObj.properties.formhelp).translate();
+        $('#formHelp').html(formObj.properties.formhelp).attr("lang-tran", formObj.properties.formhelp).attr("lang-form", "true").translate();
     }
     
     if(formObj && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("processimagelink")
@@ -1258,6 +1285,48 @@ function cancelTheme(e)
     e.stopPropagation();
     resetTheme();
     $('#themeCard').closeExtendedCard();
+}
+
+/**
+ * Shows the Phrase APP card in the settings menu which
+ * switches the Phrase APP plugin on and off
+ */
+function showPhraseAppSettingsCard()
+{
+    $('#savePhraseApp').click(savePhraseAppSwitch);
+    $('#cancelPhraseApp').click(cancelPhraseAppSwitch);
+    $('#collapsePhraseApp').click(cancelPhraseAppSwitch);
+    $('#phraseAppCardWrapper').show();
+}
+
+/**
+ * Shows the warning that the phraseapp.js hasn't been loaded
+ */
+function showPhraseAppHelperLoadFailedWarning()
+{
+    alert('Failed to load Phrase APP helper');
+}
+
+/**
+ * Saves changes from the Phrase APP switch on/off menu settings and
+ * closes the extended 'Phrase APP' settings menu card
+ */
+function savePhraseAppSwitch(e)
+{
+    e.stopPropagation();
+    applyPhraseAppSettingsChanges();
+    $('#phraseAppCard').closeExtendedCard();
+}
+
+/**
+ * Cancels changes from the Phrase APP switch on/off menu settings and
+ * closes the extended 'Phrase APP' settings menu card
+ */
+function cancelPhraseAppSwitch(e)
+{
+    e.stopPropagation();
+    resetPhraseAppSettings();
+    $('#phraseAppCard').closeExtendedCard();
 }
 
 /**

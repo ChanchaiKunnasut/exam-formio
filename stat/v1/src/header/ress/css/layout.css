@@ -928,6 +928,47 @@ body {
     outline: 1px dotted black;
 }
 
+.user-settings-card-checkbox {
+    background-color: transparent;
+    border-style: none;
+    vertical-align: middle;
+    padding: 0px;
+    cursor: pointer !important;
+    font-size: 14px;
+}
+
+.user-settings-card-checkbox:focus {
+    outline: 1px dotted black;
+}
+
+.user-settings-card-checkbox-box {
+    display: inline-block;
+    line-height: 1;
+    border-color: #c8c8c8;
+    background-color: white;
+    font-size: 14px;
+    width: 16px;
+    height: 15px;
+    border-width: 1px;
+    border-style: solid;
+    vertical-align: middle;
+    text-align: center;
+    white-space: normal;
+}
+
+.user-settings-card-checkbox-box:focus {
+    outline: none;
+}
+
+.user-settings-card-checkbox-label {
+    color: #333333;
+    vertical-align: middle;
+    margin-left: 10px;
+    cursor: pointer !important;
+    font-size: 14px;
+    white-space: normal;
+}
+
 .current-theme-setting {
     margin-left: 10px;
     margin-right: 10px;
