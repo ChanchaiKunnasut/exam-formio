@@ -100,7 +100,7 @@ function applyTranslation()
 }
 
 /**
- * Prepares body (form) strings for the Phrase APP in-context editor
+ * Prepares body (form) strings for the PhraseApp in-context editor
  */
 function prepareBodyForTranslations()
 {
@@ -109,7 +109,7 @@ function prepareBodyForTranslations()
 }
 
 /**
- * Resets string after Phrase APP in-context editor has been switched off
+ * Resets string after PhraseApp in-context editor has been switched off
  */
 function resetBodyTranslation()
 {
@@ -148,7 +148,7 @@ function resetBodyTranslation()
 }(jQuery));
 
 /**
- * Prepares selected elements for the Phrase APP in-context editor
+ * Prepares selected elements for the PhraseApp in-context editor
  */
 (function($)
 {

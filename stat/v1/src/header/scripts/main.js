@@ -582,7 +582,7 @@ function setupLayout()
         $('#themeCardWrapper').show();
     }
      
-    // Check if we should show the phrase app settings
+    // Check if we should show the PhraseApp settings
     var hasPhraseAppSettings = false;
     var hasPhraseAppSettingsUrl = checkForUrlParameter("phraseapp");
     if (hasPhraseAppSettingsUrl === "false" || hasPhraseAppSettingsUrl === "true")
@@ -1288,8 +1288,8 @@ function cancelTheme(e)
 }
 
 /**
- * Shows the Phrase APP card in the settings menu which
- * switches the Phrase APP plugin on and off
+ * Shows the PhraseApp card in the settings menu which
+ * switches the PhraseApp plugin on and off
  */
 function showPhraseAppSettingsCard()
 {
@@ -1304,12 +1304,12 @@ function showPhraseAppSettingsCard()
  */
 function showPhraseAppHelperLoadFailedWarning()
 {
-    alert('Failed to load Phrase APP helper');
+    alert('Failed to load PhraseApp helper');
 }
 
 /**
- * Saves changes from the Phrase APP switch on/off menu settings and
- * closes the extended 'Phrase APP' settings menu card
+ * Saves changes from the PhraseApp switch on/off menu settings and
+ * closes the extended 'PhraseApp' settings menu card
  */
 function savePhraseAppSwitch(e)
 {
@@ -1319,8 +1319,8 @@ function savePhraseAppSwitch(e)
 }
 
 /**
- * Cancels changes from the Phrase APP switch on/off menu settings and
- * closes the extended 'Phrase APP' settings menu card
+ * Cancels changes from the PhraseApp switch on/off menu settings and
+ * closes the extended 'PhrasApp' settings menu card
  */
 function cancelPhraseAppSwitch(e)
 {

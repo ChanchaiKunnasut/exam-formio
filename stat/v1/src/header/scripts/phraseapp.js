@@ -8,11 +8,11 @@ var phraseSelector =
 };
 
 /**
- * Loads Phrase App plugin
+ * Loads PhraseApp plugin
  */
 function loadPhraseApp()
 {
-    // Set up Phrase APP project ID
+    // Set up PhraseApp project ID
     var projectIdConfig = "";
     var projectIdUrl = checkForUrlParameter("phraseapp project id");
     if (projectIdUrl)
@@ -28,7 +28,7 @@ function loadPhraseApp()
         projectIdConfig = headerObj["phraseapp project id"];
     }
     
-    // Set up Phrase APP prefix
+    // Set up PhraseApp prefix
     var prefixConfig = "[[__";
     var prefixUrl = checkForUrlParameter("phraseapp prefix");
     if (prefixUrl)
@@ -46,7 +46,7 @@ function loadPhraseApp()
     
     phraseSelector.prefix = prefixConfig;
     
-    // Set up Phrase APP suffix
+    // Set up PhraseApp suffix
     var suffixConfig = "__]]";
     var suffixUrl = checkForUrlParameter("phraseapp suffix");
     if (suffixUrl)
@@ -78,21 +78,21 @@ function loadPhraseApp()
     phraseapp.async = true;
     phraseapp.src = ['https://', 'phraseapp.com/assets/in-context-editor/2.0/app.js?', new Date().getTime()].join('');
     phraseapp.onload = (function() { phraseSelector.phraseAppLoaded = true; })
-    phraseapp.onerror = (function() {alert('Failed to load Phrase APP')});
+    phraseapp.onerror = (function() {alert('Failed to load PhraseApp')});
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(phraseapp, s);
 }
 
 /**
- * First loads the Phrase APP plugin if not already loaded.
- * Then shows Phrase APP GUI at the bottom of the page.
+ * First loads the PhraseApp plugin if not already loaded.
+ * Then shows PhraseApp GUI at the bottom of the page.
  */
 function showPhraseAppPlugin()
 {
     prepareBodyForTranslations();
     if (phraseSelector.phraseAppLoaded)
     {
-        // Show hidden Phrase APP plugin
+        // Show hidden PhraseApp plugin
         $("#phrase-app").show();
     }
     else
@@ -102,17 +102,17 @@ function showPhraseAppPlugin()
 }
 
 /**
- * Hides Phrase APP GUI at the bottom of the page
+ * Hides PhraseApp GUI at the bottom of the page
  */
 function closePhraseAppPlugin()
 {
-    // Hide Phrase APP plugin
+    // Hide PhraseApp plugin
     $("#phrase-app").hide();
     resetBodyTranslation();
 }
 
 /**
- * Applies changes of Phrase APP settings
+ * Applies changes of PhraseApp settings
  */
 function applyPhraseAppSettingsChanges()
 {
@@ -131,7 +131,7 @@ function applyPhraseAppSettingsChanges()
 }
 
 /**
- * Resets changes of Phrase APP settings
+ * Resets changes of PhraseApp settings
  */
 function resetPhraseAppSettings()
 {
@@ -155,7 +155,7 @@ function changePhraseAppSelection()
 }
 
 /**
- * Applies Phrase APP to selected elements
+ * Applies PhraseApp to selected elements
  */
 (function($)
 {
@@ -178,7 +178,7 @@ function changePhraseAppSelection()
 }(jQuery));
 
 /**
- * Clears Phrase APP from selected elements
+ * Clears PhraseApp from selected elements
  */
 (function($)
 {
