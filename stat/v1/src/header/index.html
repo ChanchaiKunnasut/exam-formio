@@ -47,7 +47,7 @@
                         <img class="client-logo" src="./" />
                     </div>
                     <div id="environmentcontainerl" class="header-common app-header rsp-visible">
-                        <button type="button" class="header-common app-menu-button app-menu-button-right environment-button" onclick="showEnvironmentDropdown(this)">
+                        <button type="button" class="header-common app-menu-button app-menu-button-right environment-button environments-trigger" onclick="showEnvironmentDropdown(this)">
                             <div class="environment-wrapper">
                                 <span lang-tran="Environment" class="environment-text environment-head">Environment</span>
                                 <span class="environment-text environment-current">Tenant 1 (default)</span>
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="header-common app-header rsp-hidden visiblesmcommands">
-                        <button type="button" class="header-common app-menu-button app-menu-button-right" onclick="showCommands()">
+                        <button id="ellipsisButton" type="button" class="header-common app-menu-button app-menu-button-right" onclick="showCommands()">
                             <span class="header-common app-menu-button-label"><i class="ms-Icon ms-Icon--ellipsis" aria-hidden="true"></i></span>
                         </button>
                     </div>
@@ -106,7 +106,7 @@
                         </button>
                     </div>
                     <div id="accountsCommandWrapperL" class="header-common app-header rsp-visible">
-                        <button id="accountsCommand" type="button" class="header-common app-menu-button app-menu-button-right app-menu-button-right-menu" onclick="openUserMenu(this)">
+                        <button id="accountsCommand" type="button" class="header-common app-menu-button app-menu-button-right app-menu-button-right-menu account-trigger" onclick="openUserMenu(this)">
                             <div class="app-menu-button-right-menu-wrapper">
                                 <div class="app-menu-button-right-menu-left">
                                     <span class="username">James H. Smith</span>
@@ -123,7 +123,7 @@
                         </button>
                     </div>
                     <div id="accountsCommandWrapperS" class="header-common app-header rsp-hidden visiblesmcommands">
-                        <button id="accountsCommandSmall" type="button" class="header-common app-menu-button app-menu-button-right" onclick="hideUserSettingsSmallMenuDropdown();openUserMenu(this)">
+                        <button id="accountsCommandSmall" type="button" class="header-common app-menu-button app-menu-button-right account-trigger" onclick="hideUserSettingsSmallMenuDropdown();openUserMenu(this)">
                             <span class="header-common app-menu-button-label app-menu-button-right-menu-right-image ms-Icon ms-Icon--person ms-icon-font-size-52 rsp"></span>
                             <div class="app-menu-button-right-menu-right-user-image-wrapper">
                                 <img class="app-menu-button-right-menu-right-user-image userphoto"/>
@@ -370,7 +370,7 @@
                     <div id="accountsWrapperSmall" class="header-common user-settings-small-wrapper header-hidden-element">
                         <div id="environmentcontainers" class="header-common">
                             <div class="header-common">
-                                <button class="header-common user-settings-small-menu-item" onclick="showUserSettingsSmallMenuDropdown(this)">
+                                <button class="header-common user-settings-small-menu-item environments-trigger" onclick="showUserSettingsSmallMenuDropdown(this)">
                                     <div class="user-settings-small-menu-item-wrapper">
                                         <div class="user-settings-small-menu-item-content" lang-tran="Environments">Environments</div>
                                         <div class="user user-settings-small-menu-item-glyphwrapper">
