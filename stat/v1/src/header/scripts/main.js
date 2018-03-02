@@ -584,29 +584,46 @@ function setupLayout()
      
     // Check if we should show the PhraseApp settings
     var hasPhraseAppSettings = false;
+    var phraseAppSettingsOn = false;
     var hasPhraseAppSettingsUrl = checkForUrlParameter("phraseapp");
-    if (hasPhraseAppSettingsUrl === "false" || hasPhraseAppSettingsUrl === "true")
+    if (hasPhraseAppSettingsUrl === "false" || hasPhraseAppSettingsUrl === "true" || hasPhraseAppSettingsUrl === "on" || hasPhraseAppSettingsUrl === "off")
     {
-        if (hasPhraseAppSettingsUrl === "true")
+        if (hasPhraseAppSettingsUrl === "true" || hasPhraseAppSettingsUrl === "on" || hasPhraseAppSettingsUrl === "off")
         {
             hasPhraseAppSettings = true;
+        }
+        
+        if (hasPhraseAppSettingsUrl === "on")
+        {
+            phraseAppSettingsOn = true;
         }
     }
     else if (typeof formObj !== 'undefined' && formObj !== null && formObj.hasOwnProperty("properties") && formObj.properties.hasOwnProperty("phraseapp"))
     {
-        if (formObj.properties["phraseapp"] === true)
+        if (formObj.properties["phraseapp"] === true || formObj.properties["phraseapp"] === "true" || formObj.properties["phraseapp"] === "on" || formObj.properties["phraseapp"] === "off")
         {
             hasPhraseAppSettings = true;
         }
+        
+        if (formObj.properties["phraseapp"] === "on")
+        {
+            phraseAppSettingsOn = true;
+        }
     }
-    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("phraseapp") && headerObj["phraseapp"] === true)
+    else if (typeof headerObj !== 'undefined' && headerObj !== null && headerObj.hasOwnProperty("phraseapp")
+        && (headerObj["phraseapp"] === true || headerObj["phraseapp"] === "true" || headerObj["phraseapp"] === "on" || headerObj["phraseapp"] === "off"))
     {
         hasPhraseAppSettings = true;
+        
+        if (headerObj["phraseapp"] === "on")
+        {
+            phraseAppSettingsOn = true;
+        }
     }
     
     if (hasPhraseAppSettings)
     {
-        loadScript("./scripts/phraseapp.js", showPhraseAppSettingsCard, showPhraseAppHelperLoadFailedWarning);
+        loadScript("./scripts/phraseapp.js", (phraseAppSettingsOn ? showPhraseAppSettingsCardAndSwitchOn : showPhraseAppSettingsCard), showPhraseAppHelperLoadFailedWarning);
     }
     
     // Check if we should show the button which opens the feedback form
@@ -1297,6 +1314,18 @@ function showPhraseAppSettingsCard()
     $('#cancelPhraseApp').click(cancelPhraseAppSwitch);
     $('#collapsePhraseApp').click(cancelPhraseAppSwitch);
     $('#phraseAppCardWrapper').show();
+}
+
+/**
+ * Shows the PhraseApp card in the settings menu which
+ * switches the PhraseApp plugin on and off. Switches
+ * the plugin on immediately.
+ */
+function showPhraseAppSettingsCardAndSwitchOn()
+{
+    showPhraseAppSettingsCard();
+    changePhraseAppSelection();
+    applyPhraseAppSettingsChanges();
 }
 
 /**
