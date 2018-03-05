@@ -293,7 +293,7 @@ function themesLoaded() {
     themesMap = themesObj;
     
     // Check if anything else should be loaded
-    checkAppCofig();
+    checkForAppSetup();
 }
 
 /**
@@ -308,7 +308,7 @@ function loadDefaultThemes()
     window.themesObj = themesMap;
     
     // Check if anything else should be loaded
-    checkAppCofig();
+    checkForAppSetup();
 }
 
 /**
