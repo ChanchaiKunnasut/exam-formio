@@ -18,8 +18,14 @@
         <script src="./scripts/main.js"></script>
         <script src="./scripts/auth.js"></script>
         <script src="./scripts/defimp.js"></script>
+		<script src="./scripts/bingmap.js"></script>
+		<!--script charset="UTF-8" type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1"></script-->
+		<script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol"></script>
     </head>
-    <body>
+    <body onLoad=GetMap("TH");>
+        <div id="appTitlePrint" class="header-title">
+            <p class="app-menu-brand-print">Formviewer for MS Azure and Office 365</p>
+        </div>
 	    <div class="header-border">
             <div class="header-wrapper">
                 <div class="header-common header-left">
@@ -560,6 +566,6 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>		
     </body>
 </html>
