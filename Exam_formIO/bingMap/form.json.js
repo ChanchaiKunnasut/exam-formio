@@ -17,7 +17,7 @@ var formObj = {
         {
             "key": "content",
             "input": false,
-            "html": "<div id=\"mapDiv\" style=\"position: relative; width: 600px; height:300px;\">Map</div>\n",
+            "html": "<div id=\"mapDiv\" style=\"position: relative; width: 600px; height:300px;\">Map</div>\n\n<div id=\"printOutPanel\" style=\"position: relative; width: 600px; height:300px;\">Panel</div>\n",
             "type": "content",
             "tags": [],
             "conditional": {
@@ -26,8 +26,7 @@ var formObj = {
                 "eq": ""
             },
             "properties": {},
-            "label": "content",
-            "hideLabel": true
+            "label": "content"
         },
         {
             "autofocus": false,
@@ -51,6 +50,29 @@ var formObj = {
             },
             "properties": {},
             "custom": "PushPin();"
+        },
+        {
+            "autofocus": false,
+            "input": true,
+            "label": "Traffic",
+            "tableView": false,
+            "key": "traffic",
+            "size": "md",
+            "leftIcon": "",
+            "rightIcon": "",
+            "block": false,
+            "action": "custom",
+            "disableOnInvalid": false,
+            "theme": "primary",
+            "type": "button",
+            "tags": [],
+            "conditional": {
+                "show": "",
+                "when": null,
+                "eq": ""
+            },
+            "properties": {},
+            "custom": "showTraffic();"
         },
         {
             "autofocus": false,
@@ -86,6 +108,6 @@ var formObj = {
     "name": "bingMap",
     "path": "bingmap",
     "project": "5aa110f77cb5555e671703f3",
-    "modified": "2018-03-14T03:29:42.551Z",
+    "modified": "2018-03-14T04:04:52.106Z",
     "machineName": "cnacwyscoumtvqx:bingMap"
 };
