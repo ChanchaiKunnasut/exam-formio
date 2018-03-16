@@ -3,6 +3,8 @@ var directionsManager = null;
 var locations = [];
 var Route = "";
 var routeNum = 0;
+var Routes = [];
+
 //https://developers.google.com/chart/interactive/docs/gallery/timeline
 
 // get the bing map key https://msdn.microsoft.com/en-us/library/ff428642.aspx
@@ -13,7 +15,7 @@ function GetMap() {
 	map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {
 		credentials: credentials
 	});
-}
+};
 
 async function PushPin() {
 	map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {
@@ -57,7 +59,8 @@ async function PushPin() {
 		// 	CreateRoute(startInitial, endInitial);
 		// 	console.log(i);
 		// })
-		await new Promise(resolve => CreateRoute(startInitial, endInitial));
+		await new Promise(resolve => setTimeout(resolve, CreateRoute(startInitial, endInitial))
+		);
 	}
 };
 
@@ -81,10 +84,10 @@ function pushpinClicked(e) {
 	}
 };
 async function CreateRoute(start, end) {
-	// if (directionsManager != null) {
-	// 	directionsManager.clearAll();
-	// }
-	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+	if (directionsManager != null) {
+		directionsManager.clearAll();
+	}
+	await new Promise(resolve => setTimeout(resolve, Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
 		directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 
 		//Set Route Mode to driving
@@ -94,18 +97,22 @@ async function CreateRoute(start, end) {
 		directionsManager.addWaypoint(waypoint1);
 		directionsManager.addWaypoint(waypoint2);
 		var allWaypoints = [];
-		directionsManager.calculateDirections();
+		directionsManager.calculateDirections()
 	})
+	))
+	setTimeout(function () {
+		getRoute();
+	}, 5000)
 };
 
 function getRoute() {
-	var Routes = [];
 	Routes = directionsManager.getCurrentRoute()
+	console.log(Routes);
 	if (routeNum < locations.length) {
 		Route += JSON.stringify(Routes.routeLegs[0].summary) + "<br>";
 		routeNum++;
 	}
-	if (routeNum == locations.length) {
+	if (routeNum == locations.length - 1) {
 		document.getElementById('printOutPanel').innerHTML = Route;
 	}
 };
