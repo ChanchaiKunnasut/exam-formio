@@ -87,7 +87,7 @@ async function CreateRoute(start, end) {
 	if (directionsManager != null) {
 		directionsManager.clearAll();
 	}
-	await new Promise(resolve => setTimeout(resolve, Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
 		directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 
 		//Set Route Mode to driving
@@ -99,7 +99,6 @@ async function CreateRoute(start, end) {
 		var allWaypoints = [];
 		directionsManager.calculateDirections()
 	})
-	))
 	setTimeout(function () {
 		getRoute();
 	}, 5000)
