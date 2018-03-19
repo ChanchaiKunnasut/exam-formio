@@ -98,16 +98,13 @@ async function CreateRoute(start, end) {
 };
 
 function getRoute(Routes) {
-	console.log(Routes[0].distance)
-	if (routeNum < locations.length) {
-		Route += "Distance: " + JSON.stringify(Routes[0].distance) + ",";
-		Route += "Time: " + JSON.stringify(Routes[0].time / 60) + ",";
-		Route += "TimeWithTraffic: " + JSON.stringify(Routes[0].timeWithTraffic / 60) + "<br>";
-		routeNum++;
-	}
-	if (routeNum == locations.length - 1) {
-		document.getElementById('printOutPanel').innerHTML = Route;
-	}
+
+	Route += "Distance: " + Math.round(Routes[0].distance*100/100) + ",";
+	Route += "Time: " + Math.round(Routes[0].time / 60) + ",";
+	Route += "TimeWithTraffic: " + Math.round(Routes[0].timeWithTraffic / 60) + "<br>";
+	routeNum++;
+	document.getElementById('printOutPanel').innerHTML = Route;
+
 };
 
 function showTraffic() {
