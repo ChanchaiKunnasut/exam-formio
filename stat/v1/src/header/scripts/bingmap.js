@@ -4,9 +4,6 @@ var locations = [];
 var Route = "";
 var routeNum = 0;
 var Routes = [];
-var currentRoute = [];
-
-//https://developers.google.com/chart/interactive/docs/gallery/timeline
 
 // get the bing map key https://msdn.microsoft.com/en-us/library/ff428642.aspx
 var credentials = "Athn_KItIkNuuG8lEUJQj1TfHTVfBARQJzx7t_QjY8M2DTcpu6bRJ80wEnuFAeE1";
@@ -83,9 +80,9 @@ async function CreateRoute(start, end) {
 	if (directionsManager != null) {
 		directionsManager.clearAll();
 	}
+
 	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
 		directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-
 		//Set Route Mode to driving
 		directionsManager.setRequestOptions({ distanceUnit: Microsoft.Maps.Directions.DistanceUnit.km, routeMode: Microsoft.Maps.Directions.RouteMode.driving });
 		var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: start });
@@ -93,17 +90,19 @@ async function CreateRoute(start, end) {
 		directionsManager.addWaypoint(waypoint1);
 		directionsManager.addWaypoint(waypoint2);
 		Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function (args) {
-			var x = args.routeSummary;
-			getRoute(x);
+			var currentRoute = args.routeSummary;
+			getRoute(currentRoute);
 		})
 		directionsManager.calculateDirections();
 	})
 };
 
 function getRoute(Routes) {
-	console.log(Routes);
+	console.log(Routes[0].distance)
 	if (routeNum < locations.length) {
-		Route += JSON.stringify(Routes) + "<br>";
+		Route += "Distance: " + JSON.stringify(Routes[0].distance) + ",";
+		Route += "Time: " + JSON.stringify(Routes[0].time / 60) + ",";
+		Route += "TimeWithTraffic: " + JSON.stringify(Routes[0].timeWithTraffic / 60) + "<br>";
 		routeNum++;
 	}
 	if (routeNum == locations.length - 1) {
@@ -117,4 +116,4 @@ function showTraffic() {
 		manager.setOptions({ flowVisible: true });
 		manager.show();
 	})
-}
+};
