@@ -4,6 +4,7 @@ var locations = [];
 var Route = "";
 var routeNum = 0;
 var Routes = [];
+var currentRoute = [];
 
 //https://developers.google.com/chart/interactive/docs/gallery/timeline
 
@@ -54,11 +55,6 @@ async function PushPin() {
 		//Get start and end location
 		var startInitial = locations[0].lat + "," + locations[0].long;
 		var endInitial = locations[i].lat + "," + locations[i].long;
-		//Initialize calculate route.
-		// await new Promise(resolve => setTimeout(resolve,Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-		// 	CreateRoute(startInitial, endInitial);
-		// 	console.log(i);
-		// })
 		await new Promise(resolve => setTimeout(resolve, CreateRoute(startInitial, endInitial))
 		);
 	}
@@ -96,19 +92,18 @@ async function CreateRoute(start, end) {
 		var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: end });
 		directionsManager.addWaypoint(waypoint1);
 		directionsManager.addWaypoint(waypoint2);
-		var allWaypoints = [];
-		directionsManager.calculateDirections()
+		Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function (args) {
+			var x = args.routeSummary;
+			getRoute(x);
+		})
+		directionsManager.calculateDirections();
 	})
-	setTimeout(function () {
-		getRoute();
-	}, 5000)
 };
 
-function getRoute() {
-	Routes = directionsManager.getCurrentRoute()
+function getRoute(Routes) {
 	console.log(Routes);
 	if (routeNum < locations.length) {
-		Route += JSON.stringify(Routes.routeLegs[0].summary) + "<br>";
+		Route += JSON.stringify(Routes) + "<br>";
 		routeNum++;
 	}
 	if (routeNum == locations.length - 1) {
